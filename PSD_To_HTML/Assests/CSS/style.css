@@ -1,0 +1,187 @@
+
+/* header section */
+.main-header {
+  width: 1560px;
+  height: 930px;
+  margin: 0 0 87px;
+  padding: 10px 15px 33px 17px;
+  z-index: -10;
+  background : url(Assests/Image/group35.png);
+}
+header{
+  color: white;
+}
+img.white_logo_transparent_background {
+  width: 175px;
+  height: 130px;
+  margin: 0 49px 190px 0;
+  float: left;
+}
+.menu{
+	margin-top: 2%;
+	text-align: center;
+}
+ul.menu{
+	list-style-type: none;
+	float: right;
+}
+.menu li{
+	display:inline;
+	margin: 8px;
+}
+.border{
+  padding: 8px;
+  border-radius: 20px;
+}
+.header-para{
+  margin-top: 330px;
+  margin-left: 58px;
+  width: 388px;
+  display: block;
+}
+.header-para ul{
+  list-style-image: url('keyboard-right-arrow-button.svg');
+}
+.bookCleaner{
+ margin-left: 500px !important;
+ margin-top: 100px;
+}
+
+.bookAppoenpent{
+  width: 225px;
+  height: 20px;
+  margin: 16px 7px 157px 0;
+  padding: 18px 33px 22px 31px;
+  opacity: 0.6;
+  border: 1px solid white;
+  border-radius: 27px;
+  background-color: #006072;
+}
+h2{
+  text-align: center;
+}
+.whyhelperland-option{
+ margin-top: 50px;
+ text-align: center;
+}
+.payment{
+  margin-top: 7rem;
+  padding-left: 5rem;
+  display: block;
+
+}
+.icon-box{
+  float: left;
+}
+.icon-box img{
+  margin-bottom: 1rem;
+}
+.arrow{
+  float: left;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+/* Common style */
+
+.max-width{
+  max-width: 1104px;
+  margin: auto;
+  padding: 0px 50px;
+}
+
+section{
+  padding: 80px 0px;
+}
+
+.bg-color-pal-grey{
+  background-color: #f4f5f8;
+}
+
+/* Why helperland */
+
+.helperland .row .padding-lr-25{
+  padding: 0px 25px;
+}
+
+/* our-blog */
+
+.our-blog .card a{
+  text-decoration: none;
+  color: black;
+}
+
+.our-blog .card a img{
+  margin-left: 4px;
+}
+
+
+
+
+/* customer-review */
+
+.customer-review .card{
+  border-left: 3px solid #1d7a8c;
+}
+
+.customer-review .card a{
+  text-decoration: none;
+  color: black;
+}
+
+#newslatter .col-md-6{
+  text-align: center;
+}
+#newslatter .col-md-6 input{
+ border-radius: 1rem;
+ padding-left: 1rem;
+ padding-right: 1rem;
+}
+#newslatter .col-md-6 .btn{
+  border-radius: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: #ff7b6d;
+ }
+.newslatter-size{
+  font-size: 2.5rem;
+  text-align: center;
+}
+/* footer section */
+footer{
+  background-color: #111111;
+}
+.footer-main{
+ padding: 20px;
+}
+.footer-main .col-md-8{
+margin-top: 50px;
+}
+.footer-main .col-md-1{
+  margin-top: 50px;
+  color: white;
+  }
+  .footer-main .col-md-1 .bi{
+    margin: 10px;
+    } 
+.footer-main .col-md-8 ul {
+  list-style-type: none;
+  color: white;
+  text-align: center;
+ }
+ .footer-main .col-md-8 ul li{
+   display: inline;
+   margin: 10px;
+ }
+.footer-last-row {
+  margin: 0px  0 20px;
+  height: 60px;
+  padding: 15px 15px 12px 15px;
+  opacity: 0.8;
+  background-color: #292929;
+  color:white;
+  text-align: center;
+  }
+  .footer-last-row .btn{
+    border-radius: 2rem;
+    float:right;
+  }
