@@ -1,85 +1,133 @@
 
 /* header section */
-.main-header {
-  width: 1560px;
-  height: 930px;
-  margin: 0 0 87px;
-  padding: 10px 15px 33px 17px;
-  z-index: -10;
-  background : url(Assests/Image/group35.png);
+/* Navbar */
+
+.navbar {
+  transition: all 0.3s ease;
+  height: 100px;;
+  background-color: #525252;
 }
-header{
-  color: white;
+.navbar.navbar-bg-color{
+  background-color: #2f2f2f;
 }
-img.white_logo_transparent_background {
-  width: 175px;
-  height: 130px;
-  margin: 0 49px 190px 0;
-  float: left;
+.active{
+  background-color: #29626D;
 }
-.menu{
-	margin-top: 2%;
-	text-align: center;
-}
-ul.menu{
-	list-style-type: none;
-	float: right;
-}
-.menu li{
-	display:inline;
-	margin: 8px;
-}
-.border{
-  padding: 8px;
-  border-radius: 20px;
-}
-.header-para{
-  margin-top: 330px;
-  margin-left: 58px;
-  width: 388px;
-  display: block;
-}
-.header-para ul{
-  list-style-image: url('keyboard-right-arrow-button.svg');
-}
-.bookCleaner{
- margin-left: 500px !important;
- margin-top: 100px;
+.navbar-brand img {
+  height: 100px;
+  padding: 10px;;
 }
 
-.bookAppoenpent{
-  width: 225px;
-  height: 20px;
-  margin: 16px 7px 157px 0;
-  padding: 18px 33px 22px 31px;
-  opacity: 0.6;
+.navbar.navbar-bg-color .navbar-brand img{
+  height: 70px;
+}
+
+.navbar .navbar-nav li{
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.navbar .navbar-nav .rounded-link{
   border: 1px solid white;
-  border-radius: 27px;
-  background-color: #006072;
+  border-radius: 20px;
+  padding: 4px  10px;
 }
-h2{
-  text-align: center;
-}
-.whyhelperland-option{
- margin-top: 50px;
- text-align: center;
-}
-.payment{
-  margin-top: 7rem;
-  padding-left: 5rem;
-  display: block;
 
+.navbar .navbar-nav li a{
+  color: #ffffff !important;
 }
-.icon-box{
-  float: left;
+
+.navbar .navbar-nav .county-flag{
+  width: 18px;
 }
-.icon-box img{
-  margin-bottom: 1rem;
+
+.navbar .navbar-nav .dropdown-menu{
+  background-color: transparent;
+  border: none;
+  min-width: 0px;
+  left: -15px;
+  padding: 0px;
 }
-.arrow{
-  float: left;
-  margin-left: 2rem;
-  margin-right: 2rem;
+
+/* home Section */
+
+.home{
+  height: 100vh;
+}
+
+.home .home-content{
+  background: url("../Image/group35.png") no-repeat center;
+  background-size: cover;
+  height: 100%;
+  display: flex;
+  padding: 0px 30px;
+  flex-direction: column;
+  justify-content: end;
+  color: white;
+  padding-bottom: 25px;
+}
+
+.home .home-content .home-text{
+  padding-left: 35px;
+  margin-top: 100px;
+}
+
+.home .home-content .home-text ul{
+  padding-left: 0px;
+}
+
+.home .home-content .home-text ul li{
+  list-style: none;
+}
+
+.home .home-content .home-text ul li::before{
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900; 
+  content: "\f00c";
+  padding-right: 12px;
+}
+
+.home .home-content .button button{
+  border: 1px solid white;
+  background-color: #00607287;
+  color: white;
+  border-radius: 27px;
+  padding: 12px 32px;
+  margin-bottom: 60px;
+}
+
+.home .home-content .payment-process{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 35px;
+}
+
+.home .home-content .payment-process .img-size{
+  width: 40px;
+}
+
+.home .home-content .payment-process .arrow img{
+  width: 70px;
+}
+
+.home .home-content .payment-process .icon-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.home .home-content .payment-process .rotateImg{
+  transform: rotateX(180deg);
+}
+
+.home .home-content .down-arrow{
+  border: 1px solid white;
+  padding: 7px 9px;
+  border-radius: 50%;
 }
 /* Common style */
 
@@ -90,7 +138,7 @@ h2{
 }
 
 section{
-  padding: 80px 0px;
+  padding: 25px 0px;
 }
 
 .bg-color-pal-grey{
@@ -152,12 +200,16 @@ footer{
 }
 .footer-main{
  padding: 20px;
+ height: 100px;
+}
+.footer-main .col-md-2 img{
+  height: 70px;
 }
 .footer-main .col-md-8{
-margin-top: 50px;
+margin-top: 25px;
 }
 .footer-main .col-md-1{
-  margin-top: 50px;
+  margin-top: 25px;
   color: white;
   }
   .footer-main .col-md-1 .bi{
@@ -174,7 +226,7 @@ margin-top: 50px;
  }
 .footer-last-row {
   margin: 0px  0 20px;
-  height: 60px;
+  height: 50px;
   padding: 15px 15px 12px 15px;
   opacity: 0.8;
   background-color: #292929;
@@ -185,3 +237,103 @@ margin-top: 50px;
     border-radius: 2rem;
     float:right;
   }
+  .footer-line{
+      width: 1300;
+      height: 1px;
+      background-color: #424242;
+  
+  }
+  .banner-Section{
+    margin-top: 73px;
+    height: 370px;;
+  }
+  .FAQs-Active{
+    background-color:#29626D;
+    color: white;
+    padding: 5px;
+    margin-bottom: 15px;
+  }
+  .FAQs-BORDER{
+    border-bottom: 3PX solid #29626D;
+    margin-bottom: 15px;
+  }
+  .deactive{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+  .deactive :hover{
+    color: black;
+  }
+  .separator-line{
+    width: 62px;
+    height: 2px;
+    background-color:#ccc;
+    display: inline-block;
+  }
+  .collapse .card{
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .Prices-Active{
+    height: 50px;
+    color: white;
+    background-color: #1D7A8C;
+  }
+  .Roboto-Bold-24{
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 48px;
+  }
+  .Roboto-Bold-48{
+    font-size: 28px;
+    line-height: 48px;
+    color: #646464;
+  }
+  .price-onetime-description{
+    margin-left: 4rem;
+    margin-top: 1rem;
+  }
+  .border-blue{
+    border: solid 1px #b0c9ce;
+  }
+  .price-onetime-description ul{
+    list-style-type: none; 
+    list-style-image: url('../Image/Right-Arrow.png');
+  }
+  .extra-services-icon{
+    width: 108px;
+    height: 108px;
+    border: 1px solid #B0C9CE;
+    border-radius: 50%;
+    padding-top:27px;
+  }
+.font-blue{
+  color: #1D7A8C;
+  font-size: 18px;
+  font-weight: bold;
+}
+.gray-bachgroud {
+ background-color:  #F6F6F6 ;
+}
+.ul-Style-sideArrow{
+  list-style: none;
+  list-style-image: url("../Image/vector-smart-object-copy.png") ;
+  font-size: 16px;
+}
+.text-right{
+  text-align: right;
+}
+.font-14{
+ font-size: 14px;
+}
+.margin-top-50{
+  margin-top: 50px;;
+}
+.marun{
+  background-color: #1D7A8C;
+}
+
+
+
+  
