@@ -5,13 +5,17 @@
 .navbar {
   transition: all 0.3s ease;
   height: 100px;;
-  background-color: #525252;
+  background-color:transparent;
 }
 .navbar.navbar-bg-color{
   background-color: #2f2f2f;
 }
 .active{
   background-color: #29626D;
+}
+.active2{
+  background-color:#525252;
+  height: 80px;
 }
 .navbar-brand img {
   height: 100px;
@@ -244,7 +248,7 @@ margin-top: 25px;
   
   }
   .banner-Section{
-    margin-top: 73px;
+    margin-top: 55px;
     height: 370px;;
   }
   .FAQs-Active{

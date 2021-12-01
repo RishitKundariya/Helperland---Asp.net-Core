@@ -1,12 +1,9 @@
-$(document).ready(function(){
-    $(window).scroll(function(){
-        if(this.scrollY > 50){
-            $('.navbar').addClass("navbar-bg-color");
-        }
-        else{
-            $('.navbar').removeClass("navbar-bg-color");
-        }
-    })
 
-    
-})
+$(window).on("scroll", function() {
+    if($(window).scrollTop() > 50) {
+        $(".navbar").addClass("active2");
+    } else {
+        
+       $(".navbar").removeClass("active2");
+    }
+});
