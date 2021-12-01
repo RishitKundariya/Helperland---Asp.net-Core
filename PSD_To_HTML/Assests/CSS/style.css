@@ -303,7 +303,18 @@ margin-top: 25px;
   }
   .price-onetime-description ul{
     list-style-type: none; 
-    list-style-image: url('../Image/Right-Arrow.png');
+    padding-top: 20px;
+    margin-left: -36px;
+    list-style-type: none;
+    text-align: left;
+  }
+  .price-onetime-description ul li{
+    text-align: left;
+    padding-left: 1.5rem;
+    background-image: url(../Image/Right-Arrow.png);
+    background-position: 0px 5px;
+    background-size: 1rem 1rem;
+    background-repeat: no-repeat;
   }
   .extra-services-icon{
     width: 108px;
@@ -321,9 +332,18 @@ margin-top: 25px;
  background-color:  #F6F6F6 ;
 }
 .ul-Style-sideArrow{
-  list-style: none;
-  list-style-image: url("../Image/vector-smart-object-copy.png") ;
-  font-size: 16px;
+  padding-top: 20px;
+    margin-left: -32px;
+    list-style-type: none;
+    text-align: left;
+}
+.ul-Style-sideArrow li{
+  text-align: left;
+    padding-left: 1.5rem;
+    background-image: url(../Image/vector-smart-object-copy.png);
+    background-position: 0px 4px;
+    background-size: 1rem 1rem;
+    background-repeat: no-repeat;
 }
 .text-right{
   text-align: right;
