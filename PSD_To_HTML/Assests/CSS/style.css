@@ -15,7 +15,7 @@
 }
 .active2{
   background-color:#525252;
-  height: 80px;
+  height: 110px;
 }
 .navbar-brand img {
   height: 100px;
@@ -57,6 +57,7 @@
 
 .home{
   height: 100vh;
+  padding: 0px;
 }
 
 .home .home-content{
@@ -69,6 +70,9 @@
   justify-content: end;
   color: white;
   padding-bottom: 25px;
+}
+.home-service-provider .home-content{
+  background: url(../image/group-8.png) !important;
 }
 
 .home .home-content .home-text{
@@ -204,7 +208,6 @@ footer{
 }
 .footer-main{
  padding: 20px;
- height: 100px;
 }
 .footer-main .col-md-2 img{
   height: 70px;
@@ -357,7 +360,21 @@ margin-top: 25px;
 .marun{
   background-color: #1D7A8C;
 }
-
+.login-form{
+  height: 71.6%;
+  width: 27.6%;
+  margin-top: 5.2%;
+  margin-left: 36.1%;
+  background: white;
+}
+@media only screen and (max-width: 700px) {
+  .login-form {
+   height: 71.6%;
+   width: 90%;
+  margin-left: 4.1%;
+  background: white;
+  }
+}
 
 
   
