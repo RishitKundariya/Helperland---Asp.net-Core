@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="description">
+	<meta content="" name="keywords">
+	<!-- Google Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+		rel="stylesheet">
+	<!-- Vendor CSS Files -->
+
+	<link href="Assests/CSS/Bootstrap/Css/bootstrap.min.css" rel="stylesheet">
+	<link href="Assests/CSS/Bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+	<!-- Template Main CSS File -->
+	<link href="Assests/CSS/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+</head>
+
+<body id="body">
+	<!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-xl navbar-light navbar-service" id="nav">
+        <div class="container-fluid">
+            <a class="" href="./HomePage.html" >
+                <img src="Assests/Image/white-logo-transparent-background.png" alt="" class="navbar-service-img img-fluid">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item display-sm">
+                        <a class="nav-link" href="#"> Dashboard</a>
+                    </li>
+                    <li class="nav-item display-sm">
+                        <a class="nav-link" href="#"> New Service</a>
+                    </li>
+                    <li class="nav-item display-sm">
+                        <a class="nav-link" href="#"> Service Schedule</a>
+                    </li>
+                    <li class="nav-item display-sm">
+                        <a class="nav-link" href="#">  My Ratings</a>
+                    </li>
+                    <li class="nav-item display-sm">
+                        <a class="nav-link" href="#"> Block Customer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="./Prices.html">Prices & services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Warranty </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"> Contact</a>
+                    </li>
+                   
+                    <li class="nav-item ">
+                       <img src="./assests/image/icon-notification.png" class=" nav-border nav-link-image">
+                    </li>
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="Assests/Image/user.png " alt="united kingdom flag"
+                                class="county-flag nav-link-image-user">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li class="">
+                                <a class="dropdown-item nav-dropdown-item" href="#">
+                                  <small>Welcome,</small> <br>
+                                   Sandip patel
+                                </a>
+                                <hr>
+                            </li>
+                            <li class="">
+                                <a class="dropdown-item nav-dropdown-item" href="#">
+                                   My Dashboard
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="dropdown-item nav-dropdown-item" href="#">
+                                   My Setting
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="dropdown-item nav-dropdown-item" href="#">
+                                   Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+  <section id="Upcoming-service-welcome">
+      <div class="container">
+          <div class="row text-center">
+              <h1> Welcome, <b>Sandeep!</b></h1>
+          </div>
+      </div>
+  </section>
+   
+   <section id="Upcoming-service-list">
+       <div class="container">
+           <div class="row justify-content-center">
+                <div class="col-md-2 service-menu">
+                    <div class="side-menu-item">
+                        Dashboard
+                    </div>
+                    <div class="side-menu-item">
+                        New Service
+                    </div>
+                    <div class="side-menu-item side-menu-item-active">
+                        New Service Requests
+                    </div>
+                    <div class="side-menu-item">
+                        Service Schedule
+                    </div>
+                    <div class="side-menu-item">
+                        Service History
+                    </div>
+                    <div class="side-menu-item">
+                        My Ratings
+                    </div>
+                    <div class="side-menu-item">
+                        Block Customer
+                    </div>
+                </div>
+                <div class="col-md-8 table-responsive">
+                    <table id="upcoming-service" class="display table">
+                        <thead>
+                            <tr>
+                                <th>Service ID</th>
+                                <th>Service Name</th>
+                                <th>Customer details</th>
+                                <th>Distance</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>323435 </td>
+                                <td class="flex">
+                                    <div><img src="./assests/image/calendar2.png"><b> 09/04/2018</b> </div> 
+                                    <div><img src="./assests/image/layer-14.png"> 12:00 - 18:00 </div>
+                                </td>
+                                <td>
+                                    <div> David Bough  </div> 
+                                    <div><img src="./assests/image/layer-15.png"> Musterstrabe 5,12345 Bonn </div>
+                                </td>
+                                <td>15 km</td>
+                                <td><input type="button" class="btn btn-lite-pink btn-sm rounded-pill" value="Cancel""></td>
+                            </tr>
+                            <tr>
+                                <td>323436 </td>
+                                <td class="flex">
+                                    <div><img src="./assests/image/calendar2.png"><b> 09/04/2018</b> </div> 
+                                    <div><img src="./assests/image/layer-14.png"> 12:00 - 18:00 </div>
+                                </td>
+                                <td>
+                                    <div> David Bough  </div> 
+                                    <div><img src="./assests/image/layer-15.png"> Musterstrabe 5,12345 Bonn </div>
+                                </td>
+                                <td>15 km</td>
+                                <td><input type="button" class="btn btn-lite-pink btn-sm rounded-pill" value="Cancel""></td>
+                            </tr>
+                            <tr>
+                                <td>323437 </td>
+                                <td class="flex">
+                                    <div><img src="./assests/image/calendar2.png"><b> 09/04/2018</b> </div> 
+                                    <div><img src="./assests/image/layer-14.png"> 12:00 - 18:00 </div>
+                                </td>
+                                <td>
+                                    <div> David Bough  </div> 
+                                    <div><img src="./assests/image/layer-15.png"> Musterstrabe 5,12345 Bonn </div>
+                                </td>
+                                <td>15 km</td>
+                                <td><input type="button" class="btn btn-lite-pink btn-sm rounded-pill" value="Cancel""></td>
+                            </tr>
+                            <tr>
+                                <td>323438 </td>
+                                <td class="flex">
+                                    <div><img src="./assests/image/calendar2.png"><b> 09/04/2018</b> </div> 
+                                    <div><img src="./assests/image/layer-14.png"> 12:00 - 18:00 </div>
+                                </td>
+                                <td>
+                                    <div> David Bough  </div> 
+                                    <div><img src="./assests/image/layer-15.png"> Musterstrabe 5,12345 Bonn </div>
+                                </td>
+                                <td>15 km</td>
+                                <td><input type="button" class="btn btn-lite-pink btn-sm rounded-pill" value="Cancel""></td>
+                            </tr>
+                            <tr>
+                                <td>323439 </td>
+                                <td class="flex">
+                                    <div><img src="./assests/image/calendar2.png"><b> 09/04/2018</b> </div> 
+                                    <div><img src="./assests/image/layer-14.png"> 12:00 - 18:00 </div>
+                                </td>
+                                <td>
+                                    <div> David Bough  </div> 
+                                    <div><img src="./assests/image/layer-15.png"> Musterstrabe 5,12345 Bonn </div>
+                                </td>
+                                <td>15 km</td>
+                                <td><input type="button" class="btn btn-lite-pink btn-sm rounded-pill" value="Cancel""></td>
+                            </tr>
+                            <tr>
+                                <td>323440 </td>
+                                <td class="flex">
+                                    <div><img src="./assests/image/calendar2.png"><b> 09/04/2018</b> </div> 
+                                    <div><img src="./assests/image/layer-14.png"> 12:00 - 18:00 </div>
+                                </td>
+                                <td>
+                                    <div> David Bough  </div> 
+                                    <div><img src="./assests/image/layer-15.png"> Musterstrabe 5,12345 Bonn </div>
+                                </td>
+                                <td>15 km</td>
+                                <td><input type="button" class="btn btn-lite-pink btn-sm rounded-pill" value="Cancel""></td>
+                            </tr>
+                            <tr>
+                                <td>323441 </td>
+                                <td class="flex">
+                                    <div><img src="./assests/image/calendar2.png"><b> 09/04/2018</b> </div> 
+                                    <div><img src="./assests/image/layer-14.png"> 12:00 - 18:00 </div>
+                                </td>
+                                <td>
+                                    <div> David Bough  </div> 
+                                    <div><img src="./assests/image/layer-15.png"> Musterstrabe 5,12345 Bonn </div>
+                                </td>
+                                <td>15 km</td>
+                                <td><input type="button" class="btn btn-lite-pink btn-sm rounded-pill" value="Cancel""></td>
+                            </tr>
+                            <tr>
+                                <td>323442 </td>
+                                <td class="flex">
+                                    <div><img src="./assests/image/calendar2.png"><b> 09/04/2018</b> </div> 
+                                    <div><img src="./assests/image/layer-14.png"> 12:00 - 18:00 </div>
+                                </td>
+                                <td>
+                                    <div> David Bough  </div> 
+                                    <div><img src="./assests/image/layer-15.png"> Musterstrabe 5,12345 Bonn </div>
+                                </td>
+                                <td>15 km</td>
+                                <td><input type="button" class="btn btn-lite-pink btn-sm rounded-pill" value="Cancel""></td>
+                            </tr>
+                            <tr>
+                                <td>323443 </td>
+                                <td class="flex">
+                                    <div><img src="./assests/image/calendar2.png"><b> 09/04/2018</b> </div> 
+                                    <div><img src="./assests/image/layer-14.png"> 12:00 - 18:00 </div>
+                                </td>
+                                <td>
+                                    <div> David Bough  </div> 
+                                    <div><img src="./assests/image/layer-15.png"> Musterstrabe 5,12345 Bonn </div>
+                                </td>
+                                <td>15 km</td>
+                                <td><input type="button" class="btn btn-lite-pink btn-sm rounded-pill" value="Cancel""></td>
+                            </tr>
+                            <tr>
+                                <td>323444 </td>
+                                <td class="flex">
+                                    <div><img src="./assests/image/calendar2.png"><b> 09/04/2018</b> </div> 
+                                    <div><img src="./assests/image/layer-14.png"> 12:00 - 18:00 </div>
+                                </td>
+                                <td>
+                                    <div> David Bough  </div> 
+                                    <div><img src="./assests/image/layer-15.png"> Musterstrabe 5,12345 Bonn </div>
+                                </td>
+                                <td>15 km</td>
+                                <td><input type="button" class="btn btn-lite-pink btn-sm rounded-pill" value="Cancel""></td>
+                            </tr>
+                            <tr>
+                                <td>323445 </td>
+                                <td class="flex">
+                                    <div><img src="./assests/image/calendar2.png"><b> 09/04/2018</b> </div> 
+                                    <div><img src="./assests/image/layer-14.png"> 12:00 - 18:00 </div>
+                                </td>
+                                <td>
+                                    <div> David Bough  </div> 
+                                    <div><img src="./assests/image/layer-15.png"> Musterstrabe 5,12345 Bonn </div>
+                                </td>
+                                <td>15 km</td>
+                                <td><input type="button" class="btn btn-lite-pink btn-sm rounded-pill" value="Cancel""></td>
+                            </tr>
+                        </tbody>
+                    </table>
+            
+                </div>
+           </div>
+       </div>
+   </section>
+<footer>
+    <div class="container-fluid">
+        <div class="row footer-main justify-content-center">
+            <div class="col-md-2 col-sm-12 text-center">
+             <img src="Assests/Image/white-logo-transparent-background.png"
+             class="img-fluid">
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <ul>
+                    <li> <a href="./HomePage.html" class="link">Home</a> </li>
+                    <li> <a href="./About.html" class="link">About</a>  </li>
+                    <li> <a href="#" class="link">TestiMonials </a>  </li>
+                    <li><a href="./FAQ.html" class="link">Faq</a>  </li>
+                    <li><a href="#" class="link">Insurance Policy</a>  </li>
+                    <li><a href="#" class="link">Impressun</a>  </li>
+                </ul>
+                
+            </div>
+            <div class="col-md-1 col-sm-12 text-center">
+             <i class="bi bi-facebook"></i>
+             <i class="bi bi-instagram"></i>
+            </div>
+        </div>
+    </div>
+ 
+     <div class="footer-last-row">
+         Lorem ipsum dolor, sit amet consectetur  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse modi, repudiandae deserunt . <span> </span>
+         
+     </div>
+  </footer>
+ 
+ 
+  <!-- JS -->
+  <script src="./Assests/JS/main.js"></script>
+  <!-- JS Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- fontawesome -->
+  <script src="https://kit.fontawesome.com/ae6d6e0254.js" crossorigin="anonymous"></script>
+ </body>
+ 
+ </html>

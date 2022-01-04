@@ -10,7 +10,10 @@
 .navbar.navbar-bg-color {
   background-color: #2f2f2f !important;
 }
-
+.dropdown-menu{
+  background-color: white;
+  color: black !important;
+}
 .active {
   background-color: #29626d;
 }
@@ -40,20 +43,26 @@
   border-radius: 20px;
   padding: 4px 10px;
 }
-
+.navbar .navbar-nav li .nav-dropdown-item {
+  color: #000000 !important;
+}
 .navbar .navbar-nav li a {
   color: #ffffff !important;
 }
-
+small{
+  font-size: 12px;
+}
 .navbar .navbar-nav .county-flag {
   width: 18px;
 }
-
+.display-sm{
+  display: none;
+}
 .navbar .navbar-nav .dropdown-menu {
-  background-color: transparent;
+  background-color: white;
   border: none;
   min-width: 0px;
-  left: -15px;
+  left: -5rem;
   padding: 0px;
 }
 
@@ -457,6 +466,15 @@ tbody tr td div img {
     text-align: center;
   }
 }
+@media only screen and (max-width: 1199px) {
+  .display-sm{
+    display: block !important;
+  }
+   .service-menu{
+    display: none;
+  }
+}
+
 .font-blue {
   color: #1d7a8c;
   font-size: 18px;
