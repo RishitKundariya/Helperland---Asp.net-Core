@@ -473,7 +473,12 @@ tbody tr td div img {
    .service-menu{
     display: none;
   }
+  .display-non-sm{
+    display: none;
+  }
 }
+
+
 
 .font-blue {
   color: #1d7a8c;
