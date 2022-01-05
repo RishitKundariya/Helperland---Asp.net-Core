@@ -500,6 +500,9 @@ tbody tr td div img {
 .text-right {
   text-align: right;
 }
+.title{
+  margin-bottom: 0rem;
+}
 .font-14 {
   font-size: 14px;
 }
