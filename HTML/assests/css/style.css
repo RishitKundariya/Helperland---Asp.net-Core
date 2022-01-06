@@ -454,6 +454,43 @@ tbody tr td div img {
 .active-btn{
   background-color: #146371;
 }
+.navbar-admin{
+  background-color: #1FB6FF;
+  color: white;
+  height: 60px;
+}
+#admin-pannel{
+  margin-top: 60px;
+  padding: 0px;
+}
+.navbar-admin-list{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.side-menu-bar{
+ padding: 0px;
+ color: #646464;
+}
+.btn-admin{
+  background-color: #1fb6ff;
+}
+.float-right{
+  float: right;
+}
+.white-background{
+  background-color: white;
+}
+.admin-pannel-content{
+  background-color: #f2f4f5;
+  color: #646464;
+  padding: 1rem;
+}
+.border-bottom-admin{
+  padding: 0.5rem;
+  border-bottom: 1px solid black;
+  font-size: 16px;
+}
 @media only screen and (max-width: 765px) {
   .extra-services-icon {
     margin-left: 24%;

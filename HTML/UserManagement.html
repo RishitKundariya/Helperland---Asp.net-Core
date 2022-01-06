@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="description">
+	<meta content="" name="keywords">
+	<!-- Google Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+		rel="stylesheet">
+	<!-- Vendor CSS Files -->
+
+	<link href="Assests/CSS/Bootstrap/Css/bootstrap.min.css" rel="stylesheet">
+	<link href="Assests/CSS/Bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+	<!-- Template Main CSS File -->
+	<link href="Assests/CSS/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.2/jquery.contextMenu.min.css" integrity="sha512-SWjZLElR5l3FxoO9Bt9Dy3plCWlBi1Mc9/OlojDPwryZxO0ydpZgvXMLhV6jdEyULGNWjKgZWiX/AMzIvZ4JuA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.2/jquery.contextMenu.min.js" integrity="sha512-kvg/Lknti7OoAw0GqMBP8B+7cGHvp4M9O9V6nAYG91FZVDMW3Xkkq5qrdMhrXiawahqU7IZ5CNsY/wWy1PpGTQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.2/jquery.ui.position.min.js" integrity="sha512-2NZDd1dAB6xu/KFmVhHk+R00JDnC1S9jTfcROXKDTYYTXTkKRLnT5ykFv8CdWWKZB7LeFkxYcvJH+x95klrH1Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+</head>
+
+<body id="body">
+	<!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-xl navbar-light navbar-admin" id="nav">
+        <div class="container-fluid">
+           
+            <h1>Halperland</h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse  " >
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-admin-list">
+                    <li>
+                        <img src="./assests/image/user.png ">
+                    </li>
+                    <li >
+                        James Smith
+                    </li>
+                    <li>
+                        <img src="./assests/image/logout.png">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+ 
+   <section id="admin-pannel">
+       <div class="container-fluid">
+           <div class="row">
+               <div class="col-md-2 side-menu-bar">
+                   <div class="border-bottom-admin">
+                    Service Management 
+                   </div>
+                   <div class="border-bottom-admin">
+                     Role Management
+                   </div>
+                   <div class="border-bottom-admin">
+                    Coupon Code Management
+                   </div>
+                   <div class="border-bottom-admin">
+                    Escalation Management 
+                   </div>
+                   <div class="border-bottom-admin">
+                    Service Requests 
+                   </div>
+                   <div class="border-bottom-admin">
+                    Service Providers 
+                    </div>
+                    <div class="border-bottom-admin">
+                        User Management 
+                    </div>
+                    <div class="border-bottom-admin">
+                        Finance Module
+                    </div>
+                    <div class="border-bottom-admin">
+                        Zip Code Management 
+                    </div>
+                    <div class="border-bottom-admin">
+                        Rating Management 
+                    </div>
+                    <div class="border-bottom-admin">
+                        Inquiry Management 
+                    </div>
+                    <div class="border-bottom-admin">
+                        Newsletter Management
+                    </div>
+                    <div class="border-bottom-admin">
+                        Content Management
+                    </div>
+
+               </div>
+               <div class="col-md-10 admin-pannel-content">
+                    <div class="m-1">
+                        <h2 class="d-inline"> User Management </h2>
+                        <div class="float-right"> <a href="#" class="btn-admin btn btn-sm">
+                            <img src="./assests/image/plus.png">  Add New User</a></div>
+                        
+                    </div>
+                    <div class="p-3 mb-3 white-background">
+                        <div class="row ">
+                            <div class="col-md-3">
+                                <select name="User name" class="form-control" >
+                                    <option value="volvo">User Name </option>
+                                    <option value="saab">Saab</option>
+                                    <option value="mercedes">Mercedes</option>
+                                    <option value="audi">Audi</option>
+                                  </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select name="User Role" class="form-control" >
+                                    <option value="volvo">User Role </option>
+                                    <option value="saab">Saab</option>
+                                    <option value="mercedes">Mercedes</option>
+                                    <option value="audi">Audi</option>
+                                  </select>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="col-auto">
+                                    <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                                    <div class="input-group mb-2">
+                                      <div class="input-group-prepend">
+                                        <div class="input-group-text">+49</div>
+                                      </div>
+                                      <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Phone Number">
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control" placeholder="zipcode">
+                            </div>
+                            <div class="col-md-1">
+                                <a href="#" class="btn btn-admin btn-sm">Search</a>
+                            </div>
+                            <div class="col-md-1">
+                                <a href="#" class="btn white-background btn-sm btn-outline-dark">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive row">
+                        <div class="col-md-12">
+                            <table id="adminUserManagement" class=" table">
+                                <thead>
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>User Type</th>
+                                        <th>Role</th>
+                                        <th>Postal Code</th>
+                                        <th>City</th>
+                                        <th>Redius</th>
+                                        <th>User Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                      <td>John Smith  </td>
+                                      <td> Service Provider</td>
+                                      <td>  </td>
+                                      <td>123456</td>
+                                      <td> Berlin</td>
+                                      <td></td>
+                                      <td> <span class="completed">Active</span></td>
+                                      <td class="text-center context-menu-customer"><img src="./assests/image/three-dot.png"> </td>
+
+                                  </tr>
+                                  <tr>
+                                    <td>Lyum watson  </td>
+                                    <td> Call Center</td>
+                                    <td> Inquiry Manager</td>
+                                    <td>123456</td>
+                                    <td> Berlin</td>
+                                    <td>10 km</td>
+                                    <td> <span class="completed">Active</span></td>
+                                    <td class="text-center context-menu-customer"><img src="./assests/image/three-dot.png"> </td>
+
+                                </tr>
+                                <tr>
+                                    <td>Lyum watson  </td>
+                                    <td> Call Center</td>
+                                    <td> </td>
+                                    <td>123456</td>
+                                    <td> Berlin</td>
+                                    <td></td>
+                                    <td> <span class="completed">Active</span></td>
+                                    <td class="text-center context-menu-customer"><img src="./assests/image/three-dot.png"> </td>
+
+                                </tr>
+                                <tr>
+                                    <td>Lyum watson  </td>
+                                    <td> Call Center</td>
+                                    <td> Inquiry Manager</td>
+                                    <td>123456</td>
+                                    <td> Berlin</td>
+                                    <td></td>
+                                    <td> <span class="completed">Active</span></td>
+                                    <td class="text-center context-menu-customer"><img src="./assests/image/three-dot.png"> </td>
+
+                                </tr>
+                                <tr>
+                                    <td>Lyum watson  </td>
+                                    <td> Customer</td>
+                                    <td> </td>
+                                    <td>123456</td>
+                                    <td> Berlin</td>
+                                    <td></td>
+                                    <td> <span class="completed">Active</span></td>
+                                    <td class="text-center context-menu-user"><img src="./assests/image/three-dot.png"> </td>
+                                </tr>
+                                <tr>
+                                    <td>Lyum watson  </td>
+                                    <td> Call Center</td>
+                                    <td> Content Manager</td>
+                                    <td>123456</td>
+                                    <td> Berlin</td>
+                                    <td></td>
+                                    <td> <span class="completed">Active</span></td>
+                                    <td class="text-center context-menu-customer"><img src="./assests/image/three-dot.png"> </td>
+
+                                </tr>
+                                 <tr>
+                                    <td>Lyum watson  </td>
+                                    <td> Call Center</td>
+                                    <td> Finance Manager</td>
+                                    <td>123456</td>
+                                    <td> Berlin</td>
+                                    <td></td>
+                                    <td> <span class="completed">Active</span></td>
+                                    <td class="text-center context-menu-customer"><img src="./assests/image/three-dot.png"> </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>Lyum watson  </td>
+                                    <td> Customer</td>
+                                    <td> </td>
+                                    <td>123456</td>
+                                    <td> Berlin</td>
+                                    <td></td>
+                                    <td> <span class="cancel">Inactive</span></td>
+                                    <td class="text-center context-menu-user"><img src="./assests/image/three-dot.png"> </td>
+                                </tr>
+                                <tr>
+                                    <td>Lyum watson  </td>
+                                    <td> Call Center</td>
+                                    <td> Finance Manager</td>
+                                    <td>123456</td>
+                                    <td> Berlin</td>
+                                    <td></td>
+                                    <td> <span class="completed">Active</span></td>
+                                    <td class="text-center context-menu-customer"><img src="./assests/image/three-dot.png"> </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>Lyum watson  </td>
+                                    <td> Call Center</td>
+                                    <td> Finance Manager</td>
+                                    <td>123456</td>
+                                    <td> Berlin</td>
+                                    <td></td>
+                                    <td> <span class="completed">Active</span></td>
+                                    <td class="text-center context-menu-customer"><img src="./assests/image/three-dot.png"> </td>
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    ©2018 Helperland. All rights reserved.
+               </div>
+           </div>
+       </div>
+   </section>
+   
+
+ 
+ 
+  <!-- JS -->
+  <script src="./Assests/JS/main.js"></script>
+  <!-- JS Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- fontawesome -->
+  <script src="https://kit.fontawesome.com/ae6d6e0254.js" crossorigin="anonymous"></script>
+ </body>
+ 
+ </html>
