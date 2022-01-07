@@ -525,7 +525,9 @@ tbody tr td div img {
   }
 }
 
-
+table tr td{
+  vertical-align: middle;
+}
 
 .font-blue {
   color: #1d7a8c;
