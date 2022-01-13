@@ -139,3 +139,50 @@ $(function(){
         }
     });
 });
+function gotonextplan(){
+    var header = document.getElementById("bookservice");
+   var btns = header.getElementsByClassName("btn");
+    btns[1].className +=" active-book-service";
+    var hidediv = document.getElementById("first-book-service");
+    hidediv.style.display = "none";
+    document.getElementById("second-book-service").style.display="block";
+    var imgs = header.getElementsByTagName("img");
+    imgs[1].src="./assests/image/schedule-white.png";
+  
+}
+function gotoyourDetails(){
+    var header = document.getElementById("bookservice");
+    var btns = header.getElementsByClassName("btn");
+     btns[2].className +=" active-book-service";
+     var imgs = header.getElementsByTagName("img");
+     imgs[2].src="./assests/image/details-white.png";
+     document.getElementById("second-book-service").style.display="none";
+     document.getElementById("third-book-service").style.display="block";
+}
+function gotomakepayment(){
+    var header = document.getElementById("bookservice");
+    var btns = header.getElementsByClassName("btn");
+    var imgs = header.getElementsByTagName("img");
+     imgs[3].src="./assests/image/payment-white.png";
+    btns[3].className +=" active-book-service";
+    document.getElementById("third-book-service").style.display="none";
+    document.getElementById("fourth-book-service").style.display="block";
+}
+
+function checkIfSelected(para){
+    var btns = document.getElementsByClassName("btn-rounded-book-service");
+    var imgs  = document.getElementsByClassName("img-book-service");
+    var hidden =document.getElementsByClassName("hidden-input");
+    if(hidden[para].value == "notselected"){
+        hidden[para].value="selected"; 
+        btns[para].style.border = "3px solid #146371";
+        var path="./assests/image/"+(para+1)+"-green.png";
+        imgs[para].src=path;
+    }
+    else{
+        hidden[para].value="notselected"; 
+        btns[para].style.border = "1px solid black";
+        var path="./assests/image/"+(para+1)+".png";
+        imgs[para].src=path;
+    }
+}

@@ -17,6 +17,10 @@
 .active {
   background-color: #29626d;
 }
+.active-book-service{
+  background-color: #29626d;
+  color: white;
+}
 .active2 {
   background-color: #525252;
   height: 115px;
@@ -463,6 +467,25 @@ tbody tr td div img {
 }
 .active-btn{
   background-color: #146371;
+  color: white;
+}
+.btn-outline{
+  border: 1px solid #146371 ;
+  color: #146371;
+  font-weight: 500;
+}
+.btn-outline:hover{
+  background-color: #146371;
+  color: white;
+}
+#second-book-service{
+  display: none;
+}
+#third-book-service{
+  display: none;
+}
+#fourth-book-service{
+  display: none;
 }
 .navbar-admin{
   background-color: #1FB6FF;
@@ -485,6 +508,7 @@ tbody tr td div img {
 .btn-admin{
   background-color: #1fb6ff;
 }
+
 .float-right{
   float: right;
 }
@@ -513,6 +537,8 @@ tbody tr td div img {
     text-align: center;
   }
 }
+
+
 @media only screen and (max-width: 1199px) {
   .display-sm{
     display: block !important;
@@ -641,4 +667,25 @@ table tr td{
   top: -5px;
   padding: 15px 0px 0px 8px;
   position: absolute;
+}
+.book-service-extra{
+  height: 130px;
+  width: 100px;
+}
+.book-service-extra-flex{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; 
+   align-items: center; 
+  justify-content: center;
+}
+
+.btn-rounded-book-service{
+  height: 90px;
+  width: 90px;
+  border: 1px solid black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
