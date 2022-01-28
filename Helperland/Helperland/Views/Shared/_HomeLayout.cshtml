@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>@ViewBag.Title | Helperland</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <!--  Main CSS File -->
+    <link href="~/css/style.css" rel="stylesheet" />
+
+</head>
+
+<body id="body">
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-xl navbar-light home-navbar" id="nav">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-action="index" asp-controller="home">
+                <img src="~/image/white-logo-transparent-background.png" asp-append-version="true"  id="brand-logo"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0"  id="navLinks">
+                    <li class="nav-item hover-blue">
+                        <a class="nav-link rounded-link" href="#">Book a Cleaner</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="prices" asp-controller="home" >Prices</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Our Guarantee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="contact" asp-controller="home">Contact us</a>
+                    </li>
+                    <li class="nav-item hover-blue">
+                        <a class="nav-link rounded-link" data-bs-toggle="modal" data-bs-target="#LoginModel">Login</a>
+                    </li>
+                    <li class="nav-item hover-blue">
+                        <a class="nav-link rounded-link" href="#">Become a Helper</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="~/image/gb.svg" asp-append-version="true" alt="united kingdom flag"
+                                 class="county-flag">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <img src="~/image/in.svg" asp-append-version="true" alt="united kingdom flag"
+                                         class="county-flag">
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <img src="~/image/us.svg" asp-append-version="true" alt="united kingdom flag"
+                                         class="county-flag">
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modal -->
+    <div class="modal fade" id="LoginModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog col-4">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login to your account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary form-control">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+
+    <section id="newslatter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 ">
+                    <a href="#home" class="link"> <i class="bi bi-arrow-up-circle newslatter-size"></i> </a>
+                </div>
+                <div class="col-md-6 offset-md-2">
+                    <h2>
+                        Get Our Newsletter
+                    </h2>
+                    <input type="email" placeholder="Your Email">
+                    <button class="btn btn-sm">Submit</button>
+                </div>
+                <div class="col-md-1 offset-md-2 text-right ">
+                    <img class="img-fluid" src="~/image/layer-598.png" asp-append-version="true">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+
+        <div class="container-fluid">
+            <div class="row footer-main justify-content-center">
+                <div class="col-md-2 col-sm-12 text-center">
+                    <img src="~/image/white-logo-transparent-background.png" asp-append-version="true"
+                         class="img-fluid">
+                </div>
+                <div class="col-md-8 col-sm-12">
+                    <ul>
+                        <li> <a asp-action="index" asp-controller="home" class="link">Home</a> </li>
+                        <li> <a asp-action="about" asp-controller="home" class="link">About</a>  </li>
+                        <li> <a href="#" class="link">TestiMonials </a>  </li>
+                        <li><a asp-action="faq" asp-controller="home" class="link">Faq</a>  </li>
+                        <li><a href="#" class="link">Insurance Policy</a>  </li>
+                        <li><a href="#" class="link">Impressun</a>  </li>
+                    </ul>
+
+                </div>
+                <div class="col-md-1 col-sm-12 text-center">
+                    <i class="bi bi-facebook"></i>
+                    <i class="bi bi-instagram"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-line"></div>
+        <div class="footer-last-row">
+            Lorem ipsum dolor, sit amet consectetur  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse modi, repudiandae deserunt . <span> </span>
+            <input type="button" class="btn btn-sm btn-warning" onclick="closeDiv()" id="warningbtn" value="ok">
+        </div>
+    </footer>
+
+    <!-- Jquery -->
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Main Js File-->
+    <script src="~/js/main.js"></script>
+    <!-- JS Bootstrap -->
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/ae6d6e0254.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

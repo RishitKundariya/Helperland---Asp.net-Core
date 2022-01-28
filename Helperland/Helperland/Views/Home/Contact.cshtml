@@ -1,0 +1,103 @@
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Title = "Contact";
+}
+@model Helperland.Models.ViewModel.ContactViewModel
+<section id="headerImage">
+    <img src="~/Image/group-16.png" asp-append-version="true" class="img-fluid  banner-Section">
+</section>
+
+<section id="Contact">
+    <div class="text-center">
+        <div class=" justify-content-center align-self-center">
+            <h1 class="">Contact</h1>
+            <div class="separator-line"></div>
+            <img src="~/Image/separator.png" asp-append-version="true" >
+            <div class="separator-line"></div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center margin-top-50">
+                <div class="col-md-2">
+                    <img src="~/Image/location.png" asp-append-version="true" class="img-fluid">
+                    <p class="justify-center"> <br>1111 Lorem ipsum text 100, Lorem ipsum AB</p>
+                </div>
+                <div class="col-md-2 offset-md-1">
+                    <img src="~/Image/phone-call.png" asp-append-version="true" class="img-fluid">
+
+                    <p>  <br>+49 (40) 123 56 7890 <br> +49 (40) 987 56 0000 </p>
+
+                </div>
+                <div class="col-md-2 offset-md-1">
+                    <img src="~/Image/email.png" asp-append-version="true" class="img-fluid">
+
+                    <p> <br> <br>info@helperland.com </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="getintouch">
+    <h1 class="text-center"> Get in touch with us</h1>
+    <div class="container">
+        <div class="row justify-content-center margin-top-50">
+            <div class="col-md-6">
+                <form class="row g-3" enctype="multipart/form-data" data-ajax="true" asp-action="Contact" asp-controller="home" data-ajax-success="successfullyDataEnter()">
+                    <div class="col-md-6">
+                        <input asp-for="FirstName" class="form-control"  placeholder="First Name">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <input asp-for="LastName" class="form-control" placeholder="Last Name">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group-text">+41</div>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="phonenumber" class="form-control" >
+                        <span asp-validation-for="phonenumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="Email" class="form-control" placeholder="Email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <select asp-for="Subject" class="form-control form-select">
+                            <option> General </option>
+                            <option> Inquiry </option>
+                            <option> Renewal </option>
+                            <option> Revocation </option>
+                        </select>
+                        <span asp-validation-for="Subject" class="text-danger"></span>
+                    </div>
+                    <div class="col-12">
+                        <textarea asp-for="Message" rows="4" cols="50" class="form-control" placeholder="Message">
+                        </textarea>
+                        <span asp-validation-for="Message" class="text-danger"></span>
+                    </div>
+                    <div class="col-12">
+                        <h6>Attachment</h6>
+                        <label class="costm-input-file">
+                            <input type="file" hidden asp-for="File" />
+                            <span>Upload</span>
+                        </label>
+                    </div>
+                    <div class="col-12 text-center">
+                        <input type="submit" class="btn btn-primary rounded-pill marun" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section id="map">
+    <img src="~/Image/map.png" class="img-fluid">
+</section>
+<script>
+    function successfullyDataEnter() {
+        swal("Submitted", "Form has been sumiteed successfully", "success");
+    }
+</script>

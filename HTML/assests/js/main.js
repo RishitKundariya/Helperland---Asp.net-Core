@@ -186,3 +186,7 @@ function checkIfSelected(para){
         imgs[para].src=path;
     }
 }
+function closeDiv(){
+    alert("fnknbkf");
+    $(".footer-last-row").hide();
+}
