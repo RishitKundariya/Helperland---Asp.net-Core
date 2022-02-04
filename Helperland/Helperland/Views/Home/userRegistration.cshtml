@@ -1,0 +1,84 @@
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Title = "User Registration";
+}
+@model Helperland.Models.ViewModel.UserRegistrationViewModel
+<div class="container mt-5 pt-5">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class=" text-center">
+                <h1 class="">Create an account</h1>
+                <div class="separator-line"></div>
+                <img src="~/Image/separator.png" asp-append-version="true">
+                <div class="separator-line"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+            <div class="alert alert-success alert-dismissible fade show" style="display:none" role="alert" id="user-alert">
+                Data Enter successfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <form class="row g-3" id="registrationForm"
+                  asp-action="userRegistration"
+                  asp-controller="home">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger alert-dismissible fade show">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="col-md-6">
+                    <input asp-for="FirstName" class="form-control" placeholder="First Name">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <input asp-for="LastName" class="form-control" placeholder="Last Name">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="col-2">
+                    <div class="input-group-text">+41</div>
+                </div>
+                <div class="col-4">
+                    <input asp-for="MobileNumber" class="form-control" placeholder="Mobile Number">
+                    <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Email" class="form-control" placeholder="Email">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <input asp-for="Password" class="form-control" placeholder="Password">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password">
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="col-md-12 ">
+
+                    <input type="checkbox" /> Terms & Condition
+
+
+                </div>
+
+                <div class="col-12 text-center">
+                    <input type="submit" class="btn btn-primary rounded-pill marun" value="Submit"><br />
+                    <br />
+                    <span class="mt-3"> Already registered? <a data-bs-toggle="modal" data-bs-target="#LoginModel" class="text-marun">  Login now</a> </span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@if (ViewBag.Success == true)
+{
+    @section script{
+        <script>
+            $('#user-alert').show();
+        </script>
+    }
+
+}
+

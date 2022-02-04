@@ -199,3 +199,10 @@ function checkIfSelected(para){
 function closeDiv() {
     $("#warningbtn").hide();
 }
+
+$("#login-alert").delay(4000).slideUp(200, function () {
+    $(this).alert('close');
+});
+$(".alerts").delay(4000).slideUp(200, function () {
+    $(this).hide();
+});

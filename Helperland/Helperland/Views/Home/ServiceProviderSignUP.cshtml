@@ -1,0 +1,143 @@
+﻿@{
+    Layout = "_HomeLayout";
+    ViewBag.Title = "Service Provider Registration";
+}
+@model Helperland.Models.ViewModel.UserRegistrationViewModel
+<!-- Home Section -->
+<section class="home home-service-provider " id="home">
+    <div class="home-content">
+        <div class="d-flex flex-wrap login-form p-3">
+            <div class="container">
+                <h3 class="text-center mb-3">Register Now!</h3>
+                <span class="text-success alert-success" style="display:none" id="service-provider-alert">Data Enter Succesfully </span>
+                <div asp-validation-summary="ModelOnly" class="text-danger alert-danger alerts"></div>
+                <form asp-action="ServiceProviderSignUP" asp-controller="home">
+
+                    <div class="form-group mb-2">
+                        <input class="form-control"
+                               asp-for="FirstName"
+                               placeholder="First Name">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input class="form-control"
+                               asp-for="LastName"
+                               placeholder="Last Name">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input class="form-control"
+                               asp-for="Email"
+                               placeholder="Enter Email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <div class="col-auto">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">+46</div>
+                                </div>
+                                <input type="text" class="form-control"
+                                       asp-for="MobileNumber"
+                                       placeholder="Phone Number">
+                            </div>
+                            <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input class="form-control"
+                               asp-for="Password"
+                               placeholder="Password">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input class="form-control"
+                               asp-for="ConfirmPassword"
+                               placeholder="Confirm Password">
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="checkbox"> Send me newsletters from Helperland <br>
+                        <input type="checkbox"> I accept <span class="font-blue">terms and conditions & privacy policy</span>
+                    </div>
+                    <div class="container text-center">
+                        <input type="submit"
+                               class="btn rounded-pill active font-white">
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="how-it-work">
+    <div class="container">
+
+        <h1 class="Roboto-48 text-center m-4">How it works</h1>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-2 col-sm-6 text-center order-sm-1">
+                <img src="~/image/group-6.png" class="img-fluid how-it-work-image">
+            </div>
+            <div class="col-md-5 col-sm-6 ">
+                <span class="Roboto-Bold-30 mb-4">Register yourself</span>
+                <p>
+                    Provide your basic information to register
+                    yourself as a service provider.
+                </p>
+                <span>
+                    Read more <img src="~/image/shape-2 (1).svg">
+                </span>
+            </div>
+
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-2 pl-4 col-sm-6 text-center">
+                <img src="~/image/group-7.png" class="img-fluid how-it-work-image">
+            </div>
+            <div class="col-md-5 col-sm-6">
+                <span class="Roboto-Bold-30 mb-4">Get service requests</span>
+                <p>
+                    You will get service requests from
+                    customes depend on service area and profile..
+                </p>
+                <span>
+                    Read more <img src="~/image/shape-2 (1).svg">
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-2 col-sm-6 text-center order-sm-1">
+                <img src="~/image/group-9.png" class="img-fluid how-it-work-image">
+            </div>
+            <div class="col-md-5 col-sm-6">
+                <span class="Roboto-Bold-30 mb-4"> Complete service</span>
+                <p>
+                    Accept service requests from your customers
+                    and complete your work.
+                </p>
+                <span>
+                    Read more <img src="~/image/shape-2 (1).svg">
+                </span>
+            </div>
+
+        </div>
+    </div>
+</section>
+@if (ViewBag.Success == true)
+{
+    @section script{
+        <script>
+            $('#service-provider-alert').show();
+        </script>
+    }
+
+}
+
+

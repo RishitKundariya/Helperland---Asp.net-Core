@@ -80,3 +80,11 @@ G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\runtim
 G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\userRegistration.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\ServiceProviderSignUP.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartialView.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ForgetPasswordView.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\MailKit.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\MimeKit.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\Resetpassword.cshtml.g.cs

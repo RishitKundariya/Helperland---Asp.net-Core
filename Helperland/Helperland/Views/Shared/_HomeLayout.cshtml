@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+@model Helperland.Models.ViewModel.LoginViewModel;
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -23,7 +25,7 @@
     <nav class="navbar fixed-top navbar-expand-xl navbar-light home-navbar" id="nav">
         <div class="container-fluid">
             <a class="navbar-brand" asp-action="index" asp-controller="home">
-                <img src="~/image/white-logo-transparent-background.png" asp-append-version="true"  id="brand-logo"/>
+                <img src="~/image/white-logo-transparent-background.png" asp-append-version="true" id="brand-logo" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -31,12 +33,12 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0"  id="navLinks">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0" id="navLinks">
                     <li class="nav-item hover-blue">
                         <a class="nav-link rounded-link" href="#">Book a Cleaner</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-action="prices" asp-controller="home" >Prices</a>
+                        <a class="nav-link" asp-action="prices" asp-controller="home">Prices</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Our Guarantee</a>
@@ -51,7 +53,7 @@
                         <a class="nav-link rounded-link" data-bs-toggle="modal" data-bs-target="#LoginModel">Login</a>
                     </li>
                     <li class="nav-item hover-blue">
-                        <a class="nav-link rounded-link" href="#">Become a Helper</a>
+                        <a class="nav-link rounded-link" asp-action="ServiceProviderSignUP" asp-controller="home">Become a Helper</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -79,23 +81,8 @@
         </div>
     </nav>
 
-    <!-- Modal -->
-    <div class="modal fade" id="LoginModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog col-4">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Login to your account</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary form-control">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <partial name="_LoginPartialView" model="Model" />
+
     @RenderBody()
 
     <section id="newslatter">
@@ -152,16 +139,51 @@
         </div>
     </footer>
 
+
+
     <!-- Jquery -->
     <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>
     <script src="~/lib/jquery-validate/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+    @if (ViewBag.isOpen == true)
+    {
+        <script>
+            $(window).on('load', function () {
+                $('#LoginModel').modal('show');
+                $('#login-alert').show();
+            });
+        </script>
+
+    }
+    @if (ViewBag.isForgetPasswordOpen == true)
+    {
+        <script>
+            $(window).on('load', function () {
+                $('#ForgetPasswordModel').modal('show');
+                $('#Forget-alert').show();
+            });
+        </script>
+    }
+    @if (ViewBag.sendMail == true)
+    {
+        <script>
+            $(window).on('load', function () {
+                $('#ForgetPasswordModel').modal('show');
+                $('#Forget-alert-success').show();
+                $('#ForgetPasswordforrm').hide();
+            });
+        </script>
+    }
     <!-- Main Js File-->
     <script src="~/js/main.js"></script>
-    <!-- JS Bootstrap -->
-    <script src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>
+    @RenderSection("Script", required: false);
+
+
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/ae6d6e0254.js" crossorigin="anonymous"></script>
 </body>

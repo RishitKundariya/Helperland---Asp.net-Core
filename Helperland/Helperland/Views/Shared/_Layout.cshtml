@@ -48,16 +48,17 @@
                         <a class="nav-link" asp-action="contact" asp-controller="home">Contact us</a>
                     </li>
                     <li class="nav-item hover-change">
-                        <a class="nav-link rounded-link active" href="#">Login</a>
+                        <a class="nav-link rounded-link active" data-bs-toggle="modal" data-bs-target="#LoginModel">Login</a>
                     </li>
                     <li class="nav-item hover-change">
-                        <a class="nav-link rounded-link active" href="#">Become a Helper</a>
+                        <a class="nav-link rounded-link active" asp-action="ServiceProviderSignUP" asp-controller="home">Become a Helper</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <partial name="_LoginPartialView" model="Model" />
     @RenderBody()
 
     <section id="newslatter">

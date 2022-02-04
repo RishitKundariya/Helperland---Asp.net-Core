@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Helperland.Repository
 {
-    public class ContactRepository
+    public class ContactRepository : IContactRepository
     {
         private readonly HelperlandContext helperlandContext;
         private readonly IWebHostEnvironment webHostEnvironment;
@@ -35,7 +35,7 @@ namespace Helperland.Repository
             contactU.Subject = contactViewModel.Subject;
             contactU.Email = contactViewModel.Email;
             contactU.Message = contactViewModel.Message;
-            contactU.CreatedOn = DateTime.Now;
+            contactU.CreatedOn = DateTime.Now.Date;
             helperlandContext.ContactUs.Add(contactU);
             helperlandContext.SaveChanges();
 

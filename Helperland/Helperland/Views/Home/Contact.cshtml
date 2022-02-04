@@ -43,7 +43,9 @@
     <div class="container">
         <div class="row justify-content-center margin-top-50">
             <div class="col-md-6">
-                <form class="row g-3" enctype="multipart/form-data" data-ajax="true" asp-action="Contact" asp-controller="home" data-ajax-success="successfullyDataEnter()">
+                <form class="row g-3" enctype="multipart/form-data" 
+                      data-ajax="true" asp-action="Contact" id="Conatctus"
+                      asp-controller="home" data-ajax-success="successfullyDataEnter()">
                     <div class="col-md-6">
                         <input asp-for="FirstName" class="form-control"  placeholder="First Name">
                         <span asp-validation-for="FirstName" class="text-danger"></span>
@@ -99,5 +101,6 @@
 <script>
     function successfullyDataEnter() {
         swal("Submitted", "Form has been sumiteed successfully", "success");
+        $("#Conatctus").trigger("reset");
     }
 </script>

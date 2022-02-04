@@ -15,6 +15,9 @@
 .navbar.navbar-bg-color {
     background-color: #2f2f2f !important;
 }
+.text-marun {
+    color: #1d7a8c;
+}
 .dropdown-menu{
   background-color: white;
   color: black !important;
@@ -175,6 +178,18 @@ small{
   border-radius: 50%;
 }
 /* Common style */
+
+.dvImageTextBox {
+    position: relative;
+    width: 100%;
+}
+
+.dvImageTextBox img {
+    position: absolute;
+    top:8px;
+    right: 8px;
+}
+
 
 .max-width {
   max-width: 1104px;

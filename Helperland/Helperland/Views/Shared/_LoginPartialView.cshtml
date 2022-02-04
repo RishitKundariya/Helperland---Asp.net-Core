@@ -1,0 +1,42 @@
+﻿@model Helperland.Models.ViewModel.LoginViewModel
+<!-- Modal -->
+<div class="modal fade" id="LoginModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login to your account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <form asp-action="login" asp-controller="home">
+                <div class="modal-body">
+                    <div class="alert alert-danger alert-dismissible fade show " id="login-alert" style="display:none" role="alert">
+                        <div asp-validation-summary="ModelOnly" ></div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                   
+                    <div class="dvImageTextBox mt-4 ">
+                        <img asp-append-version="true" src="~/image/user-input.png" class="icon" />
+                        <input asp-for="Email" class="form-control" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="dvImageTextBox mt-2 mb-2">
+                        <img asp-append-version="true" src="~/image/lock.png" class="icon" />
+                        <input asp-for="Password" class="form-control" placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn font-white form-control rounded-pill marun" value="Login">
+
+                </div>
+            </form>
+            <div class="text-center  p-2">
+                <a class="text-marun d-block" data-bs-target="#ForgetPasswordModel" data-bs-toggle="modal" data-bs-dismiss="modal" >Forget Password </a>
+                Don't have an account?<a asp-action="userRegistration" asp-controller="home"> <h6 class="text-marun"> Create an account</h6></a>
+            </div>
+        </div>
+    </div> 
+</div>
+
+<partial name="_ForgetPasswordView"  model="Model"/>
