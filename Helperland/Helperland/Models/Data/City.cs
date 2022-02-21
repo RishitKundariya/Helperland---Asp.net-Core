@@ -9,6 +9,7 @@ namespace Helperland.Models.Data
     {
         public City()
         {
+            UserAddresses = new HashSet<UserAddress>();
             Zipcodes = new HashSet<Zipcode>();
         }
 
@@ -17,6 +18,7 @@ namespace Helperland.Models.Data
         public int StateId { get; set; }
 
         public virtual State State { get; set; }
+        public virtual ICollection<UserAddress> UserAddresses { get; set; }
         public virtual ICollection<Zipcode> Zipcodes { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace Helperland.Models.Data
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=RISHITKUNDARIYA; initial catalog=Helperland; Integrated Security=true");
+                optionsBuilder.UseSqlServer("Data Source=RISHITKUNDARIYA; initial catalog=Helperland; Integrated Security=true ");
             }
         }
 
@@ -250,6 +250,12 @@ namespace Helperland.Models.Data
                     .IsRequired()
                     .HasMaxLength(100);
 
+                entity.Property(e => e.IsActive).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.IsApproved).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(100);
@@ -260,13 +266,15 @@ namespace Helperland.Models.Data
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Password).HasMaxLength(100);
+                entity.Property(e => e.Password).HasMaxLength(200);
 
                 entity.Property(e => e.PaymentGatewayUserRef).HasMaxLength(200);
 
                 entity.Property(e => e.TaxNo).HasMaxLength(50);
 
                 entity.Property(e => e.UserProfilePicture).HasMaxLength(200);
+
+                entity.Property(e => e.WorksWithPets).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.ZipCode).HasMaxLength(20);
             });
@@ -284,25 +292,31 @@ namespace Helperland.Models.Data
 
                 entity.Property(e => e.AddressLine2).HasMaxLength(200);
 
-                entity.Property(e => e.City)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
                 entity.Property(e => e.Email).HasMaxLength(100);
 
                 entity.Property(e => e.Mobile).HasMaxLength(20);
 
-                entity.Property(e => e.PostalCode)
+                entity.Property(e => e.ZipCode)
                     .IsRequired()
                     .HasMaxLength(20);
 
-                entity.Property(e => e.State).HasMaxLength(50);
+                entity.HasOne(d => d.City)
+                    .WithMany(p => p.UserAddresses)
+                    .HasForeignKey(d => d.CityId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserAddress_City");
+
+                entity.HasOne(d => d.State)
+                    .WithMany(p => p.UserAddresses)
+                    .HasForeignKey(d => d.StateId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserAddress_State");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserAddresses)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserAddresses_User");
+                    .HasConstraintName("FK_UserAddress_User");
             });
 
             modelBuilder.Entity<Zipcode>(entity =>

@@ -149,7 +149,7 @@ $(function(){
         }
     });
 });
-function gotonextplan(){
+function gotonextplan() {
     var header = document.getElementById("bookservice");
    var btns = header.getElementsByClassName("btn");
     btns[1].className +=" active-book-service";
@@ -157,23 +157,46 @@ function gotonextplan(){
     hidediv.style.display = "none";
     document.getElementById("second-book-service").style.display="block";
     var imgs = header.getElementsByTagName("img");
-    imgs[1].src="./assests/image/schedule-white.png";
+    imgs[1].src="/image/schedule-white.png";
   
 }
-function gotoyourDetails(){
+function gotoyourDetails() {
+    let btn = $(".nav-btn");
+    for (let i = 0; i < 2; i++) {
+        btn[i].removeAttribute("disabled")
+    }
     var header = document.getElementById("bookservice");
     var btns = header.getElementsByClassName("btn");
      btns[2].className +=" active-book-service";
      var imgs = header.getElementsByTagName("img");
-     imgs[2].src="./assests/image/details-white.png";
+     imgs[2].src="/image/details-white.png";
      document.getElementById("second-book-service").style.display="none";
-     document.getElementById("third-book-service").style.display="block";
+    document.getElementById("third-book-service").style.display = "block";
+    $("#addAddressPostCode").val($("#txtpincode").val());
+    getAddress();
 }
-function gotomakepayment(){
+
+
+
+
+function gotomakepayment() {
+    if ($("input[name='address']").prop("checked")) {
+    }
+    else {
+        $("#errSelectAddress").text("Please Select Address");
+        return;
+    }
+
+
+    let btn = $(".nav-btn");
+    for (let i = 0; i < 3; i++) {
+        btn[i].removeAttribute("disabled")
+    }
+
     var header = document.getElementById("bookservice");
     var btns = header.getElementsByClassName("btn");
     var imgs = header.getElementsByTagName("img");
-     imgs[3].src="./assests/image/payment-white.png";
+     imgs[3].src="/image/payment-white.png";
     btns[3].className +=" active-book-service";
     document.getElementById("third-book-service").style.display="none";
     document.getElementById("fourth-book-service").style.display="block";
@@ -186,14 +209,53 @@ function checkIfSelected(para){
     if(hidden[para].value == "notselected"){
         hidden[para].value="selected"; 
         btns[para].style.border = "3px solid #146371";
-        var path="./assests/image/"+(para+1)+"-green.png";
-        imgs[para].src=path;
+        var path="/image/"+(para+1)+"-green.png";
+        imgs[para].src = path;
+        if (para == 0) {
+            $("#textExtraCabinet").show();
+        }
+        else if (para == 1) {
+            $("#textExtraFridge").show();
+        }
+        else if (para == 2) {
+            $("#textExtraOven").show();
+        }
+        else if (para == 3) {
+            $("#textExtraLaundry").show();
+        }
+        else if (para == 4) {
+            $("#textExtraWindow").show();
+        }
+       
+        $("#totalServiceTime").val(parseFloat($("#totalServiceTime").val()) + 0.5);
+
+        $("#numberOfExtraService").val(parseInt( $("#numberOfExtraService").val()) + 1);
+        ChageInServiceTime();
     }
     else{
         hidden[para].value="notselected"; 
         btns[para].style.border = "1px solid black";
-        var path="./assests/image/"+(para+1)+".png";
-        imgs[para].src=path;
+        var path="/image/"+(para+1)+".png";
+        imgs[para].src = path;
+        if (para == 0) {
+            $("#textExtraCabinet").hide();
+        }
+        else if (para == 1) {
+            $("#textExtraFridge").hide();
+        }
+        else if (para == 2) {
+            $("#textExtraOven").hide();
+        }
+        else if (para == 3) {
+            $("#textExtraLaundry").hide();
+        }
+        else if (para == 4) {
+            $("#textExtraWindow").hide();
+        }
+        $("#totalServiceTime").val(parseFloat($("#totalServiceTime").val()) - 0.5);
+        $("#numberOfExtraService").val(parseInt( $("#numberOfExtraService").val()) - 1);
+        ChageInServiceTime();
+        
     }
 }
 function closeDiv() {
@@ -206,3 +268,32 @@ $("#login-alert").delay(4000).slideUp(200, function () {
 $(".alerts").delay(4000).slideUp(200, function () {
     $(this).hide();
 });
+
+function setUpService() {
+    location.reload();
+}
+function schedulePlan() {
+    let btn = $(".nav-btn");
+    for (let i = 2; i < btn.length; i++) {
+        btn[i].setAttribute("disabled", "disabled");
+    }
+
+    document.getElementById("third-book-service").style.display = "none";
+    document.getElementById("fourth-book-service").style.display = "none";
+    document.getElementById("second-book-service").style.display = "block";
+}
+function servicedetails() {
+    let btn = $(".nav-btn");
+    for (let i = 3; i < btn.length; i++) {
+        btn[i].setAttribute("disabled", "disabled");
+    }
+
+    document.getElementById("third-book-service").style.display = "block";
+    document.getElementById("fourth-book-service").style.display = "none";
+}
+
+function ChageInServiceTime() {
+    $("#textBasichour").text($("#totalServiceTime").val() - 0.5 * parseInt( $("#numberOfExtraService").val()));
+    $("#textTotalAmount").text(18 * $("#totalServiceTime").val());
+    $("#textTotalHour").text($("#totalServiceTime").val());
+}

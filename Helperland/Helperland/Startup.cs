@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Serialization;
 
 namespace Helperland
 {
@@ -27,8 +28,11 @@ namespace Helperland
             services.AddScoped<IContactRepository, ContactRepository>();
             services.AddScoped<IUserRegistrationRepository, UserRegistrationRepository>();
             services.AddScoped<ILoginRepository,LoginRepository>();
+            services.AddScoped<IBookServiceRepository, BookServiceRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<DataProtectionPurposeString>();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +44,7 @@ namespace Helperland
             }
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();

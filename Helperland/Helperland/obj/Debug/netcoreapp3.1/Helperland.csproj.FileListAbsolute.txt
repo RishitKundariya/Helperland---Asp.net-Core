@@ -88,3 +88,9 @@ G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\MailKi
 G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\MimeKit.dll
 G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
 G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Home\Resetpassword.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\Azure.Core.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\System.Memory.Data.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\BookService\Index.cshtml.g.cs

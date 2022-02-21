@@ -12,11 +12,31 @@
     border-radius: 20px;
     padding: 4px 10px;
 }
+.address {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+.display-none{
+    display:none;
+}
+.no-margin-padding{
+    padding:0px !important;
+    margin:0px !important;
+}
 .navbar.navbar-bg-color {
     background-color: #2f2f2f !important;
 }
+#navbar-user-image{
+    height:2rem;
+    width:auto
+}
 .text-marun {
     color: #1d7a8c;
+}
+.margin-left-10{
+    margin-left:10px;
 }
 .dropdown-menu{
   background-color: white;
@@ -397,6 +417,79 @@ footer {
 } 
  .navbar-service-img{
  height: 50px;
+}
+.payment .text-right {
+    float: right;
+    text-align: right;
+    color: #646464;
+}
+.paymentheading {
+    background-color: #1D7A8C;
+    height: 60px;
+    margin-left: -13px;
+    margin-right: -13px;
+    padding-top: 15px;
+    padding-left: 15px;
+    color: #fff;
+    font-size: 20px;
+}
+/*.max-width{
+    width:100% !important;
+    display :block;
+}*/
+.basic-service {
+    background-color: #F3F3F3;
+    height: 45px;
+    padding-top: 10px;
+    padding-left: 15px;
+    color: gray;
+    font-size: 17px;
+}
+.ul_li {
+    padding-top: 20px;
+    margin-left: -40px;
+    list-style-type: none;
+    text-align: left;
+}
+
+    .ul_li li {
+        text-align: left;
+        padding-left: 2rem;
+        background-image: url('../../../1 HomePage/assets/img/right-arrow.png');
+        /* list-style-image: url("../../../1 HomePage/assets/img/right-arrow.png"); */
+        background-position: 0px 3px;
+        background-size: 1rem 1rem;
+        background-repeat: no-repeat;
+    }
+
+.basic-service {
+    background-color: #F3F3F3;
+    height: 45px;
+    padding-top: 10px;
+    padding-left: 15px;
+    color: gray;
+    font-size: 17px;
+}
+
+.card.mb-3 {
+    box-shadow: 2px 2px gray;
+}
+
+.col-md-3 .card .card-body h5 {
+    text-align: left;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.col-md-3 .card .card-body {
+    /* background-color: #F6F6F6; */
+    text-align: left;
+}
+
+.payment .text-right {
+    float: right;
+    text-align: right;
+    color: #646464;
 }
 .nav-border{
   border-left: 1px solid white;

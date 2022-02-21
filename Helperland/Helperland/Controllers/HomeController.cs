@@ -46,11 +46,14 @@ namespace Helperland.Controllers
             configuration = _configuration;
            
         }
-        public IActionResult Index()
+        public IActionResult Index(Boolean isLoginOpen=false)
         {
+            ViewBag.isLoginOpen = isLoginOpen;
             ViewBag.isOpen = false;
             ViewBag.isForgetPasswordOpen = false;
             ViewBag.Success = false;
+
+          
             return View();
         }
         public IActionResult About()
@@ -128,10 +131,21 @@ namespace Helperland.Controllers
         public IActionResult Login(LoginViewModel loginViewModel)
         {
             if (ModelState.IsValid)
-            {
-                if (loginRepository.IsValidUser(loginViewModel))
+            { int userID = loginRepository.IsValidUser(loginViewModel);
+                if (userID != -1)
                 {
-
+                    User user = loginRepository.GetUser(userID);
+                    if(user != null)
+                    {
+                        CookieOptions options = new CookieOptions();
+                        options.Expires = DateTime.Now.AddMinutes(20);
+                        Response.Cookies.Append("userID", user.UserId.ToString(),options);
+                        Response.Cookies.Append("username", user.FirstName,options);
+                        Response.Cookies.Append("usertype", user.UserTypeId.ToString(),options);
+                        HttpContext.Session.SetInt32("userID", user.UserId);
+                        HttpContext.Session.SetString("username", user.FirstName);
+                        HttpContext.Session.SetInt32("usertype", user.UserTypeId);
+                    }
                     ModelState.Clear();
                 }
                 else
@@ -150,6 +164,14 @@ namespace Helperland.Controllers
                 
 
             return View("Index");
+        }
+         public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            Response.Cookies.Delete("userID");
+            Response.Cookies.Delete("username");
+            Response.Cookies.Delete("usertype");
+            return RedirectToAction("Index");
         }
 
         public IActionResult ServiceProviderSignUP()

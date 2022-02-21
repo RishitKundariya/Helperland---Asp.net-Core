@@ -2,6 +2,7 @@
 using Helperland.Models.ViewModel;
 using Helperland.Security;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,20 +25,21 @@ namespace Helperland.Repository
         {
             return _Message;
         }
-        public Boolean IsValidUser(LoginViewModel loginViewModel)
+        public int IsValidUser(LoginViewModel loginViewModel)
         {
             try
             {
-                string pass = protector.Protect(loginViewModel.Password);
-                User user = helperlandContext.Users.Where(x => /*x.Password == pass &&*/ x.Email == loginViewModel.Email).FirstOrDefault();
-                if(user == null)
+               
+                User user = helperlandContext.Users.Where(x => x.Email == loginViewModel.Email).FirstOrDefault();
+                if(user != null && protector.Unprotect( user.Password) == loginViewModel.Password)
                 {
-                    _Message += " Invalid username or password "+pass + " ," ;
-                     return false;
+                    return user.UserId;
                 }
                 else
                 {
-                    return true;
+                    _Message += " Invalid username or password ";
+                    return -1;
+                    
                 }
 
 
@@ -45,7 +47,7 @@ namespace Helperland.Repository
             catch(Exception ex)
             {
                 _Message += ex.Message;
-                return false;
+                return -1;
             }
         }
 
@@ -112,6 +114,32 @@ namespace Helperland.Repository
             {
                 _Message += ex.Message;
                 return false;
+            }
+        }
+
+        public User GetUser(int userID)
+        {
+            try
+            {
+
+                User user = helperlandContext.Users.Where(x => x.UserId == userID).FirstOrDefault();
+                if (user != null)
+                {
+                    return user;
+                }
+                else
+                {
+                    _Message += " Enter valid Email ";
+                    return null;
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                _Message += ex.Message;
+                return null;
             }
         }
     }

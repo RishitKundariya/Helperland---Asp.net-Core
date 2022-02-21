@@ -11,14 +11,16 @@ namespace Helperland.Models.Data
         public int UserId { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string PostalCode { get; set; }
+        public int CityId { get; set; }
+        public int StateId { get; set; }
+        public string ZipCode { get; set; }
         public bool IsDefault { get; set; }
         public bool IsDeleted { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
 
+        public virtual City City { get; set; }
+        public virtual State State { get; set; }
         public virtual User User { get; set; }
     }
 }

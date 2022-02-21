@@ -10,11 +10,13 @@ namespace Helperland.Models.Data
         public State()
         {
             Cities = new HashSet<City>();
+            UserAddresses = new HashSet<UserAddress>();
         }
 
         public int Id { get; set; }
         public string StateName { get; set; }
 
         public virtual ICollection<City> Cities { get; set; }
+        public virtual ICollection<UserAddress> UserAddresses { get; set; }
     }
 }
