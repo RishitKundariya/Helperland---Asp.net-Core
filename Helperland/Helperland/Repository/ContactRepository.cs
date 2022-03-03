@@ -19,6 +19,7 @@ namespace Helperland.Repository
             webHostEnvironment = _webHostEnvironment;
         }
 
+        #region Save Data of Contact Us form
         public void AddContactusFrom(ContactViewModel contactViewModel )
         {
             ContactU contactU = new ContactU();
@@ -41,5 +42,6 @@ namespace Helperland.Repository
 
 
         }
+        #endregion
     }
 }

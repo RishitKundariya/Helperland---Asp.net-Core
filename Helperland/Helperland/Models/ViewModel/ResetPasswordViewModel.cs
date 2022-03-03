@@ -11,11 +11,13 @@ namespace Helperland.Models.ViewModel
     {
         [Required(ErrorMessage ="Enter the password") ]
         [DataType(DataType.Password)]
-        [PassworldValidation(ErrorMessage = "Lenght of Password is must greater than 8 & atleat contain one capital, one Numeric & one Special Character")]
+        [PassworldValidation(ErrorMessage = "Length of Password is must greater than 8 & atleat contain one capital, one Numeric & one Special Character")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Enter the Confirm password")]
         [Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
+        [PassworldValidation(ErrorMessage = "Length of Password is must greater than 8 & atleat contain one capital, one Numeric & one Special Character")]
+        [DataType(DataType.Password)]
         public string Confirmpassword { get; set; }
     }
 }

@@ -24,6 +24,8 @@ namespace Helperland.Repository
             protector = dataProtectionProvider.CreateProtector(dataProtectionPurposeString.HelperlandPasswordValue);
         
         }
+
+        #region Add User 
         public Boolean AddUser(UserRegistrationViewModel userRegistrationViewModel)
         {
             User check = _helperlandContext.Users.Where(x => x.Email == userRegistrationViewModel.Email).FirstOrDefault();
@@ -57,7 +59,9 @@ namespace Helperland.Repository
             }
 
         }
+        #endregion
 
+        #region Add Service Provide
         public Boolean AddServiceProvider(UserRegistrationViewModel userRegistrationViewModel)
         {
             User check = _helperlandContext.Users.Where(x => x.Email == userRegistrationViewModel.Email).FirstOrDefault();
@@ -91,6 +95,50 @@ namespace Helperland.Repository
             }
 
         }
+        #endregion
+
+        #region GetUser By ID
+        public User GetUserById(int userID)
+        { User user = new User();
+            try
+            {
+                user = _helperlandContext.Users.Where(x => x.UserId == userID).FirstOrDefault();
+                if (user != null)
+                    return user;
+                else
+                    return null;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        #endregion
+
+        #region Change User Data
+        public Boolean ChangeUserData(string FirstName, string LastName, string DOB, string MobileNumber, int UserId, int LanguageId)
+        {
+            User user = _helperlandContext.Users.Where(x => x.UserId == UserId).FirstOrDefault();
+            user.FirstName = FirstName;
+            user.LanguageId = LanguageId;
+            user.LastName = LastName;
+            user.DateOfBirth = Convert.ToDateTime( DOB);
+            user.Mobile = MobileNumber;
+
+            try
+            {
+                _helperlandContext.Users.Update(user);
+                _helperlandContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
         public string Message()
         {
             return _Message;

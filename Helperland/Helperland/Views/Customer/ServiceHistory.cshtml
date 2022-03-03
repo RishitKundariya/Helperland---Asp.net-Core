@@ -1,0 +1,368 @@
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Title = "Service History ";
+}
+@using Microsoft.AspNetCore.Http
+@model List<Helperland.Models.ViewModel.Customer.ServiceHistoryViewModel>
+<div class="row justify-content-center gray-bachgroud" style="margin-top:100px; padding-top:2rem;padding-bottom:2rem;">
+    <h1 class="text-center"> Welcome, @Context.Session.GetString("username") </h1>
+</div>
+<div class="row justify-content-center">
+    <partial name="_CustomerSidetaMenuPartialView" />
+    <input type="hidden" value="@Context.Session.GetString("userID")" id="userId" />
+    <div class="col-md-9">
+        <div class="row p-3">
+            <div class="col-md-6">
+                <h3>  Service History </h3>
+            </div>
+            <div class="row p-3">
+                <div class="col-md-12 table-responsive">
+                    <table id="tblServiceRequestHistory" class="table">
+                        <thead>
+                            <tr>
+                                <td>Service Id </td>
+                                <td>Service Date </td>
+                                <td>Service Provider </td>
+                                <td>Payment</td>
+                                <td>Status</td>
+                                <td> Rate SP</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td onclick="OpenModel(@item.ServiceId)"> @item.ServiceId </td>
+                                    <td class="flex" onclick="OpenModel(@item.ServiceId)">
+                                        <div><img src="/image/calendar2.png" asp-append-version="true"><b> @item.StartDate</b> </div>
+                                        8.:00 - 12:00
+                                    </td>
+                                    <td onclick="OpenModel(@item.ServiceId)">
+                                        @if (item.ServiceProviderName != null)
+                                        {
+                                            <div class="d-flex">
+                                                <div class="service-history-icon d-flex"><img src="/image/cap.png"></div>
+                                                <div>
+                                                    <span class="d-block"> @item.ServiceProviderName </span>
+                                                    @{
+                                                        int i = (int)item.Rating;
+                                                    }
+                                                    @for (int j = 0; j < i; j++)
+                                                    {
+                                                        <img src="/image/yellow-small-star.png" class="service-history-star-icon">
+                                                    }
+                                                    @for (int j = 0; j < 5 - i; j++)
+                                                    {
+                                                        <img src="/image/grey-small-star.png" class="service-history-star-icon">
+                                                    }
+                                                    @i
+                                                </div>
+
+                                            </div>
+                                        }
+
+                                    </td>
+                                    <td class="active-font" onclick="OpenModel(@item.ServiceId)">
+                                        <div> <b> @item.Payment  € </b> </div>
+                                    </td>
+                                    <td>
+                                        @if (item.Status == 2)
+                                        {
+                                            <span class="cancel">Cancel</span>
+                                        }
+                                        @if (item.Status == 1)
+                                        {
+                                            <span class="completed">Completed</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.Rate == false)
+                                        {
+                                            <button class="btn marun font-white rounded-pill" disabled>Rate SP</button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn marun font-white rounded-pill" onclick="RateSp(@item.ServiceId)">Rate SP</button>
+                                        }
+
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal  Service Details -->
+    <div class="modal fade" id="ServiceDeatils" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Service Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-9" id="ModelMainDiv">
+                            <div>
+                                <span id="ModelServiceDate" class="font-bold h5"></span> 8:00 - 13:00<br />
+                                <span class="font-bold"> Duration </span><span id="ModelDuration"> </span> Hrs
+                            </div>
+                            <hr />
+                            <div>
+                                <span class="font-bold"> Service Id: </span><span id="ModelServiceRequestId"> </span>.<br />
+                                <span class="font-bold"> Extras </span> <span id="ModelExtra"></span><br />
+                                <span class="font-bold"> Net Amount: </span> <span id="ModelTotalCost" class="font-blue font-bold"></span> € <br />
+                            </div>
+                            <hr />
+                            <div>
+                                <span class="font-bold"> Service Address </span><span id="ModelServiceAddress"> </span>.<br />
+                                <span class="font-bold"> Phone Number </span><span id="ModelMobileNumber"> </span><br />
+                                <span class="font-bold"> Email </span><span id="ModelEmail"> </span><br />
+                            </div>
+                            <hr />
+                            <div>
+                                <span class="font-bold"> Comments </span> <br /> <span id="ModelComments"> </span>
+                            </div>
+                            <hr />
+                            <span> <img src="/image/not-included.png" id="ModelHasPatImage" /> I <span id="ModelHasPat">  don't </span>  have Pate at Home</span>
+
+                        </div>
+                        <div class="col-md-3 display-none" id="ModelServiceProviderDetails">
+                            <h6> Service Provider Details</h6>
+                            <div class="d-flex">
+                                <div class="service-history-icon d-flex"><img src="/image/cap.png"></div>
+                                <div>
+                                    <span id="ModelServiceRating"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- rate SP Model -->
+    <div class="modal fade" id="RateSPModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Rate SP</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="ratingServiceRequestId" />
+                    <div class="alert alert-success alert-dismissible fade show display-none" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" id="ModelServiceProviderDetails">
+                            <h6> Service Provider Details</h6>
+                            <div class="d-flex">
+                                <div class="service-history-icon d-flex"><img src="/image/cap.png"></div>
+                                <div>
+                                    <span class="d-block" id="RatingModelServiceProviderName">  </span>
+                                    <span id="ModelServiceRatingDetails"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <h5> Rate your service provider</h5>
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="onTimeArrival" class="font-bold">On time arrival </label>
+                            <input id="onTimeArrival" class="rating rating-loading " data-show-clear="false" value="4">
+                            <label for="friendly" class="font-bold">Friendly</label>
+                            <input id="friendly" class="rating rating-loading " data-show-clear="false">
+                            <label for="qualityOfService" class="font-bold">Quality of service</label>
+                            <input id="qualityOfService" class="rating rating-loading " data-show-clear="false">
+
+                            <span class="text-danger display-none" id="errRating">please give rating</span>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <span class="font-bold"> Feedback on service provider</span>
+                            <textarea rows="3" class="form-control" id="feedback"></textarea>
+                        </div>
+                    </div>
+
+                    <button class="btn marun rounded-pill font-white" onclick="SubmitDataOfRateSP()">Submit </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    @section Script{
+        <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script>
+
+         /*   Open Service Details Model on Click of Table Row*/
+            function OpenModel(para) {
+            $("#ServiceDeatils").modal('show');
+            $("#ModelServiceRequestId").text(para);
+            $("#ModelbtnReschedule").val(para);
+            $("#ModelbtnCancel").val(para);
+            $.ajax({
+                  type: "POST",
+                  url: "@Url.Action("GetServiceRequestData")",
+                  data: { "ServiceReqestId": para },
+                 success: function (responce) {
+                     var obj = JSON.parse(responce);
+                     $("#ModelDuration").text(obj.TotalHour);
+                     $("#ModelServiceDate").text(obj.ServiceDate);
+                     $("#ModelExtra").text(obj.Extra);
+                     $("#ModelTotalCost").text(obj.TotalCost);
+                     $("#ModelServiceAddress").text(obj.Address);
+                     $("#ModelMobileNumber").text(obj.MobileNumber);
+                     $("#ModelEmail").text(obj.Email);
+                     $("#ModelComments").text(obj.Comments);
+                     if (obj.ServiceProviderId != null) {
+
+                         $("#ModelServiceProviderName").text(obj.ServiceProviderName);
+                         $("#ModelServiceProviderDetails").show();
+                         $("#ModelServiceProviderDetails").addClass("col-md-3");
+                         $("#ModelMainDiv").addClass("col-md-9");
+                         $("#ModelMainDiv").removeClass("col-md-12");
+                     }
+                     else {
+                         $("#ModelServiceProviderDetails").hide();
+                         $("#ModelServiceProviderDetails").removeClass("col-md-3");
+                         $("#ModelMainDiv").removeClass("col-md-9");
+                         $("#ModelMainDiv").addClass("col-md-12");
+
+
+                     }
+                     if (obj.Haspet) {
+                         $("#ModelHasPatImage").attr("src", "/image/included.png");
+                         $("#ModelHasPat").hide();
+                     } else {
+                         $("#ModelHasPatImage").attr("src", "/image/not-included.png");
+                         $("#ModelHasPat").show();
+                     }
+                     $("#ModelServiceRating").empty();
+                    for (var i = 0; i < 5; i++) {
+                        if (obj.Rating > i) {
+                             $("#ModelServiceRating").append('<img src="/image/yellow-small-star.png" class="service-history-star-icon">');
+                         }
+                         else {
+                             $("#ModelServiceRating").append('<img src="/image/grey-small-star.png" class="service-history-star-icon">');
+                         }
+                     }
+                     $("#ModelServiceRating").append(obj.Rating);
+                 },
+                 failure: function (response) {
+                        alert("failure");
+                 },
+                 error: function (response) {
+                        alert("Something went Worng");
+                 }
+
+              });
+        }
+
+           /* Rate Sp model open*/
+            function RateSp(para) {
+                $("#ratingServiceRequestId").val(para);
+                $("#RateSPModel").modal('show');
+                $("#onTimeArrival").rating("update", "0");
+                $("#friendly").rating("update", "0");
+                $("#qualityOfService").rating("update", "0");
+                $("#feedback").val("");
+                $.ajax({
+                  type: "POST",
+                  url: "@Url.Action("GetServiceRequestData")",
+                  data: { "ServiceReqestId": para },
+                 success: function (responce) {
+                     var obj = JSON.parse(responce);
+                     $("#RatingModelServiceProviderName").text(obj.ServiceProviderName);
+                     $("#ModelServiceRatingDetails").empty();
+                     for (var i = 0; i < 5; i++) {
+                         if (obj.Rating > i) {
+                             $("#ModelServiceRatingDetails").append('<img src="/image/yellow-small-star.png" class="service-history-star-icon">');
+                         }
+                         else {
+                             $("#ModelServiceRatingDetails").append('<img src="/image/grey-small-star.png" class="service-history-star-icon">');
+                         }
+                     }
+                     $("#ModelServiceRatingDetails").append(obj.Rating);
+                 },
+                 failure: function (response) {
+                        alert("failure");
+                 },
+                 error: function (response) {
+                        alert("Something went Worng");
+                 }
+
+              });
+            }
+
+            /*Submit button of RateSP Model*/
+            function SubmitDataOfRateSP() {
+                var onTime = $("#onTimeArrival").val();
+                var friendly = $("#friendly").val();
+                var qualityOfservice = $("#qualityOfService").val();
+                if (onTime <= 0 || friendly <= 0 || qualityOfservice <= 0) {
+                    $("#errRating").show();
+                    return;
+                }
+                else {
+                    $("#errRating").hide();
+                    $.ajax({
+                          type: "POST",
+                        url: "@Url.Action("AddRating")",
+                        data: { "ServiceReqestId": $("#ratingServiceRequestId").val(), "onTime": onTime, "friendly": friendly, "qualityOfService": qualityOfservice, "feedBack": $("#feedback").val() },
+                        success: function (responce) {
+                            location.reload();
+                         },
+                         failure: function (response) {
+                                alert("failure");
+                         },
+                         error: function (response) {
+                                alert("Something went Worng");
+                         }
+
+                     });
+
+                }
+            }
+
+            $(".rating").rating({
+                min: 0,
+                max: 5,
+                step: 0.5,
+                size: "xs",
+                stars: "5",
+                showClear: false,
+                readonly: false,
+                starCaptions: function (val) {
+                    return val;
+                },
+                
+            });
+
+        </script>
+
+
+    }

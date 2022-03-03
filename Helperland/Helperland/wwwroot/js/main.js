@@ -39,6 +39,8 @@ $(document).ready(function() {
     });
   
 });
+
+
 $(document).ready(function() {
     $('#adminUserManagement').dataTable({
         "bFilter": false,
@@ -180,14 +182,6 @@ function gotoyourDetails() {
 
 
 function gotomakepayment() {
-    if ($("input[name='address']").prop("checked")) {
-    }
-    else {
-        $("#errSelectAddress").text("Please Select Address");
-        return;
-    }
-
-
     let btn = $(".nav-btn");
     for (let i = 0; i < 3; i++) {
         btn[i].removeAttribute("disabled")
@@ -215,16 +209,16 @@ function checkIfSelected(para){
             $("#textExtraCabinet").show();
         }
         else if (para == 1) {
-            $("#textExtraFridge").show();
-        }
-        else if (para == 2) {
             $("#textExtraOven").show();
         }
-        else if (para == 3) {
+        else if (para == 2) {
             $("#textExtraLaundry").show();
         }
-        else if (para == 4) {
+        else if (para == 3) {
             $("#textExtraWindow").show();
+        }
+        else if (para == 4) {
+            $("#textExtraFridge").show();
         }
        
         $("#totalServiceTime").val(parseFloat($("#totalServiceTime").val()) + 0.5);
@@ -241,16 +235,16 @@ function checkIfSelected(para){
             $("#textExtraCabinet").hide();
         }
         else if (para == 1) {
-            $("#textExtraFridge").hide();
-        }
-        else if (para == 2) {
             $("#textExtraOven").hide();
         }
-        else if (para == 3) {
+        else if (para == 2) {
             $("#textExtraLaundry").hide();
         }
-        else if (para == 4) {
+        else if (para == 3) {
             $("#textExtraWindow").hide();
+        }
+        else if (para == 4) {
+            $("#textExtraFridge").hide();
         }
         $("#totalServiceTime").val(parseFloat($("#totalServiceTime").val()) - 0.5);
         $("#numberOfExtraService").val(parseInt( $("#numberOfExtraService").val()) - 1);

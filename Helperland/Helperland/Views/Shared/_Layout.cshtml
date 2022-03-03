@@ -1,5 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Http
 @{ int? userID = Context.Session.GetInt32("userID"); }
+@{ int? Usertype = Context.Session.GetInt32("usertype"); }
+@*@if(userID == null)
+{
+    userID = 1;
+}*@
 <!DOCTYPE html>
 <html>
 
@@ -37,6 +42,7 @@
 
                     @if (userID == null)
                     {
+
                         <li class="nav-item hover-change ">
                             <a class="nav-link rounded-link active" asp-action="index" asp-controller="BookService">Book a Cleaner</a>
                         </li>
@@ -64,9 +70,13 @@
                         <li class="nav-item display-sm">
                             <a class="nav-link"> Welcome Sandeep</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link rounded-link active" asp-action="index" asp-controller="BookService">Book now </a>
-                        </li>
+                        @if (Usertype == 1)
+                        {
+                            <li class="nav-item diaplay-center">
+                                <a class="nav-link rounded-link active" asp-action="index" asp-controller="BookService">Book now </a>
+                            </li>
+                        }
+
 
                         <li class="nav-item display-sm">
                             <a class="nav-link"> Dashboard</a>
@@ -93,47 +103,51 @@
                         <li class="nav-item display-sm">
                             <a class="nav-link"> Logout</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item diaplay-center">
                             <a class="nav-link " asp-action="Prices" asp-controller="home">Prices & services</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item diaplay-center">
                             <a class="nav-link" href="#">Warranty </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item diaplay-center">
                             <a class="nav-link" href="#">Blog</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item diaplay-center">
                             <a class="nav-link" asp-action="Contact" asp-controller="home"> Contact</a>
                         </li>
-                        <li class="nav-item display-non-sm">
-                            <img src="~/image/icon-notification.png" class=" nav-border nav-link-image">
+                        <li class="nav-item display-non-sm diaplay-center">
+                            <img src="~/image/icon-notification.png" class="diaplay-center nav-border nav-link-image">
                         </li>
                         <li class="nav-item dropdown display-non-sm">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle diaplay-center" href="#" id="navbarDropdown" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="~/image/user.png"  id="navbar-user-image"
+                                <img src="~/image/user.png" id="navbar-user-image"
                                      class="county-flag nav-link-image-user">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li class="">
                                     <a class="dropdown-item nav-dropdown-item" href="#">
-                                        <small>Welcome,</small> 
+                                        <small>Welcome,</small>
                                         @Context.Session.GetString("username")
                                     </a>
                                     <hr>
                                 </li>
+                                @if (Usertype == 1)
+                                {
+                                    <li class="">
+                                        <a class="dropdown-item nav-dropdown-item" asp-action="Index" asp-controller="Customer">
+                                            My Dashboard
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a class="dropdown-item nav-dropdown-item" asp-action="Dashbord" asp-controller="Customer">
+                                            My Setting
+                                        </a>
+                                    </li>
+
+                                }
                                 <li class="">
-                                    <a class="dropdown-item nav-dropdown-item" href="#">
-                                        My Dashboard
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a class="dropdown-item nav-dropdown-item" href="#">
-                                        My Setting
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a class="dropdown-item nav-dropdown-item"  asp-action="Logout" asp-controller="Home">
+                                    <a class="dropdown-item nav-dropdown-item" asp-action="Logout" asp-controller="Home">
                                         Logout
                                     </a>
                                 </li>
@@ -145,8 +159,11 @@
             </div>
         </div>
     </nav>
+    @if (userID == null)
+    {
+        <partial name="_LoginPartialView" model="Model" />
+    }
 
-    <partial name="_LoginPartialView" model="Model" />
     @RenderBody()
 
     <section id="newslatter">

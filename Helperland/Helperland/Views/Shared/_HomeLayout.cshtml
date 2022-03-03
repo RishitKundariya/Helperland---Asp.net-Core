@@ -2,6 +2,7 @@
 @model Helperland.Models.ViewModel.LoginViewModel;
 @using Microsoft.AspNetCore.Http
 @{ int? userID = Context.Session.GetInt32("userID"); }
+@{ int? Usertype = Context.Session.GetInt32("usertype"); }
 <!DOCTYPE html>
 <html>
 
@@ -85,30 +86,30 @@
                     }
                     else
                     {
-                        if (userID == 1)
+                        if (Usertype == 1)
                         {
-                            <li class="nav-item">
+                            <li class="nav-item diaplay-center">
                                 <a class="nav-link rounded-link active" asp-action="index" asp-controller="BookService">Book now </a>
                             </li>
                         }
 
-                        <li class="nav-item">
+                        <li class="nav-item diaplay-center">
                             <a class="nav-link " asp-action="prices" asp-controller="Home">Prices & services</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item diaplay-center">
                             <a class="nav-link" href="#">Warranty </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item diaplay-center">
                             <a class="nav-link" href="#">Blog</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item diaplay-center">
                             <a class="nav-link" asp-action="Contact" asp-controller="home"> Contact</a>
                         </li>
-                        <li class="nav-item display-non-sm">
+                        <li class="nav-item display-non-sm diaplay-center">
                             <img src="~/image/icon-notification.png" class=" nav-border nav-link-image">
                         </li>
                         <li class="nav-item dropdown display-non-sm">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle diaplay-center" href="#" id="navbarDropdown" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="~/image/user.png" id="navbar-user-image"
                                      class="county-flag nav-link-image-user">
@@ -121,21 +122,27 @@
                                     </a>
                                     <hr>
                                 </li>
-                                <li class="">
-                                    <a class="dropdown-item nav-dropdown-item" href="#">
-                                        My Dashboard
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a class="dropdown-item nav-dropdown-item" href="#">
-                                        My Setting
-                                    </a>
-                                </li>
+
+                                @if (Usertype == 1)
+                                {
+                                    <li class="">
+                                        <a class="dropdown-item nav-dropdown-item" asp-action="Index" asp-controller="Customer">
+                                            My Dashboard
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a class="dropdown-item nav-dropdown-item" asp-action="Dashbord" asp-controller="Customer">
+                                            My Setting
+                                        </a>
+                                    </li>
+
+                                }
                                 <li class="">
                                     <a class="dropdown-item nav-dropdown-item" asp-action="Logout" asp-controller="Home">
                                         Logout
                                     </a>
                                 </li>
+
                             </ul>
                         </li>
                     }
@@ -147,7 +154,10 @@
         </div>
     </nav>
 
-    <partial name="_LoginPartialView" model="Model" />
+    @if (userID == null)
+    {
+        <partial name="_LoginPartialView" model="Model" />
+    }
 
     @RenderBody()
 
@@ -215,7 +225,7 @@
     <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
 
 
-    
+
     @if (ViewBag.isLoginOpen == true)
     {
         <script>

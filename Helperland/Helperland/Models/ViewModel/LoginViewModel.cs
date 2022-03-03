@@ -16,7 +16,7 @@ namespace Helperland.Models.ViewModel
         public string Email { get; set; }
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "please enter the password")]
-        [PassworldValidation(ErrorMessage = "Lenght of Password is must greater than 8 & atleat contain one capital, one Numeric & one Special Character")]
+        [PassworldValidation(ErrorMessage = "Length of Password is must greater than 8 & atleast contain one capital, one Numeric & one Special Character")]
         public string Password { get; set; }
 
     }

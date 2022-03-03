@@ -212,17 +212,17 @@ namespace Helperland.Controllers
         }
 
         [HttpPost]
-        public IActionResult ForgrtPassword(LoginViewModel loginViewModel)
+        public IActionResult ForgrtPassword(ForgetPasswordLoginModel forgetPasswordLoginModel)
         {
-            if (loginRepository.IsValidUserEmail(loginViewModel))
+            if (loginRepository.IsValidUserEmail(forgetPasswordLoginModel))
             {
                 try
                 {
-                    int UserID = loginRepository.GetUserID(loginViewModel.Email);
-                    string welcomeMessage = "wlcome to Helperland, below link is for reset password.   <br/>";
-                    string path = "<a href=\"" +" https://" + _httpContextAccessor.HttpContext.Request.Host.Value + "/home/resetpassword/" + UserID.ToString() + " \" > Reset Password </a>";
+                    int UserID = loginRepository.GetUserID(forgetPasswordLoginModel.Email);
+                    string welcomeMessage = "Welcome to Helperland, <br/> You can Reset your password using below link. </br>";
+                    string path = "<a href=\"" +" https://" + _httpContextAccessor.HttpContext.Request.Host.Value + "/home/resetpassword/" + UserID.ToString() + " \"  style=\"font-weight:500;color:blue;\" > Reset Password </a>";
                     MailHelper mailHelper = new MailHelper(configuration);
-                    ViewBag.sendMail = mailHelper.Send(loginViewModel.Email,welcomeMessage+path);
+                    ViewBag.sendMail = mailHelper.Send(forgetPasswordLoginModel.Email,welcomeMessage+path);
                     ModelState.Clear();
                 }
                 catch(Exception ex)

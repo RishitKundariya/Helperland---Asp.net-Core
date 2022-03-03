@@ -28,7 +28,10 @@ namespace Helperland
             services.AddScoped<IContactRepository, ContactRepository>();
             services.AddScoped<IUserRegistrationRepository, UserRegistrationRepository>();
             services.AddScoped<ILoginRepository,LoginRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IBookServiceRepository, BookServiceRepository>();
+            services.AddScoped<IRatingRepository, RatingRepository>();
+            services.AddScoped<IServiceRequestRepository, ServiceRequestRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<DataProtectionPurposeString>();
             services.AddDistributedMemoryCache();
@@ -44,6 +47,7 @@ namespace Helperland
             }
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseCookiePolicy();
             app.UseSession();
             app.UseEndpoints(endpoints =>
             {

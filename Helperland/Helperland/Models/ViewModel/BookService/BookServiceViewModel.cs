@@ -8,18 +8,14 @@ namespace Helperland.Models.ViewModel.BookService
 {
     public class BookServiceViewModel
     {
-        [Required]
         public int UserId { get; set; }
-        [Required]
         public DateTime ServiceStartDate { get; set; }
-        [Required]
+        public string ServiceStartTime { get; set; }
+        
         public string ZipCode { get; set; }
         public int  AddressId { get; set; }
         public decimal TotalService { get; set; }
-        public decimal ServiceHourlyRate { get; set; }
         public decimal ServiceHours { get; set; }
-        public decimal ExtraHours { get; set; }
-        public decimal SubTotal { get; set; }
         public decimal TotalCost { get; set; }
         public string Comments { get; set; }
         public bool HasPets { get; set; }

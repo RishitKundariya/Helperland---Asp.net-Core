@@ -8,7 +8,8 @@ namespace Helperland.Models.ViewModel.BookService
 {
     public class AddressViewModel
     {
-        public int AddressID { get; set; }
+        [JsonPropertyName("addressID")]
+        public int? AddressID { get; set; }
         [JsonPropertyName("userId")]
         public int? UserId { get; set; }
         [JsonPropertyName("addressLine1")]

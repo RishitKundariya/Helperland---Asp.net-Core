@@ -13,13 +13,15 @@ using System.Threading.Tasks;
 
 namespace Helperland.Controllers
 {
-    //[SessionHelper(UserTypeID:1)]
+    [SessionHelper(UserTypeID:1)]
     public class BookServiceController : Controller
     {
         private readonly IBookServiceRepository bookServiceRepository;
-        public BookServiceController(IBookServiceRepository bookServiceRepository)
+        private readonly IAddressRepository addressRepository;
+        public BookServiceController(IBookServiceRepository bookServiceRepository, IAddressRepository addressRepository)
         {
             this.bookServiceRepository = bookServiceRepository;
+            this.addressRepository = addressRepository;
         }
         public IActionResult Index()
         {
@@ -55,7 +57,7 @@ namespace Helperland.Controllers
         {
             if(address.UserId != null && address.AddressLine1 != null && address.AddressLine2 != null && address.CityId != null)
             {
-                if (bookServiceRepository.SetAddress(address))
+                if (addressRepository.SetAddress(address))
                 {
                     return Json(true);
                 }
@@ -72,13 +74,21 @@ namespace Helperland.Controllers
         }
         public IActionResult GetAddress(string userID)
         {
-            List<AddressViewModel> addresses = bookServiceRepository.GetAddress(Int32.Parse(userID));
+            List<AddressViewModel> addresses = addressRepository.GetAddress(Int32.Parse(userID));
             if (addresses == null)
             {
                 Json(false);
             }
                return Json( JsonConvert.SerializeObject(addresses));
             
+        }
+
+        [HttpPost]
+        public IActionResult BookServiceRequest(BookServiceViewModel bookServiceViewModel)
+        {
+            ViewBag.ServiceRequestID = bookServiceRepository.BookService(bookServiceViewModel);
+            ViewBag.SuccessRequest = true;
+            return View("Index");
         }
 
     }

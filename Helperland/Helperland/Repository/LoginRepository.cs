@@ -25,6 +25,8 @@ namespace Helperland.Repository
         {
             return _Message;
         }
+
+        #region Check for Valid Username or not
         public int IsValidUser(LoginViewModel loginViewModel)
         {
             try
@@ -50,12 +52,14 @@ namespace Helperland.Repository
                 return -1;
             }
         }
+        #endregion
 
-        public Boolean IsValidUserEmail(LoginViewModel loginViewModel)
+        #region Check for Vallid Email Address in forget
+        public Boolean IsValidUserEmail(ForgetPasswordLoginModel forgetPasswordLoginModel)
         {
             try
             {
-                User user = helperlandContext.Users.Where(x => x.Email == loginViewModel.Email).FirstOrDefault();
+                User user = helperlandContext.Users.Where(x => x.Email == forgetPasswordLoginModel.Email).FirstOrDefault();
                 if (user == null)
                 {
                     _Message += " Entered email is not registered";
@@ -74,7 +78,9 @@ namespace Helperland.Repository
                 return false;
             }
         }
+        #endregion
 
+        #region Get User ID from Email address
         public int GetUserID(string Email)
         {
             try
@@ -99,7 +105,9 @@ namespace Helperland.Repository
                 return -1;
             }
         }
+        #endregion
 
+        #region Change Password
         public Boolean ChangePassword(int UserID, ResetPasswordViewModel resetPasswordViewModel)
         {
             try
@@ -116,7 +124,36 @@ namespace Helperland.Repository
                 return false;
             }
         }
+        #endregion
 
+        #region Reset Password 
+        public bool ResetPassword(int userId,string OldPassword,string NewPassword)
+        {
+            try
+            {
+                User user = helperlandContext.Users.Find(userId);
+                string pass = protector.Unprotect(user.Password);
+                if (pass == OldPassword)
+                {
+                    user.Password = protector.Protect(NewPassword);
+                    helperlandContext.Users.Update(user);
+                    helperlandContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+            
+        }
+        #endregion
+
+        #region Check for User validation
         public User GetUser(int userID)
         {
             try
@@ -142,5 +179,6 @@ namespace Helperland.Repository
                 return null;
             }
         }
+        #endregion
     }
 }

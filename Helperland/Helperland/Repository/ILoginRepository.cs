@@ -13,13 +13,15 @@ namespace Helperland.Repository
 
         public int IsValidUser(LoginViewModel loginViewModel);
 
-        public Boolean IsValidUserEmail(LoginViewModel loginViewModel);
+        public Boolean IsValidUserEmail(ForgetPasswordLoginModel forgetPasswordLoginModel );
 
         public int GetUserID(string Email);
 
         public Boolean ChangePassword(int UserID,ResetPasswordViewModel resetPasswordViewModel);
 
         public User GetUser(int userID);
+
+        public bool ResetPassword(int userId, string OldPassword, string NewPassword);
 
 
     }
