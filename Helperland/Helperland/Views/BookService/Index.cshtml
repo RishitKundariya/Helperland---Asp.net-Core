@@ -237,7 +237,23 @@
                         </div>
                         <hr>
                         <div class="mb-3 mt-3">
-                            <input type="number" maxlength="16" class="form-control" placeholder="Card Number">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <input type="number"  class="form-control form-control-none" placeholder="Card Number" id="txtCardNumber">
+                                    <span id="errCardNumber" class="text-danger display-none">Enter Valid Card Number</span>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control form-control-none" placeholder="MM/YY" id="MonthAndYear">
+                                    <span id="errMonthAndYear" class="text-danger display-none">Enter Valid Month and Year</span>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" class="form-control form-control-none" placeholder="CVV" id="CVV">
+                                    <span id="errCVV" class="text-danger display-none" >Enter Valid CVV </span>
+
+                                </div>
+                            </div>
+                            
                         </div>
                         <hr>
                         <div class="mt-3">
@@ -569,6 +585,50 @@
             $("#ServiceHours").val($('#textBasichour').text());
         })
 
+        $('#txtCardNumber').on('input', function () {
+            var Password = $("#txtCardNumber").val();
+            if (Password.length != 16 ) {
+                $('#errCardNumber').addClass('error').show();
+                $("#btnBookService").attr('disabled', 'disabled');
+            }
+            else {
+                $("#btnBookService").removeAttr('disabled');
+                $('#errCardNumber').removeClass('error').hide();
+            }
+
+
+
+        });
+
+        $('#MonthAndYear').on('input', function () {
+            var Password = $("#MonthAndYear").val();
+            if (Password.length != 5) {
+                $('#errMonthAndYear').addClass('error').show();
+                $("#btnBookService").attr('disabled', 'disabled');
+            }
+            else {
+                $("#btnBookService").removeAttr('disabled');
+                $('#errMonthAndYear').removeClass('error').hide();
+            }
+
+
+
+        });
+
+        $('#CVV').on('input', function () {
+            var Password = $("#CVV").val();
+            if (Password.length != 3) {
+                $('#errCVV').addClass('error').show();
+                $("#btnBookService").attr('disabled', 'disabled');
+            }
+            else {
+                $("#btnBookService").removeAttr('disabled');
+                $('#errCVV').removeClass('error').hide();
+            }
+
+
+
+        });
 
 
     });

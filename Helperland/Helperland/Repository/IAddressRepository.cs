@@ -1,4 +1,5 @@
-﻿using Helperland.Models.ViewModel.BookService;
+﻿using Helperland.Models.Data;
+using Helperland.Models.ViewModel.BookService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,6 @@ namespace Helperland.Repository
 
         public Boolean UpdateAddress(AddressViewModel addressViewModel);
         public Boolean DeleteAddress(int addressId);
-
+        public UserAddress GetServiceProviderAddress(int userId);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Helperland.Models.Data;
+using Helperland.Models.ViewModel.ServiceProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,6 +68,32 @@ namespace Helperland.Repository
                 }
                 
             }
+        }
+
+        public List<RatingsViewModel> GetRatingsForServiceProvider(int serviceproviderId)
+        {
+            List<RatingsViewModel> ratingsViewModels=new List<RatingsViewModel>();
+            List<Rating> ratings = _helperlandContext.Ratings.Where(x => x.RatingTo == serviceproviderId).ToList();
+            if (ratings != null)
+            {
+                foreach(var item in ratings)
+                {
+                    RatingsViewModel r = new RatingsViewModel();
+                    User u = _helperlandContext.Users.Where(x => x.UserId == item.RatingFrom).FirstOrDefault();
+                    ServiceRequest s = _helperlandContext.ServiceRequests.Where(x => x.ServiceRequestId == item.ServiceRequestId).FirstOrDefault();
+                    r.RatingID = item.RatingId;
+                    r.CustomerName = u.FirstName + " " + u.LastName;
+                    r.Comments = item.Comments;
+                    r.Rating = item.Ratings;
+                    r.ServiceRequestID = item.ServiceRequestId;
+                    r.ServiceDate = s.ServiceStartDate.ToString("dd/MM/yyyy");
+                    ratingsViewModels.Add(r);
+                }
+                return ratingsViewModels;
+            }
+            else
+                return null;
+                
         }
     }
 }

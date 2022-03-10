@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Title = "Dashbord";
+}
+@using Microsoft.AspNetCore.Http
+<div class="container-fluid">
+    <div class="row justify-content-center gray-bachgroud" style="margin-top: 100px; padding-top: 2rem; padding-bottom: 2rem;">
+        <h1 class="text-center"> Welcome, @Context.Session.GetString("username") </h1>
+    </div>
+    <div class="row justify-content-center mt-2">
+        <div class="col-md-2">
+            <partial name="_ServiceProviderMenuPartialView" />
+        </div>
+        <div class="col-md-9">
+
+        </div>
+    </div>
+</div>

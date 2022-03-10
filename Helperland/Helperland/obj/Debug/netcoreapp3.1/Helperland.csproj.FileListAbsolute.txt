@@ -98,3 +98,11 @@ G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\
 G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CustomerSidetaMenuPartialView.cshtml.g.cs
 G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Dashbord.cshtml.g.cs
 G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Customer\ServiceHistory.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\NewServiceRquest.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\UpcomingServices.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\ServiceHistory.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\MyRating.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\BlockCustomer.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\MySetting.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ServiceProviderMenuPartialView.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\Index.cshtml.g.cs

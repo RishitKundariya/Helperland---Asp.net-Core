@@ -32,6 +32,7 @@ namespace Helperland
             services.AddScoped<IBookServiceRepository, BookServiceRepository>();
             services.AddScoped<IRatingRepository, RatingRepository>();
             services.AddScoped<IServiceRequestRepository, ServiceRequestRepository>();
+            services.AddScoped<IFavouriteAndBlockRepository, FavouriteAndBlockRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<DataProtectionPurposeString>();
             services.AddDistributedMemoryCache();

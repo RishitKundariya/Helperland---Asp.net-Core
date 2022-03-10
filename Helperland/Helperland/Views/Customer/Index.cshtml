@@ -219,7 +219,7 @@
 
          /*   Open Service Details Model on Click of Table Row*/
         function OpenModel(para) {
-        $("#ServiceDeatils").modal('show');
+            $("#ServiceDeatils").modal('show');
             $("#ModelServiceRequestId").text(para);
             $("#ModelbtnReschedule").val(para);
             $("#ModelbtnCancel").val(para);
@@ -260,7 +260,7 @@
                          $("#ModelHasPatImage").attr("src", "/image/not-included.png");
                          $("#ModelHasPat").show();
                      }
-
+                     $("#ModelServiceRating").empty();
                      for (var i = 0; i < 5; i++) {
                          if (obj.Rating > i) {
                              $("#ModelServiceRating").append('<img src="/image/yellow-small-star.png" class="service-history-star-icon">');

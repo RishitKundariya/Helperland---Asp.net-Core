@@ -7,7 +7,7 @@
 <html>
 
 <head>
-    <title>@ViewBag.Title | Helperland</title>
+    <title>@ViewBag.Title</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="description">
@@ -136,6 +136,19 @@
                                         </a>
                                     </li>
 
+                                }
+                                else if (Usertype == 2)
+                                {
+                                    <li class="">
+                                        <a class="dropdown-item nav-dropdown-item" asp-action="Index" asp-controller="ServiceProvider">
+                                            My Dashboard
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a class="dropdown-item nav-dropdown-item" asp-action="MySetting" asp-controller="ServiceProvider">
+                                            My Setting
+                                        </a>
+                                    </li>
                                 }
                                 <li class="">
                                     <a class="dropdown-item nav-dropdown-item" asp-action="Logout" asp-controller="Home">

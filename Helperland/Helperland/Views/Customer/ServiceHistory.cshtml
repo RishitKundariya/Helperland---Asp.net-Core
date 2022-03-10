@@ -362,6 +362,19 @@
                 
             });
 
+
+            $(document).ready(function () {
+                $('#tblServiceRequestHistory').dataTable({
+                    "bFilter": false,
+                    "bInfo": false,
+                    'aoColumnDefs': [{
+                        'bSortable': false,
+                        'aTargets': [-1] /* 1st one, start by the right */
+                    }]
+                });
+
+            })
+
         </script>
 
 

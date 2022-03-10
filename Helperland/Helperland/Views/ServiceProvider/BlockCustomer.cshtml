@@ -1,0 +1,100 @@
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Title = "Block Customer ";
+}
+@using Microsoft.AspNetCore.Http
+@model List<Helperland.Models.ViewModel.ServiceProvider.BlockCustomerrViewModel>
+<div class="container-fluid">
+    <div class="row justify-content-center gray-bachgroud" style="margin-top: 100px; padding-top: 2rem; padding-bottom: 2rem;">
+        <h1 class="text-center"> Welcome, @Context.Session.GetString("username") </h1>
+    </div>
+    <div class="row justify-content-center mt-2">
+        <div class="col-md-2">
+            <partial name="_ServiceProviderMenuPartialView" />
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                <div class="col-md-3 p-2 m-3" style="border:1px solid grey">
+                    <div class="center" style="justify-content:center">
+                        <img src="~/image/avatar-hat.png" class="" style="border:2px solid grey;border-radius:50%; display:block" />
+
+                    </div>
+                    <div class="text-center  mt-3 mb-3"> <h5>  @item.Username </h5></div>
+                    @if (!item.IsBlock)
+                    {
+                        <div class="text-center mb-2">  <button class="btn btn-cancel font-white rounded-pill" value="@item.UserId" onclick="BlockCustomer(this.value)" > Block</button></div>
+                    }
+                    else
+                    {
+
+                        <div class="text-center mb-2">  <button class="btn marun font-white rounded-pill" value="@item.UserId" onclick="UnBlockCustomer(this.value)"> Unblock</button></div>
+                    }
+
+                </div>
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script{ 
+    <script>
+      /*  Block Customer*/
+    function BlockCustomer(para) {
+         $.ajax({
+                  type: "POST",
+                  url: "@Url.Action("SetblockCustomer")",
+                  data: { "userId": para },
+                 success: function (responce) {
+
+                     if (responce) {
+                         location.reload();
+                     }
+                 },
+                 failure: function (response) {
+                        alert("failure");
+                 },
+                 error: function (response) {
+                        alert("Something went Worng");
+                 }
+
+         });
+
+
+        }
+
+      /*  UnBlock Customer*/
+    function UnBlockCustomer(para) {
+         $.ajax({
+                  type: "POST",
+                  url: "@Url.Action("SetUnblockCustomer")",
+                  data: { "userId": para },
+                 success: function (responce) {
+
+                     if (responce) {
+
+                         location.reload();
+
+                     }
+                 },
+                 failure: function (response) {
+                        alert("failure");
+                 },
+                 error: function (response) {
+                        alert("Something went Worng");
+                 }
+
+              });
+
+
+
+    }
+
+
+    </script>
+}

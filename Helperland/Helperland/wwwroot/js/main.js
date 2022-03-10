@@ -41,6 +41,7 @@ $(document).ready(function() {
 });
 
 
+
 $(document).ready(function() {
     $('#adminUserManagement').dataTable({
         "bFilter": false,
@@ -177,8 +178,6 @@ function gotoyourDetails() {
     $("#addAddressPostCode").val($("#txtpincode").val());
     getAddress();
 }
-
-
 
 
 function gotomakepayment() {

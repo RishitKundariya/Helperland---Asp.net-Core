@@ -33,7 +33,7 @@ namespace Helperland.Repository
             {
                
                 User user = helperlandContext.Users.Where(x => x.Email == loginViewModel.Email).FirstOrDefault();
-                if(user != null && protector.Unprotect( user.Password) == loginViewModel.Password)
+                if (user != null && protector.Unprotect( user.Password) == loginViewModel.Password)
                 {
                     return user.UserId;
                 }

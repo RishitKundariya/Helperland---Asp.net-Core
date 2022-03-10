@@ -1,0 +1,156 @@
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Title = "Services History ";
+}
+@using Microsoft.AspNetCore.Http
+@model List<Helperland.Models.ViewModel.ServiceProvider.ServiceProviderServiceHistoryViewModel>
+<div class="container-fluid">
+    <div class="row justify-content-center gray-bachgroud" style="margin-top: 100px; padding-top: 2rem; padding-bottom: 2rem;">
+        <h1 class="text-center"> Welcome, @Context.Session.GetString("username") </h1>
+    </div>
+    <div class="row justify-content-center mt-2">
+        <div class="col-md-2">
+            <partial name="_ServiceProviderMenuPartialView" />
+        </div>
+        <div class="col-md-9">
+            <div class="row p-3">
+                <div class="col-md-12 table-responsive">
+                    <table id="tbleServiceRequestHistory" class="table table-striped" >
+                        <thead>
+                            <tr>
+                                <td>Service Id </td>
+                                <td>Service Date </td>
+                                <td>Customer Details </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr onclick="OpenModel(@item.ServiceRequestId)">
+                                    <td style="width:30%"> @item.ServiceRequestId </td>
+                                    <td class="flex" style="width:30%">
+                                        <div><img src="/image/calendar2.png" asp-append-version="true"><b> @item.ServiceDate</b> </div>
+                                        <img src="/image/layer-712.png" asp-append-version="true"> 8.:00 - 12:00
+                                    </td>
+                                    <td style="width:38%">
+
+                                        <div class="d-flex">
+                                            <div class="center"><img src="/image/layer-15.png"></div>
+                                            <div>
+                                                <span class="d-block"> @item.CustomerName </span>
+                                                <span class="d-block"> @item.AddressLine1 </span>
+                                                <span class="d-block"> @item.AddressLine2 </span>
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal  Service Details -->
+<div class="modal fade" id="ServiceDeatils" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Service Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12" id="ModelMainDiv">
+                        <div>
+                            <span id="ModelServiceDate" class="font-bold h5"></span> 8:00 - 13:00<br />
+                            <span class="font-bold"> Duration </span><span id="ModelDuration"> </span> Hrs
+                        </div>
+                        <hr />
+                        <div>
+                            <span class="font-bold"> Service Id: </span><span id="ModelServiceRequestId"> </span>.<br />
+                            <span class="font-bold"> Extras </span> <span id="ModelExtra"></span><br />
+                            <span class="font-bold"> Net Amount: </span> <span id="ModelTotalCost" class="font-blue font-bold"></span> €<br />
+                        </div>
+                        <hr />
+                        <div>
+                            <span class="font-bold">Customer Name: </span><span id="ModelCustomerName"> </span><br />
+                            <span class="font-bold"> Service Address :-  </span><span id="ModelServiceAddress"> </span>.
+
+                        </div>
+                        <hr />
+                        <div>
+                            <span class="font-bold"> Comments </span> <br /> <span id="ModelComments"> </span>
+                        </div>
+                        <hr />
+                        <span> <img src="/image/not-included.png" id="ModelHasPatImage" /> I <span id="ModelHasPat">  don't </span>  have Pate at Home</span>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Script{
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+                /*   Open Service Details Model on Click of Table Row*/
+        function OpenModel(para) {
+            $("#ServiceDeatils").modal('show');
+            $("#ModelServiceRequestId").text(para);
+            $.ajax({
+                 type: "POST",
+                 url: "@Url.Action("GetServiceRequestData")",
+                 data: { "ServiceReqestId": para },
+                 success: function (responce) {
+                     var obj = JSON.parse(responce);
+                     $("#ModelDuration").text(obj.TotalHour);
+                     $("#ModelServiceDate").text(obj.ServiceDate);
+                     $("#ModelExtra").text(obj.Extra);
+                     $("#ModelTotalCost").text(obj.TotalCost);
+                     $("#ModelServiceAddress").text(obj.Address);
+                     $("#ModelCustomerName").text(obj.CustomerName);
+                     $("#ModelComments").text(obj.Comments);
+                     if (obj.Haspet) {
+                         $("#ModelHasPatImage").attr("src", "/image/included.png");
+                         $("#ModelHasPat").hide();
+                     } else {
+                         $("#ModelHasPatImage").attr("src", "/image/not-included.png");
+                         $("#ModelHasPat").show();
+                     }
+
+
+                 },
+                 failure: function (response) {
+                        alert("failure");
+                 },
+                 error: function (response) {
+                        alert("Something went Worng");
+                 }
+
+              });
+        }
+
+        /* Apply Data Table*/
+        $('#tbleServiceRequestHistory').dataTable({
+            "bFilter": false,
+            "bInfo": false,
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1] /* 1st one, start by the right */
+            }]
+        });
+    </script>
+}

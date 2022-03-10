@@ -1,5 +1,6 @@
 ﻿using Helperland.Models.Data;
 using Helperland.Models.ViewModel;
+using Helperland.Models.ViewModel.ServiceProvider;
 using Helperland.Security;
 using Microsoft.AspNetCore.DataProtection;
 using System;
@@ -137,6 +138,43 @@ namespace Helperland.Repository
             {
                 return false;
             }
+        }
+        #endregion
+
+        #region Update Service Proivider Data
+        public void UpdateServiceProviderData(MyDetailsViewModel myDetailsViewModel, int userId)
+        {
+            User user = _helperlandContext.Users.Where(x => x.UserId == userId).FirstOrDefault();
+            UserAddress userAddress = _helperlandContext.UserAddresses.Where(x => x.UserId == userId).FirstOrDefault();
+            user.FirstName = myDetailsViewModel.FirstName;
+            user.LastName = myDetailsViewModel.lastName;
+            user.Mobile = myDetailsViewModel.mobileNumber;
+            user.DateOfBirth = Convert.ToDateTime(myDetailsViewModel.day + "/" + myDetailsViewModel.month + "/" + myDetailsViewModel.year);
+            user.NationalityId = myDetailsViewModel.NationalityId;
+            user.Gender = myDetailsViewModel.Gender;
+            user.UserProfilePicture = myDetailsViewModel.UserProfilePicture;
+            user.ZipCode = myDetailsViewModel.Zipcode;
+            bool isNull = false;
+            if (userAddress == null)
+            {
+                userAddress = new UserAddress();
+                userAddress.UserId = userId;
+                isNull = true;
+                
+            }
+            userAddress.AddressLine1 = myDetailsViewModel.AddressLine1;
+            userAddress.AddressLine2 = myDetailsViewModel.AddressLine2;
+            userAddress.ZipCode = myDetailsViewModel.Zipcode;
+            userAddress.CityId = myDetailsViewModel.CityId;
+            City city = _helperlandContext.Cities.Where(x => x.Id == myDetailsViewModel.CityId).FirstOrDefault();
+            userAddress.StateId = city.StateId;
+            _helperlandContext.Users.Update(user);
+            if (isNull)
+                _helperlandContext.UserAddresses.Add(userAddress);
+            else
+                _helperlandContext.UserAddresses.Update(userAddress);
+            _helperlandContext.SaveChanges();
+
         }
         #endregion
         public string Message()

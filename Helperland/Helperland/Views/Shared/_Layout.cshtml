@@ -3,7 +3,7 @@
 @{ int? Usertype = Context.Session.GetInt32("usertype"); }
 @*@if(userID == null)
 {
-    userID = 1;
+    userID = 2;
 }*@
 <!DOCTYPE html>
 <html>
@@ -20,12 +20,16 @@
     <!-- Vendor CSS Files -->
     <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
     <link href="~/lib/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet/less" href="~/css/main.less" type="text/css" />
+    
     <!--  Main CSS File -->
     <link href="~/css/style.css" rel="stylesheet" />
 
 </head>
 
 <body id="body">
+
+    <div class="loader display-none text-center"></div>
     <!-- Navbar -->
     <nav class="navbar fixed-top navbar-expand-xl navbar-dark small-head">
         <div class="container-fluid">
@@ -146,6 +150,19 @@
                                     </li>
 
                                 }
+                                else if(Usertype == 2)
+                                {
+                                    <li class="">
+                                        <a class="dropdown-item nav-dropdown-item" asp-action="Index" asp-controller="ServiceProvider">
+                                            My Dashboard
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a class="dropdown-item nav-dropdown-item" asp-action="MySetting" asp-controller="ServiceProvider">
+                                            My Setting
+                                        </a>
+                                    </li>
+                                }
                                 <li class="">
                                     <a class="dropdown-item nav-dropdown-item" asp-action="Logout" asp-controller="Home">
                                         Logout
@@ -182,7 +199,6 @@
             </div>
         </div>
     </section>
-
 
     <footer>
 
@@ -231,6 +247,7 @@
     <script src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/ae6d6e0254.js" crossorigin="anonymous"></script>
+    <script src="https://lesscss.googlecode.com/files/less-1.0.30.min.js"></script>
 </body>
 
 </html>

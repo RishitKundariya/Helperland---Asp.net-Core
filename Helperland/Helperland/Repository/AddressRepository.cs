@@ -18,6 +18,14 @@ namespace Helperland.Repository
             this.helperlandContext = helperlandContext;
         }
 
+
+        #region Get Service Provider Address
+        public UserAddress GetServiceProviderAddress(int userId)
+        {
+            return helperlandContext.UserAddresses.Where(x => x.UserId == userId).FirstOrDefault();
+        }
+        #endregion
+
         #region SetAddress
         public Boolean SetAddress(AddressViewModel addressViewModel)
         {
