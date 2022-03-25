@@ -26,7 +26,6 @@ namespace Helperland.Controllers
         private readonly IHttpContextAccessor httpContextAccessor;
 
         private ISession _session => httpContextAccessor.HttpContext.Session;
-        private int ServiceProviderUserID;
 
         public ServiceProviderController(IUserRegistrationRepository userRegistrationRepository, IAddressRepository addressRepository,
                                 IBookServiceRepository bookServiceRepository,ILoginRepository loginRepository,
@@ -41,7 +40,6 @@ namespace Helperland.Controllers
             this.serviceRequestRepository = serviceRequestRepository;
             this.favouriteAndBlockRepository = favouriteAndBlockRepository;
             this.httpContextAccessor = httpContextAccessor;
-            ServiceProviderUserID = (int)_session.GetInt32("userID");
         }
         public IActionResult Index()
         {
@@ -50,6 +48,7 @@ namespace Helperland.Controllers
         [HttpGet]
         public IActionResult NewServiceRquest(string hasPate)
         {
+            int userId = (int)_session.GetInt32("userID");
             bool hasPasts ;
             if (hasPate == "on")
             {
@@ -60,32 +59,63 @@ namespace Helperland.Controllers
                 hasPasts = false;
             }
             ViewBag.hasPat = hasPasts;
-            return View(serviceRequestRepository.GetServiceRequestsNotAccepted(ServiceProviderUserID, hasPasts));
+            return View(serviceRequestRepository.GetServiceRequestsNotAccepted(userId, hasPasts));
         }
         public IActionResult UpcomingServices()
         {
-            return View(serviceRequestRepository.GetServiceRequestsIsAccepted(ServiceProviderUserID));
+            int userId = (int)_session.GetInt32("userID");
+            return View(serviceRequestRepository.GetServiceRequestsIsAccepted(userId));
         }
         public IActionResult ServiceHistory()
         {
+            int userId = (int)_session.GetInt32("userID");
 
-            return View(serviceRequestRepository.GetServiceHistoryForServiceProvider(ServiceProviderUserID));
+            return View(serviceRequestRepository.GetServiceHistoryForServiceProvider(userId));
         }
-        public IActionResult MyRating()
+        public IActionResult MyRating(string Rating=null)
+        {
+            if(Rating == null || Int32.Parse(Rating)==0)
+            {
+                int userId = (int)_session.GetInt32("userID");
+                ViewBag.selectRating = 0;
+                return View(ratingRepository.GetRatingsForServiceProvider(userId));
+                
+            }
+            else
+            {
+                int userId = (int)_session.GetInt32("userID");
+                List<RatingsViewModel> temp = ratingRepository.GetRatingsForServiceProvider(userId);
+                temp = temp.Where(x => x.Rating > Int32.Parse(Rating) -1 && x.Rating <= Int32.Parse(Rating)).ToList();
+                ViewBag.selectRating = Int32.Parse(Rating);
+                return View(temp);
+            }
+           
+           
+        }
+
+        public IActionResult ServiceSchedule()
         {
             
-            return View(ratingRepository.GetRatingsForServiceProvider(ServiceProviderUserID));
+           return View();
+        }
+
+        public IActionResult GetUpcomingServiceRequest()
+        {
+            int userId = (int)_session.GetInt32("userID");
+            return new JsonResult(serviceRequestRepository.GetDateOfAcceptedAndUpcomingServiceRequest(userId));
         }
         public IActionResult BlockCustomer()
         {
-            return View(favouriteAndBlockRepository.GetListOfCustomer(ServiceProviderUserID));
+            int userId = (int)_session.GetInt32("userID");
+            return View(favouriteAndBlockRepository.GetListOfCustomer(userId));
         }
         public IActionResult MySetting()
         {
+            int userId = (int)_session.GetInt32("userID");
             MyDetailsViewModel model = new MyDetailsViewModel();
             User user;
-            user = userRegistrationRepository.GetUserById(ServiceProviderUserID);
-            UserAddress userAddress = addressRepository.GetServiceProviderAddress(ServiceProviderUserID);
+            user = userRegistrationRepository.GetUserById(userId);
+            UserAddress userAddress = addressRepository.GetServiceProviderAddress(userId);
             if (user != null)
             {
                 model.FirstName = user.FirstName;
@@ -126,9 +156,10 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult GetUserData(MyDetailsViewModel myDetailsViewModel)
         {
+            int userId = (int)_session.GetInt32("userID");
             if (ModelState.IsValid)
             {
-                userRegistrationRepository.UpdateServiceProviderData(myDetailsViewModel, ServiceProviderUserID);
+                userRegistrationRepository.UpdateServiceProviderData(myDetailsViewModel, userId);
                 
             }
             return RedirectToAction("MySetting");
@@ -136,7 +167,8 @@ namespace Helperland.Controllers
 
         public bool ResetPassword(string oldPassword,string newPassword)
         {
-            return loginRepository.ResetPassword(ServiceProviderUserID, oldPassword, newPassword);
+            int userId = (int)_session.GetInt32("userID");
+            return loginRepository.ResetPassword(userId, oldPassword, newPassword);
         }
 
         public IActionResult GetServiceRequestData(string ServiceReqestId)
@@ -146,7 +178,8 @@ namespace Helperland.Controllers
 
         public string AcceptServiceRequest(string serviceRequeestId)
         {
-            return serviceRequestRepository.AcceptServiceRequest(ServiceProviderUserID, Int32.Parse(serviceRequeestId));
+            int userId = (int)_session.GetInt32("userID");
+            return serviceRequestRepository.AcceptServiceRequest(userId, Int32.Parse(serviceRequeestId));
         }
 
         public bool CompleteServiceRequest(string serviceRequeestId)
@@ -160,11 +193,13 @@ namespace Helperland.Controllers
 
         public bool SetUnblockCustomer(string userId)
         {
-            return favouriteAndBlockRepository.UnblockCustomer(ServiceProviderUserID, Int32.Parse(userId));
+            int LoginUserId = (int)_session.GetInt32("userID");
+            return favouriteAndBlockRepository.UnblockCustomer(LoginUserId, Int32.Parse(userId));
         }
         public bool SetBlockCustomer(string userId)
         {
-            return favouriteAndBlockRepository.BlockCustomer(ServiceProviderUserID, Int32.Parse(userId));
+            int LoginUserId = (int)_session.GetInt32("userID");
+            return favouriteAndBlockRepository.BlockCustomer(LoginUserId, Int32.Parse(userId));
         }
 
     }

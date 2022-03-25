@@ -35,9 +35,23 @@ namespace Helperland.Repository
                 User user = helperlandContext.Users.Where(x => x.Email == loginViewModel.Email).FirstOrDefault();
                 if (user != null && protector.Unprotect( user.Password) == loginViewModel.Password)
                 {
-                    return user.UserId;
+                    if(user.IsActive == false)
+                    {
+                        _Message += " Your Account is not Activated ";
+                        return -1;
+                    }
+                    else
+                    {
+                        if(user.UserTypeId==2 &&  user.IsApproved == false)
+                        {
+                            _Message += " Your Account is not Approved ";
+                            return -1;
+                        }
+                        return user.UserId;
+                    }
+                   
                 }
-                else
+                else 
                 {
                     _Message += " Invalid username or password ";
                     return -1;

@@ -12,6 +12,6 @@ namespace Helperland.Repository
         public Boolean CheckAvailabilityOfService(string pincode);
         public List<City> GetAllCity();
         public int BookService(BookServiceViewModel bookServiceViewModel);
-        public void SendNotification(Boolean workWithPat,string zipcode);
+        public void SendNotification(Boolean workWithPat, string zipcode, int userId);
     }
 }

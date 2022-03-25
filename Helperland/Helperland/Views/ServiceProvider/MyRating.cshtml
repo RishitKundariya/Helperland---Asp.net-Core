@@ -13,59 +13,132 @@
             <partial name="_ServiceProviderMenuPartialView" />
         </div>
         <div class="col-md-9 p-3">
-            @foreach (var item in Model)
-            {
 
-                <div class="row p-2 mb-3" style="border:1px solid grey">
-                    <div class="col-md-3 mb-2">
-                        <span class="font-bold">@item.ServiceRequestID </span> <br />
-                        <span class="font-bold"> @item.CustomerName </span>
-                    </div>
-                    <div class="col-md-6 mb-2">
-                        <div><img src="/image/calendar2.png"><b>@item.ServiceDate</b> </div>
-                        <div><img src="/image/layer-14.png"> 12:00 - 18:00 </div>
-                    </div>
-                    <div class="col-md-3 mb-2">
-                        <span class="font-bold">Ratings </span><br />
-                        <div>
-                            @for(var i = 1; i < 6; i++)
-                            {
-                                if(i <= (int) item.Rating)
-                                {
-                                      <img src="/image/yellow-small-star.png" class="service-history-star-icon">
-                                     
-                                }
-                                else
-                                {
-                                    <img src="/image/grey-small-star.png" class="service-history-star-icon">
-                                }
+            <div class="row m-2">
 
-                            }
-                            @{ 
-                               var Rating = Convert.ToInt32(item.Rating);
-                            }
-                            @if(Rating > 3 && Rating <= 4 )
-                            {
-                             <span>Very Good  </span>
-                            }
-                            else if(Rating > 4 && Rating <= 5)
-                            {
-                        <span>Excellent </span>
-                            }
-                            else if(Rating > 2 && Rating <= 3)
-                            {
-                        <span>Good </span>
-                            }
-                        </div>
-                    </div>
-                    <hr class="mt-2" />
-                    <div class="col-md-12">
-                        <span class="font-bold"> Customer Comments:  </span>  @item.Comments
-                    </div>
+                <div class="col-md-2">
+                    <span class="font-bold">Rating </span>
                 </div>
-            }
+                <div class="col-md-3">
+                    <form asp-action="MyRating" asp-controller="ServiceProvider" id="Form-submit">
+                        <select class="form-control form-select" name="Rating" id="selectRating">
+                            <option value="0">All</option>
+                            <option value="5">Excellent</option>
+                            <option value="4">Very Good</option>
+                            <option value="3">Good</option>
+                            <option value="2">Poor</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+            <div class="row m-2">
+                <div class="col-md-12 table-responsive">
+                    <table class="table" id="tbleMyRating">
+                        <thead>
+                            <tr class="m-2">
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="row p-2 mb-3" style="border:1px solid grey">
+                                            <div class="col-md-3 mb-2">
+                                                <span class="font-bold">@item.ServiceRequestID </span> <br />
+                                                <span class="font-bold"> @item.CustomerName </span>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div><img src="/image/calendar2.png"><b>@item.ServiceDate</b> </div>
+                                                <div><img src="/image/layer-14.png"> 12:00 - 18:00 </div>
+                                            </div>
+                                            <div class="col-md-3 mb-2">
+                                                <span class="font-bold">Ratings </span><br />
+                                                <div>
+                                                    @for (var i = 1; i < 6; i++)
+                                                    {
+                                                        var temp = Convert.ToInt32(item.Rating);
+                                                        if (i <= temp)
+                                                        {
+                                                            <img src="/image/yellow-small-star.png" class="service-history-star-icon">
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="/image/grey-small-star.png" class="service-history-star-icon">
+                                                        }
+
+                                                    }
+                                                    @{
+                                                        var Rating = Convert.ToInt32(item.Rating);
+                                                    }
+                                                    @if (Rating > 3 && Rating <= 4)
+                                                    {
+                                                        <span>Very Good  </span>
+                                                    }
+                                                    else if (Rating > 4 && Rating <= 5)
+                                                    {
+                                                        <span>Excellent </span>
+                                                    }
+                                                    else if (Rating > 2 && Rating <= 3)
+                                                    {
+                                                        <span>Good </span>
+                                                    }
+                                                    else if (Rating > 1 && Rating <= 2)
+                                                    {
+                                                        <span>Poor </span>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <hr class="mt-2" />
+                                            <div class="col-md-12">
+                                                <span class="font-bold"> Customer Comments:  </span>  @item.Comments
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
 
 
         </div>
     </div>
 </div>
+@section Script{
+    <style>
+        a:hover {
+            color: white !important;
+        }
+    </style>
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $("#selectRating").on('change', function () {
+            $("#Form-submit").submit();
+        });
+
+
+        $(document).ready(function () {
+            $("#selectRating").val("@ViewBag.selectRating");
+        });
+
+        $('#tbleMyRating').dataTable({
+            "bFilter": false,
+            "bInfo": false,
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1]  /* 1st one, start by the right */
+            }],
+            "order": [[0, "desc"]]
+        });
+    </script>
+}

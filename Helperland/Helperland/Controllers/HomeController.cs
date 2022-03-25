@@ -130,11 +130,13 @@ namespace Helperland.Controllers
 
         public IActionResult Login(LoginViewModel loginViewModel)
         {
+            int userType=0;
             if (ModelState.IsValid)
             { int userID = loginRepository.IsValidUser(loginViewModel);
                 if (userID != -1)
                 {
                     User user = loginRepository.GetUser(userID);
+                    
                     if(user != null)
                     {
                         CookieOptions options = new CookieOptions();
@@ -145,6 +147,7 @@ namespace Helperland.Controllers
                         HttpContext.Session.SetInt32("userID", user.UserId);
                         HttpContext.Session.SetString("username", user.FirstName);
                         HttpContext.Session.SetInt32("usertype", user.UserTypeId);
+                        userType = user.UserTypeId;
                     }
                     ModelState.Clear();
                 }
@@ -161,7 +164,11 @@ namespace Helperland.Controllers
                 ViewBag.isOpen = true;
                 ModelState.AddModelError("", "Enter valid Data");
             }
-                
+
+            if (userType==3)
+            {
+                return RedirectToAction("Index","Admin");
+            }   
 
             return View("Index");
         }

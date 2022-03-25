@@ -64,7 +64,7 @@ namespace Helperland.Repository
                 }
                 else
                 {
-                    return (sum / i);
+                    return Decimal.Round(sum / i);
                 }
                 
             }
@@ -84,7 +84,7 @@ namespace Helperland.Repository
                     r.RatingID = item.RatingId;
                     r.CustomerName = u.FirstName + " " + u.LastName;
                     r.Comments = item.Comments;
-                    r.Rating = item.Ratings;
+                    r.Rating = Decimal.Round(item.Ratings);
                     r.ServiceRequestID = item.ServiceRequestId;
                     r.ServiceDate = s.ServiceStartDate.ToString("dd/MM/yyyy");
                     ratingsViewModels.Add(r);

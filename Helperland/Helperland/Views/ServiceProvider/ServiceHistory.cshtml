@@ -12,15 +12,18 @@
         <div class="col-md-2">
             <partial name="_ServiceProviderMenuPartialView" />
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
+            <div class="float-right">
+                <button class="btn font-white rounded-pill active-btn" onclick="Export()">Export</button>
+            </div> 
             <div class="row p-3">
                 <div class="col-md-12 table-responsive">
-                    <table id="tbleServiceRequestHistory" class="table table-striped" >
+                    <table id="tbleServiceRequestHistory" class="table table-hover table-outside-border " >
                         <thead>
-                            <tr>
-                                <td>Service Id </td>
-                                <td>Service Date </td>
-                                <td>Customer Details </td>
+                            <tr class="gray-bachgroud">
+                                <th>Service Id </th>
+                                <th>Service Date </th>
+                                <th>Customer Details </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -103,6 +106,11 @@
 
 
 @section Script{
+    <style>
+        a:hover {
+            color: white !important;
+        }
+    </style>
     <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
@@ -143,6 +151,51 @@
               });
         }
 
+
+        /*Export Data of table into csv*/
+        function Export() {
+            var csv = [];
+            var rows = document.querySelectorAll("table tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+
+                for (var j = 0; j < cols.length ; j++) {
+                    split = cols[j].innerText.split("\n");
+                    row.push(split[0]);
+                }
+                csv.push(row.join(","));
+            }
+            console.log(csv);
+            // Download CSV file
+            downloadCSV(csv.join("\n"), "Service Hostory");
+        }
+        function downloadCSV(csv, filename) {
+            var csvFile;
+            var downloadLink;
+
+            // CSV file
+            csvFile = new Blob([csv], { type: "text/csv" });
+
+            // Download link
+            downloadLink = document.createElement("a");
+
+            // File name
+            downloadLink.download = filename;
+
+            // Create a link to the file
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+
+            // Hide download link
+            downloadLink.style.display = "none";
+
+            // Add the link to DOM
+            document.body.appendChild(downloadLink);
+
+            // Click download link
+            downloadLink.click();
+        }
+
         /* Apply Data Table*/
         $('#tbleServiceRequestHistory').dataTable({
             "bFilter": false,
@@ -150,7 +203,8 @@
             'aoColumnDefs': [{
                 'bSortable': false,
                 'aTargets': [-1] /* 1st one, start by the right */
-            }]
+            }],
+            "order": [[0, "desc"]]
         });
     </script>
 }

@@ -32,6 +32,7 @@ namespace Helperland.Repository
                         temp.UserId = user.UserId;
                         temp.Username = user.FirstName + " " + user.LastName;
                         temp.IsBlock = false;
+                        
                     }
                     else
                     {

@@ -10,5 +10,6 @@ namespace Helperland.Models.ViewModel.ServiceProvider
         public int UserId { get; set; }
         public string Username { get; set; }
         public bool IsBlock { get; set; }
+
     }
 }

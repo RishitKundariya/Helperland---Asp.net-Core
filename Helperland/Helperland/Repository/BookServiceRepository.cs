@@ -137,30 +137,44 @@ namespace Helperland.Repository
             {
 
             }
-            SendNotification(sr.HasPets, sr.ZipCode);
+            SendNotification(sr.HasPets, sr.ZipCode,bookServiceViewModel.UserId);
             return sr.ServiceRequestId;
         }
         #endregion
 
         #region Send mail notification
-        public void SendNotification(Boolean workWithPat, string zipcode)
+        public void SendNotification(Boolean workWithPat, string zipcode,int userId)
         {
             List<User> users = new List<User>();
             if (workWithPat)
             {
-                 users = helperlandContext.Users.Where(x => x.ZipCode == zipcode && x.WorksWithPets == workWithPat).ToList();
+                 users = helperlandContext.Users.Where(x => x.ZipCode == zipcode && x.WorksWithPets == workWithPat && x.UserTypeId == 2).ToList();
+
             }
             else
             {
-                 users = helperlandContext.Users.Where(x => x.ZipCode == zipcode).ToList();
+                 users = helperlandContext.Users.Where(x => x.ZipCode == zipcode && x.UserTypeId==2).ToList();
             }
 
             foreach(var item in users)
             {
-                string welcomeMessage = "Welcome to Helperland,   <br/> You get new Service request. <br/> <b> Check it now <b>";
 
-                MailHelper mailHelper = new MailHelper(configuration);
-                mailHelper.Send(item.Email, welcomeMessage,"New Service Request");
+                FavoriteAndBlocked favoriteAndBlocked = helperlandContext.FavoriteAndBlockeds.Where(x => x.TargetUserId == userId && x.IsBlocked == true).FirstOrDefault();
+                if(favoriteAndBlocked == null)
+                {
+                    string welcomeMessage = "Welcome to Helperland,   <br/> You get new Service request. <br/> <b> Check it now <b>";
+
+                    MailHelper mailHelper = new MailHelper(configuration);
+                    mailHelper.Send(item.Email, welcomeMessage, "New Service Request");
+                }
+                else if(item.UserId != favoriteAndBlocked.UserId)
+                {
+                    string welcomeMessage = "Welcome to Helperland,   <br/> You get new Service request. <br/> <b> Check it now <b>";
+
+                    MailHelper mailHelper = new MailHelper(configuration);
+                    mailHelper.Send(item.Email, welcomeMessage, "New Service Request");
+                }
+               
             }
         }
         #endregion

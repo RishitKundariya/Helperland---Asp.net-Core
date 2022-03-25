@@ -1,0 +1,661 @@
+﻿@{
+    Layout = "_AdminPannel";
+    ViewBag.Title = "Admin Pannel";
+}
+@model Helperland.Models.ViewModel.Admin.ServiceHistoryAdminViewModel
+<div class="col-md-12">
+    <div class="row mb-3">
+        <h3> Service History</h3>
+    </div>
+    <form method="post" asp-controller="Admin" asp-action="Index">
+        <div class="row g-0 p-2" style="background-color:white">
+            <div class="col-md-1 m-1">
+                <input asp-for="SearchViewModel.ServiceId" class="form-control" placeholder="Id" />
+            </div>
+            <div class="col-md-2 m-1">
+                <input asp-for="SearchViewModel.PostalCode" class="form-control" placeholder="Zipcode" />
+            </div>
+            <div class="col-md-2 m-1">
+                <input asp-for="SearchViewModel.Email" class="form-control" placeholder="Email" />
+            </div>
+            <div class="col-md-2 m-1">
+                <input asp-for="SearchViewModel.CustomerName" class="form-control" placeholder="Customer name" />
+            </div>
+            <div class="col-md-2 m-1">
+                <input asp-for="SearchViewModel.ServiceProviderName" class="form-control" placeholder="Service Provider name" />
+            </div>
+            <div class="col-md-2 m-1">
+                <select class="form-control form-select" asp-for="SearchViewModel.Status">
+                    <option value="-1">Select </option>
+                    <option value="1">Completed </option>
+                    <option value="2">Cancel </option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="row g-0 p-2" style="background-color:white">
+            <div class="col-md-2 m-1">
+                <input onfocus="(this.type='date')" asp-for="SearchViewModel.FromDate" class="form-control" placeholder=" From Date" />
+            </div>
+            <div class="col-md-2 m-1">
+                <input onfocus="(this.type='date')" asp-for="SearchViewModel.ToDate" class="form-control" placeholder=" To Date" />
+            </div>
+            <div class="col-md-1 m-2">
+                <input type="submit" class="font-white btn btn-sm btn-admin" value="Search" />
+            </div>
+            <div class="col-md-1 m-2">
+                <input type="reset" class=" btn btn-sm btn-outline-dark" value="Clear" />
+            </div>
+        </div>
+    </form>
+    <div class="row mt-3 p-3">
+        <div class="col-md-12 table-responsive">
+            <table id="tblAdminServiceRequestHistory" class="table table-outside-border table-hover" >
+                <thead>
+                    <tr class="gray-bachgroud">
+                        <th>Service Id </th>
+                        <th>Service Date </th>
+                        <th>Customer Name</th>
+                        <th>Service Provider </th>
+                        <th>Net Amount </th>
+                        <th>Status</th>
+                        <th> Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ServiceHistory)
+                    {
+                        <tr>
+                            <td onclick="OpenModel(@item.ServiceRequestId)"> @item.ServiceRequestId </td>
+                            <td class="flex" onclick="OpenModel(@item.ServiceRequestId)">
+                                <div><img src="/image/calendar2.png" asp-append-version="true"><b> @item.ServiceDate</b> </div>
+                                8.:00 - 12:00
+                            </td>
+                            <td onclick="OpenModel(@item.ServiceRequestId)">
+
+                                <div class="d-flex">
+                                    <div class="center"><img src="/image/layer-15.png"></div>
+                                    <div>
+                                        <span class="d-block"> @item.CustomerName </span>
+                                        <span class="d-block"> @item.CustomerAddressLine1 </span>
+                                        <span class="d-block"> @item.CustomerAddressLine2 </span>
+
+                                    </div>
+
+                                </div>
+
+
+                            </td>
+                            <td onclick="OpenModel(@item.ServiceRequestId)">
+                                @if (item.ServiceProviderName != null)
+                                {
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex">
+                                            @if (item.Avatar == 0.ToString())
+                                            {
+                                                <img src="./image/avatar-car.png" style="height:50px;width:50px">
+                                            }
+                                            else if (item.Avatar == 1.ToString())
+                                            {
+                                                <img src="./image/avatar-female.png" style="height:50px;width:50px">
+                                            }
+                                            else if (item.Avatar == 2.ToString())
+                                            {
+                                                <img src="./image/avatar-hat.png" style="height:50px;width:50px">
+                                            }
+                                            else if (item.Avatar == 3.ToString())
+                                            {
+                                                <img src="./image/avatar-iron.png" style="height:50px;width:50px">
+                                            }
+                                            else if (item.Avatar == 4.ToString())
+                                            {
+                                                <img src="./image/avatar-male.png" style="height:50px;width:50px">
+                                            }
+                                            else if (item.Avatar == 5.ToString())
+                                            {
+                                                <img src="./image/avatar-ship.png" style="height:50px;width:50px">
+                                            }
+
+
+                                        </div>
+                                        <div>
+                                            <span class="d-block"> @item.ServiceProviderName </span>
+                                            @{
+                                                int i = (int)item.Rating;
+                                            }
+                                            @for (int j = 0; j < i; j++)
+                                            {
+                                                <img src="/image/yellow-small-star.png" class="service-history-star-icon">
+                                            }
+                                            @for (int j = 0; j < 5 - i; j++)
+                                            {
+                                                <img src="/image/grey-small-star.png" class="service-history-star-icon">
+                                            }
+                                            @i
+                                        </div>
+
+                                    </div>
+                                }
+
+                            </td>
+                            <td onclick="OpenModel(@item.ServiceRequestId)">
+                                <div> <b> @item.NetAmount  €</b> </div>
+                            </td>
+                            <td onclick="OpenModel(@item.ServiceRequestId)">
+                                @if (item.Status == null)
+                                {
+                                    <span class="alert-dark"> New </span>
+                                }
+                                else if (item.Status == 1)
+                                {
+                                    <span class="completed">Completed</span>
+                                }
+                                else if (item.Status == 2)
+                                {
+                                    <span class="cancel">Cancel</span>
+                                }
+                                else if (item.Status == 3)
+                                {
+                                    <span class="alert-primary">Accepted</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn " type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/image/icon-more.png" alt="" class="position-relative">
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                                        @if (item.Status == 1)
+                                        {
+                                            <li>
+                                                <button class="dropdown-item" onclick="RefundAmount(@item.ServiceRequestId)" >Refund</button>
+                                            </li>
+                                        }
+                                        @if (item.Status == 1 || item.Status == 2)
+                                        {
+                                            <li>
+                                                <button class="dropdown-item">Inquiry</button>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <button class="dropdown-item" onclick="EditService(@item.ServiceRequestId)">Edit</button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item">Inquiry</button>
+                                            </li>
+
+                                        }
+
+
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*Model Sertvice Details*@
+<div class="modal fade" id="ServiceDeatils" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Service Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-9" id="ModelMainDiv">
+                        <div>
+                            <span id="ModelServiceDate" class="font-bold h5"></span> 8:00 - 13:00<br />
+                            <span class="font-bold"> Duration </span><span id="ModelDuration"> </span> Hrs
+                        </div>
+                        <hr />
+                        <div>
+                            <span class="font-bold"> Service Id: </span><span id="ModelServiceRequestId"> </span>.<br />
+                            <span class="font-bold"> Extras </span> <span id="ModelExtra"></span><br />
+                            <span class="font-bold"> Net Amount: </span> <span id="ModelTotalCost" class="font-blue font-bold"></span> € <br />
+                        </div>
+                        <hr />
+                        <div>
+                            <span class="font-bold"> Service Address </span><span id="ModelServiceAddress"> </span>.<br />
+                            <span class="font-bold"> Phone Number </span><span id="ModelMobileNumber"> </span><br />
+                            <span class="font-bold"> Email </span><span id="ModelEmail"> </span><br />
+                        </div>
+                        <hr />
+                        <div>
+                            <span class="font-bold"> Comments </span> <br /> <span id="ModelComments"> </span>
+                        </div>
+                        <hr />
+                        <span> <img src="/image/not-included.png" id="ModelHasPatImage" /> I <span id="ModelHasPat">  don't </span>  have Pate at Home</span>
+
+                    </div>
+                    <div class="col-md-3 display-none" id="ModelServiceProviderDetails">
+                        <h6> Service Provider Details</h6>
+                        <div class="d-flex">
+
+                            <div class="service-history-icon d-flex" id="ModelServiceAvatarImage"> </div>
+                            <div>
+                                <span class="d-block" id="ModelServiceProviderName">  </span>
+                                <span id="ModelServiceRating"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*Model Edit Service Request Data*@
+<div class="modal fade" id="EditService" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Service Request</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="EditService" asp-controller="Admin">
+                <div class="modal-body">
+                    <input type="hidden" id="EditModelServiceRequestId" asp-for="EditServiceModel.ServiceRequestId" />
+                    <div class="row p-2">
+                        <div class="col-md-6">
+                            <span class="font-bold"> Date </span>
+                            <input id="EditModelDate" asp-for="EditServiceModel.ServiceStartDate" class="form-control" />
+                            <span asp-validation-for="EditServiceModel.ServiceStartDate" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="font-bold"> Time </span>
+                            <select class="form-control form-select">
+                                <option> 8.30 </option>
+                                <option> 9 </option>
+                                <option> 9.30 </option>
+                                <option> 10 </option>
+                                <option> 10.30 </option>
+                            </select>
+                        </div>
+                    </div>
+                    Service Address
+                    <div class="row p-2">
+                        <div class="col-md-6">
+                            <span class="font-bold"> Street Name </span>
+                            <input id="EditServiceStreetName" asp-for="EditServiceModel.StreetName" class="form-control" />
+                            <span asp-validation-for="EditServiceModel.StreetName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="font-bold"> House No </span>
+                            <input id="EditServiceHouseNo" asp-for="EditServiceModel.HouseNumber" class="form-control" />
+                            <span asp-validation-for="EditServiceModel.HouseNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-md-6">
+                            <span class="font-bold"> Postal Code </span>
+                            <input id="EditServicePostalCode" asp-for="EditServiceModel.Postalcode" class="form-control" />
+                            <span asp-validation-for="EditServiceModel.Postalcode" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="font-bold"> City </span>
+                            <select class=" form-control form-select" id="EditServiceCity" asp-items="@ViewBag.city">  </select>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-md-12">
+                            <span class="font-bold"> Why do you want to reschedule service request ? </span>
+                            <textarea id="EditServiceMessage" asp-for="EditServiceModel.Message" rows="4" class="form-control" ></textarea>
+                            <span asp-validation-for="EditServiceModel.Message" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer p-3">
+                    <input class="btn btn-admin font-white form-control" type="submit" value="update"> 
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@*Refund Amount*@
+
+<div class="modal fade" id="ModelRefundAmount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Refund Amount</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="RefundAmount" asp-controller="Admin">
+                    <input type="hidden" id="RefundAmountModelServiceRequestId" asp-for="RefundModel.ServiceRequestId" />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span class="font-bold">Paid Amount </span>
+                            <input class="btn-style-none form-control disabled"  id="RefundModelPaidAmount" asp-for="RefundModel.PaidAmount" />
+                        </div>
+                        <div class="col-md-4" id="ModelMainDiv">
+                            <span class="font-bold">Refunded Amount </span>
+                            <input class="btn-style-none form-control disabled"  id="RefundModelRefundedAmount" asp-for="RefundModel.RefundAmount" />
+                        </div>
+                        <div class="col-md-4" id="ModelMainDiv">
+                            <span class="font-bold">In Balance Amount </span>
+                            <input class="btn-style-none form-control disabled"  id="RefundModelBalancedAmount" asp-for="RefundModel.InBalanceAmount" />
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-3">
+                            <span class="font-bold"> Amount </span><br />
+                            <input  class=" form-control" id="RefundModelTotalRefundAmount"  />
+                        </div>
+                        <div class="col-md-3">
+                            <span>&nbsp;</span>
+                            <select class="form-control form-select" id="RefunfModelSelectOption" >
+                                <option value="1"> Percentage </option>
+                                <option value="2"> Fixed </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 ml-2">
+                            <span class="font-bold">Calculate </span>
+                            <button class="btn btn-sm form-control btn-dark " id="btnRefundModelCalculate"> Calculate</button>
+                        </div>
+                        <div class="col-md-3">
+                            <span>&nbsp;</span>
+                            <input   id="RefundModelCalculatedAmount" class="form-control disabled " asp-for="RefundModel.CalculateAmount" />
+                        </div>
+                        <span class="text-danger display-none" id="errMessage"> Refund amount is less than  balance amount. </span>
+                    </div>
+
+                    <div class="row mt-3 ">
+                        <div class="col-md-12">
+                            <span class="font-bold"> Why you want to refund amount ? </span><br />
+                            <textarea class="form-control" rows="2" id="RefundModelMessage" asp-for="RefundModel.Message">
+                             </textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                           <input class="btn font-white btn-admin form-control" disabled id="btnRefundModelRefund" type="submit" value="Refund" /> 
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Script{
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+     /*   Open Service Details Model on Click of Table Row*/
+        function OpenModel(para) {
+            $("#ServiceDeatils").modal('show');
+            $("#ModelServiceRequestId").text(para);
+            $("#ModelbtnReschedule").val(para);
+            $("#ModelbtnCancel").val(para);
+           $.ajax({
+                  type: "POST",
+                  url: "@Url.Action("GetServiceRequestData")",
+                  data: { "ServiceReqestId": para },
+                 success: function (responce) {
+                     var obj = JSON.parse(responce);
+                     $("#ModelDuration").text(obj.TotalHour);
+                     $("#ModelServiceDate").text(obj.ServiceDate);
+                     $("#ModelExtra").text(obj.Extra);
+                     $("#ModelTotalCost").text(obj.TotalCost);
+                     $("#ModelServiceAddress").text(obj.Address);
+                     $("#ModelMobileNumber").text(obj.MobileNumber);
+                     $("#ModelEmail").text(obj.Email);
+                     $("#ModelComments").text(obj.Comments);
+                     if (obj.ServiceProviderId != null) {
+
+                         $("#ModelServiceProviderName").text(obj.ServiceProviderName);
+                         $("#ModelServiceProviderDetails").show();
+                         $("#ModelServiceProviderDetails").addClass("col-md-3");
+                         $("#ModelMainDiv").addClass("col-md-9");
+                         $("#ModelMainDiv").removeClass("col-md-12");
+                         $("#ModelServiceAvatarImage").empty();
+                         if (obj.Avatar == 0) {
+                             $("#ModelServiceAvatarImage").append(' <img src="./image/avatar-car.png" style="height:50px;width:50px;">  ');
+                         }
+                         else if (obj.Avatar == 1) {
+                             $("#ModelServiceAvatarImage").append('  <img src="./image/avatar-female.png" v> ');
+                         }
+                         else if (obj.Avatar == 2) {
+                             $("#ModelServiceAvatarImage").append(' <img src="./image/avatar-hat.png" style="height:50px;width:50px;"> ');
+                         }
+                         else if (obj.Avatar == 3) {
+                             $("#ModelServiceAvatarImage").append('  <img src="./image/avatar-iron.png" style="height:50px;width:50px;"> ');
+                         }
+                         else if (obj.Avatar == 4) {
+                             $("#ModelServiceAvatarImage").append('  <img src="./image/avatar-male.png" style="height:50px;width:50px;">');
+                         }
+                         else if (obj.Avatar == 5) {
+                             $("#ModelServiceAvatarImage").append(' <img src="./image/avatar-ship.png" style="height:50px;width:50px;"> ');
+                         }
+                     }
+                     else {
+                         $("#ModelServiceProviderDetails").hide();
+                         $("#ModelServiceProviderDetails").removeClass("col-md-3");
+                         $("#ModelMainDiv").removeClass("col-md-9");
+                         $("#ModelMainDiv").addClass("col-md-12");
+
+
+                     }
+                     if (obj.Haspet) {
+                         $("#ModelHasPatImage").attr("src", "/image/included.png");
+                         $("#ModelHasPat").hide();
+                     } else {
+                         $("#ModelHasPatImage").attr("src", "/image/not-included.png");
+                         $("#ModelHasPat").show();
+                     }
+                     $("#ModelServiceRating").empty();
+                     for (var i = 0; i < 5; i++) {
+                         if (obj.Rating > i) {
+                             $("#ModelServiceRating").append('<img src="/image/yellow-small-star.png" class="service-history-star-icon">');
+                         }
+                         else {
+                             $("#ModelServiceRating").append('<img src="/image/grey-small-star.png" class="service-history-star-icon">');
+                         }
+                     }
+                     $("#ModelServiceRating").append(obj.Rating);
+
+                 },
+                 failure: function (response) {
+                        alert("failure");
+                 },
+                 error: function (response) {
+                        alert("Something went Worng");
+                 }
+
+              });
+        }
+
+       /* Open Edit Service Model */
+        function EditService(para) {
+            $("#EditService").modal('show');
+            $("#EditModelServiceRequestId").val(para);
+            $("#EditServiceMessage").val(" ");
+
+            $.ajax({
+                  type: "POST",
+                  url: "@Url.Action("GetServiceRequestDetailsForEdit")",
+                  data: { "ServiceReqestId": para },
+                 success: function (responce) {
+                     var obj = JSON.parse(responce);
+                     $("#EditModelDate").val(obj.ServiceDate);
+                     $("#EditServiceStreetName").val(obj.StreetName);
+                     $("#EditServiceHouseNo").val(obj.HouseNumber);
+                     $("#EditServicePostalCode").val(obj.Zipcode);
+                     $("#EditServiceCity").val(obj.CityId);
+                 },
+                 failure: function (response) {
+                        alert("failure");
+                 },
+                 error: function (response) {
+                        alert("Something went Worng");
+                 }
+
+              });
+
+
+
+        }
+
+        function RefundAmount(para) {
+            $("#ModelRefundAmount").modal('show');
+            $("#RefundAmountModelServiceRequestId").val(para);
+            $('#RefundModelTotalRefundAmount').val("");
+            $("#RefundModelCalculatedAmount").val("");
+            $.ajax({
+                  type: "POST",
+                  url: "@Url.Action("GetRefundDetails")",
+                data: { "serviceRequestId": para },
+                 success: function (responce) {
+                     var obj = JSON.parse(responce);
+                     $("#RefundModelPaidAmount").val(obj.TotalAmount);
+                     $("#RefundModelRefundedAmount").val(obj.RefundAmount);
+                     $("#RefundModelBalancedAmount").val(obj.TotalAmount - obj.RefundAmount);
+                 },
+                 failure: function (response) {
+                        alert("failure");
+                 },
+                 error: function (response) {
+                        alert("Something went Worng");
+                 }
+
+              });
+
+
+        }
+
+        $('#RefundModelTotalRefundAmount').on('input', function (e) {
+            var select = $("#RefunfModelSelectOption").val();
+            var value = $('#RefundModelTotalRefundAmount').val();
+            if (select == 2) {
+                $("#RefundModelCalculatedAmount").val(value);
+            }
+            else {
+                var temp = ($("#RefundModelPaidAmount").val() * value) / 100;
+                $("#RefundModelCalculatedAmount").val(temp);
+            }
+            var InbalanceAmount = $("#RefundModelBalancedAmount").val();
+            var CalculateAmount = parseInt( $("#RefundModelCalculatedAmount").val());
+            
+            if (CalculateAmount == 0) {
+                $("#btnRefundModelRefund").attr("disabled", "disabled");
+                $("#errMessage").show();
+                return;
+            }
+            if (InbalanceAmount > CalculateAmount) {
+                $("#btnRefundModelRefund").removeAttr("disabled");
+                $("#errMessage").hide();
+            }
+            else {
+                $("#btnRefundModelRefund").attr("disabled", "disabled");
+                $("#errMessage").show();
+            }
+            
+            
+        });
+
+        $('#RefunfModelSelectOption').on('change', function (e) {
+            var select = $("#RefunfModelSelectOption").val();
+            var value = $('#RefundModelTotalRefundAmount').val();
+            if (select == 2) {
+                $("#RefundModelCalculatedAmount").val(value);
+            }
+            else {
+                var temp = ($("#RefundModelPaidAmount").val() * value) / 100;
+                $("#RefundModelCalculatedAmount").val(temp);
+            }
+            var InbalanceAmount = $("#RefundModelBalancedAmount").val();
+            var CalculateAmount = $("#RefundModelCalculatedAmount").val();
+
+            if (CalculateAmount == 0) {
+                $("#btnRefundModelRefund").attr("disabled", "disabled");
+                $("#errMessage").text("Refund amount is not euqal zero.");
+                return;
+            }
+            if (InbalanceAmount > CalculateAmount) {
+                $("#btnRefundModelRefund").removeAttr("disabled");
+                $("#errMessage").hide();
+            }
+            else {
+                $("#btnRefundModelRefund").attr("disabled", "disabled");
+                $("#errMessage").text("Refund amount is less than  balance amount.");
+            }
+        });
+
+        $("#btnRefundModelCalculate").on("click", function () {
+            var select = $("#RefunfModelSelectOption").val();
+            var value = $('#RefundModelTotalRefundAmount').val();
+            if (select == 2) {
+                $("#RefundModelCalculatedAmount").val(value);
+            }
+            else {
+                var temp = ($("#RefundModelPaidAmount").val() * value) / 100;
+                $("#RefundModelCalculatedAmount").val(temp);
+            }
+            var InbalanceAmount = $("#RefundModelBalancedAmount").val();
+            var CalculateAmount = $("#RefundModelCalculatedAmount").val();
+
+            if (CalculateAmount == 0) {
+                $("#btnRefundModelRefund").attr("disabled", "disabled");
+                $("#errMessage").text("Refund amount is not euqal zero.");
+                return;
+            }
+            if (InbalanceAmount > CalculateAmount) {
+                $("#btnRefundModelRefund").removeAttr("disabled");
+                $("#errMessage").hide();
+            }
+            else {
+                $("#btnRefundModelRefund").attr("disabled", "disabled");
+                $("#errMessage").text("Refund amount is less than  balance amount.");
+            }
+        });
+
+
+
+
+        
+        /*  Implement Datatable in Service Table*/
+        $(document).ready(function () {
+            $('#tblAdminServiceRequestHistory').dataTable({
+                "bFilter": false,
+                "bInfo": false,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }],
+                "order": [[0, "desc"]]
+            });
+
+        })
+
+
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#EditModelDate').attr('min', today);
+    </script>
+}

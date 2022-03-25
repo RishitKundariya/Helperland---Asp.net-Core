@@ -106,3 +106,14 @@ G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\
 G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\MySetting.cshtml.g.cs
 G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ServiceProviderMenuPartialView.cshtml.g.cs
 G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\Index.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Index.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AdminPannel.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Admin\UserManagement.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\ServiceSchedule.cshtml.g.cs
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\System.Web.Mvc.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\System.Web.Razor.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\System.Web.Helpers.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\System.Web.WebPages.Deployment.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\System.Web.WebPages.Razor.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\System.Web.WebPages.dll
+G:\Tatvasoft\Tatvasoft_work\Helperland\Helperland\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll

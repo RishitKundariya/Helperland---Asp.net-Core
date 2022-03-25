@@ -28,7 +28,10 @@
 </head>
 
 <body id="body">
-
+    <div class="loder-wrapper">
+        <div class="loader"></div>
+    </div>
+    
     <div class="loader display-none text-center"></div>
     <!-- Navbar -->
     <nav class="navbar fixed-top navbar-expand-xl navbar-dark small-head">
@@ -128,7 +131,7 @@
                                 <img src="~/image/user.png" id="navbar-user-image"
                                      class="county-flag nav-link-image-user">
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu dropdown-set-width" aria-labelledby="navbarDropdown">
                                 <li class="">
                                     <a class="dropdown-item nav-dropdown-item" href="#">
                                         <small>Welcome,</small>
@@ -150,7 +153,7 @@
                                     </li>
 
                                 }
-                                else if(Usertype == 2)
+                                else if (Usertype == 2)
                                 {
                                     <li class="">
                                         <a class="dropdown-item nav-dropdown-item" asp-action="Index" asp-controller="ServiceProvider">
@@ -182,6 +185,8 @@
     }
 
     @RenderBody()
+
+
 
     <section id="newslatter">
         <div class="container">
@@ -247,7 +252,6 @@
     <script src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/ae6d6e0254.js" crossorigin="anonymous"></script>
-    <script src="https://lesscss.googlecode.com/files/less-1.0.30.min.js"></script>
 </body>
 
 </html>

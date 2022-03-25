@@ -14,18 +14,21 @@
         <div class="row p-3">
             <div class="col-md-6">
                 <h3>  Service History </h3>
+              
             </div>
-            <div class="row p-3">
+            <div class="col-md-6">  <button class="btn active-btn rounded-pill font-white float-right" onclick="Export()"> Export</button></div>
+        </div>
+        <div class="row p-3">
                 <div class="col-md-12 table-responsive">
-                    <table id="tblServiceRequestHistory" class="table">
+                    <table id="tblServiceRequestHistory" class="table table-hover table-outside-border ">
                         <thead>
-                            <tr>
-                                <td>Service Id </td>
-                                <td>Service Date </td>
-                                <td>Service Provider </td>
-                                <td>Payment</td>
-                                <td>Status</td>
-                                <td> Rate SP</td>
+                            <tr class="gray-bachgroud">
+                                <th>Service Id </th>
+                                <th>Service Date </th>
+                                <th>Service Provider </th>
+                                <th>Payment</th>
+                                <th>Status</th>
+                                <th> Rate SP</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,7 +44,33 @@
                                         @if (item.ServiceProviderName != null)
                                         {
                                             <div class="d-flex">
-                                                <div class="service-history-icon d-flex"><img src="/image/cap.png"></div>
+                                                <div class="service-history-icon d-flex">
+
+                                                    @if (item.Avatar == 0.ToString())
+                                                    {
+                                                        <img src="/image/avatar-car.png" style="height:50px;width:50px">
+                                                    }
+                                                    else if (item.Avatar == 1.ToString())
+                                                    {
+                                                        <img src="/image/avatar-female.png" style="height:50px;width:50px">
+                                                    }
+                                                    else if (item.Avatar == 2.ToString())
+                                                    {
+                                                        <img src="/image/avatar-hat.png" style="height:50px;width:50px">
+                                                    }
+                                                    else if (item.Avatar == 3.ToString())
+                                                    {
+                                                        <img src="/image/avatar-iron.png" style="height:50px;width:50px">
+                                                    }
+                                                    else if (item.Avatar == 4.ToString())
+                                                    {
+                                                        <img src="/image/avatar-male.png" style="height:50px;width:50px">
+                                                    }
+                                                    else if (item.Avatar == 5.ToString())
+                                                    {
+                                                        <img src="/image/avatar-ship.png" style="height:50px;width:50px">
+                                                    }
+                                                </div>
                                                 <div>
                                                     <span class="d-block"> @item.ServiceProviderName </span>
                                                     @{
@@ -92,10 +121,10 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
         </div>
+        
     </div>
-
+</div>
     <!-- Modal  Service Details -->
     <div class="modal fade" id="ServiceDeatils" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -134,8 +163,10 @@
                         <div class="col-md-3 display-none" id="ModelServiceProviderDetails">
                             <h6> Service Provider Details</h6>
                             <div class="d-flex">
-                                <div class="service-history-icon d-flex"><img src="/image/cap.png"></div>
+                                
+                                <div class="service-history-icon d-flex" id="ModelServiceAvatarImage"></div>
                                 <div>
+                                    <span class="d-block" id="ModelServiceProviderName">  </span>
                                     <span id="ModelServiceRating"></span>
                                 </div>
 
@@ -184,7 +215,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label for="onTimeArrival" class="font-bold">On time arrival </label>
-                            <input id="onTimeArrival" class="rating rating-loading " data-show-clear="false" value="4">
+                            <input id="onTimeArrival" class="rating rating-loading " data-show-clear="false" >
                             <label for="friendly" class="font-bold">Friendly</label>
                             <input id="friendly" class="rating rating-loading " data-show-clear="false">
                             <label for="qualityOfService" class="font-bold">Quality of service</label>
@@ -210,6 +241,11 @@
 
 
     @section Script{
+        <style>
+            a:hover {
+                color: white !important;
+            }
+        </style>
         <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
         <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
@@ -245,6 +281,25 @@
                          $("#ModelServiceProviderDetails").addClass("col-md-3");
                          $("#ModelMainDiv").addClass("col-md-9");
                          $("#ModelMainDiv").removeClass("col-md-12");
+                         $("#ModelServiceAvatarImage").empty();
+                         if (obj.Avatar == 0) {
+                             $("#ModelServiceAvatarImage").append(' <img src="/image/avatar-car.png" style="height:50px;width:50px;">  ');
+                         }
+                         else if (obj.Avatar == 1) {
+                             $("#ModelServiceAvatarImage").append('  <img src="/image/avatar-female.png" v> ');
+                         }
+                         else if (obj.Avatar == 2) {
+                             $("#ModelServiceAvatarImage").append(' <img src="/image/avatar-hat.png" style="height:50px;width:50px;"> ');
+                         }
+                         else if (obj.Avatar == 3) {
+                             $("#ModelServiceAvatarImage").append('  <img src="/image/avatar-iron.png" style="height:50px;width:50px;"> ');
+                         }
+                         else if (obj.Avatar == 4) {
+                             $("#ModelServiceAvatarImage").append('  <img src="/image/avatar-male.png" style="height:50px;width:50px;">');
+                         }
+                         else if (obj.Avatar == 5) {
+                             $("#ModelServiceAvatarImage").append(' <img src="/image/avatar-ship.png" style="height:50px;width:50px;"> ');
+                         }
                      }
                      else {
                          $("#ModelServiceProviderDetails").hide();
@@ -284,6 +339,7 @@
 
            /* Rate Sp model open*/
             function RateSp(para) {
+                $(".loder-wrapper").fadeIn("fast");
                 $("#ratingServiceRequestId").val(para);
                 $("#RateSPModel").modal('show');
                 $("#onTimeArrival").rating("update", "0");
@@ -307,12 +363,15 @@
                          }
                      }
                      $("#ModelServiceRatingDetails").append(obj.Rating);
+                     $(".loder-wrapper").fadeOut("fast");
                  },
                  failure: function (response) {
-                        alert("failure");
+                     alert("failure");
+                     $(".loder-wrapper").fadeOut("fast");
                  },
                  error: function (response) {
-                        alert("Something went Worng");
+                     alert("Something went Worng");
+                     $(".loder-wrapper").fadeOut("fast");
                  }
 
               });
@@ -329,18 +388,22 @@
                 }
                 else {
                     $("#errRating").hide();
+                    $(".loder-wrapper").fadeIn("fast");
                     $.ajax({
                           type: "POST",
                         url: "@Url.Action("AddRating")",
                         data: { "ServiceReqestId": $("#ratingServiceRequestId").val(), "onTime": onTime, "friendly": friendly, "qualityOfService": qualityOfservice, "feedBack": $("#feedback").val() },
                         success: function (responce) {
                             location.reload();
+                            $(".loder-wrapper").fadeOut("fast");
                          },
                          failure: function (response) {
-                                alert("failure");
+                             alert("failure");
+                             $(".loder-wrapper").fadeOut("fast");
                          },
                          error: function (response) {
-                                alert("Something went Worng");
+                             alert("Something went Worng");
+                             $(".loder-wrapper").fadeOut("fast");
                          }
 
                      });
@@ -359,10 +422,51 @@
                 starCaptions: function (val) {
                     return val;
                 },
-                
+
             });
+            /*Export Data of table into csv*/
+            function Export() {
+                var csv = [];
+                var rows = document.querySelectorAll("table tr");
 
+                for (var i = 0; i < rows.length; i++) {
+                    var row = [], cols = rows[i].querySelectorAll("td, th");
 
+                    for (var j = 0; j < cols.length - 1; j++) {
+                        split = cols[j].innerText.split("\n");
+                        row.push(split[0]);
+                    }
+                    csv.push(row.join(","));
+                }
+                console.log(csv);
+                // Download CSV file
+                downloadCSV(csv.join("\n"), "Service Hostory");
+            }
+            function downloadCSV(csv, filename) {
+                var csvFile;
+                var downloadLink;
+
+                // CSV file
+                csvFile = new Blob([csv], { type: "text/csv" });
+
+                // Download link
+                downloadLink = document.createElement("a");
+
+                // File name
+                downloadLink.download = filename;
+
+                // Create a link to the file
+                downloadLink.href = window.URL.createObjectURL(csvFile);
+
+                // Hide download link
+                downloadLink.style.display = "none";
+
+                // Add the link to DOM
+                document.body.appendChild(downloadLink);
+
+                // Click download link
+                downloadLink.click();
+            }
             $(document).ready(function () {
                 $('#tblServiceRequestHistory').dataTable({
                     "bFilter": false,
@@ -370,7 +474,8 @@
                     'aoColumnDefs': [{
                         'bSortable': false,
                         'aTargets': [-1] /* 1st one, start by the right */
-                    }]
+                    }],
+                    "order": [[0, "desc"]]
                 });
 
             })

@@ -14,20 +14,20 @@
     <input type="hidden" value="@Context.Session.GetString("userID")" id="userId" />
     <div class="col-md-9">
         <div class="row p-3">
-            <div class="col-md-6"><h3> Current Service Request </h3></div>
+            <div class="col-md-6"><h3> Current Service Requests </h3></div>
             <div class="col-md-6 text-right"> <a asp-action="Index" asp-controller="BookService" class="btn rounded-pill marun font-white">Add New Service Request </a>  </div>
         </div>
 
         <div class="row p-3">
             <div class="col-md-12 table-responsive">
-                <table id="tblCurrentServiceRequest" class="table">
+                <table id="tblCurrentServiceRequest" class="table table-hover table-outside-border ">
                     <thead>
-                        <tr>
-                            <td>Service Id </td>
-                            <td>Service Date </td>
-                            <td>Service Provider </td>
-                            <td>Payment</td>
-                            <td> Action</td>
+                        <tr class="gray-bachgroud">
+                            <th>Service Id </th>
+                            <th>Service Date </th>
+                            <th>Service Provider </th>
+                            <th>Payment</th>
+                            <th> Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,7 +43,33 @@
                                     @if (item.ServiceProviderName != null)
                                     {
                                         <div class="d-flex">
-                                            <div class="service-history-icon d-flex"><img src="./image/cap.png"></div>
+                                            <div class="service-history-icon d-flex">
+                                                @if (item.Avatar == 0.ToString())
+                                                {
+                                                    <img src="./image/avatar-car.png" style="height:50px;width:50px">
+                                                }
+                                                else if (item.Avatar == 1.ToString())
+                                                {
+                                                    <img src="./image/avatar-female.png" style="height:50px;width:50px" >
+                                                }
+                                                else if (item.Avatar == 2.ToString())
+                                                {
+                                                    <img src="./image/avatar-hat.png" style="height:50px;width:50px" >
+                                                }
+                                                else if (item.Avatar == 3.ToString())
+                                                {
+                                                    <img src="./image/avatar-iron.png" style="height:50px;width:50px">
+                                                }
+                                                else if (item.Avatar == 4.ToString())
+                                                {
+                                                    <img src="./image/avatar-male.png" style="height:50px;width:50px">
+                                                }
+                                                else if (item.Avatar == 5.ToString())
+                                                {
+                                                    <img src="./image/avatar-ship.png" style="height:50px;width:50px">
+                                                }
+
+                                            </div>
                                             <div>
                                                 <span class="d-block"> @item.ServiceProviderName </span>
                                                 @{
@@ -121,10 +147,12 @@
                     <div class="col-md-3 display-none" id="ModelServiceProviderDetails">
                         <h6> Service Provider Details</h6>
                         <div class="d-flex">
-                            <div class="service-history-icon d-flex"><img src="./image/cap.png"></div>
+                            <div class="service-history-icon d-flex" id="ModelServiceAvatarImage">
+                               
+                            </div>
                             <div>
                                 <span class="d-block" id="ModelServiceProviderName">  </span>
-                                <span id="ModelServiceRating"></span>
+                                <span id="ModelServiceRating" ></span>
                             </div>
 
                         </div>
@@ -213,6 +241,11 @@
 
 
 @section Script{
+    <style>
+        a:hover {
+            color: white !important;
+        }
+    </style>
     <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
@@ -244,6 +277,25 @@
                          $("#ModelServiceProviderDetails").addClass("col-md-3");
                          $("#ModelMainDiv").addClass("col-md-9");
                          $("#ModelMainDiv").removeClass("col-md-12");
+                         $("#ModelServiceAvatarImage").empty();
+                         if (obj.Avatar == 0) {
+                             $("#ModelServiceAvatarImage").append(' <img src="./image/avatar-car.png" style="height:50px;width:50px;">  ');
+                         }
+                         else if (obj.Avatar == 1) {
+                             $("#ModelServiceAvatarImage").append('  <img src="./image/avatar-female.png" v> ');
+                         }
+                         else if (obj.Avatar == 2) {
+                             $("#ModelServiceAvatarImage").append(' <img src="./image/avatar-hat.png" style="height:50px;width:50px;"> ');
+                         }
+                         else if (obj.Avatar == 3) {
+                             $("#ModelServiceAvatarImage").append('  <img src="./image/avatar-iron.png" style="height:50px;width:50px;"> ');
+                         }
+                         else if (obj.Avatar == 4) {
+                             $("#ModelServiceAvatarImage").append('  <img src="./image/avatar-male.png" style="height:50px;width:50px;">');
+                         }
+                         else if (obj.Avatar == 5) {
+                             $("#ModelServiceAvatarImage").append(' <img src="./image/avatar-ship.png" style="height:50px;width:50px;"> ');
+                         }
                      }
                      else {
                          $("#ModelServiceProviderDetails").hide();
@@ -287,18 +339,23 @@
             $("#RecheduleServiceModelServiceId").val(para);
             $("#ServiceDeatils").modal('hide');
             $("#ModelServiceReschedule").modal('show');
+            $(".loder-wrapper").fadeIn("fast");
              $.ajax({
                   type: "POST",
                  url: "@Url.Action("GetServiceDate")",
                  data: { "serviceReqestId": para },
                  success: function (responce) {
                      $("#RescheduleModelDate").val(responce);
+                     $('#RescheduleModelDate').attr('min', responce);
+                     $(".loder-wrapper").fadeOut("fast");
                     },
                     failure: function (response) {
                         alert("failure");
+                        $(".loder-wrapper").fadeOut("fast");
                     },
                     error: function (response) {
                         alert("Something went Worng");
+                        $(".loder-wrapper").fadeOut("fast");
                     }
 
               });
@@ -316,6 +373,7 @@
 
         /*  Update Service Model */
         function UpdateServiceDate() {
+            $(".loder-wrapper").fadeIn("fast");
             $.ajax({
                 type: "POST",
                 url: "@Url.Action("UpdateServiceDate")",
@@ -326,19 +384,23 @@
                         $("#ModelAlertMessage").show();
                         $("#ModelAlertMessage").text(" Reschedule Date Successfully").fadeOut(5000);
                         location.reload();
+                        $(".loder-wrapper").fadeOut("fast");
                     }
                     else {
                         $("#ModelAlertMessage").addClass("alert-danger");
                         $("#ModelAlertMessage").show();
                         $("#ModelAlertMessage").text("Select different date ").fadeOut(8000);
+                        $(".loder-wrapper").fadeOut("fast");
                     }
 
                     },
                     failure: function (response) {
                         alert("failure");
+                        $(".loder-wrapper").fadeOut("fast");
                     },
                     error: function (response) {
                         alert("Something went Worng");
+                        $(".loder-wrapper").fadeOut("fast");
                     }
 
               });
@@ -355,6 +417,7 @@
                 $("#btnCancelServiceModel").removeAttr("disabled");
                 return;
             }
+            $(".loder-wrapper").fadeIn("fast");
               $.ajax({
                 type: "POST",
                 url: "@Url.Action("CancelService")",
@@ -373,13 +436,15 @@
                         $("#ModelAlertMessage").text("Somthing went wrong ").fadeOut(8000);
                         location.reload();
                     }
-
+                    $(".loder-wrapper").fadeOut("fast");
                     },
                     failure: function (response) {
                         alert("failure");
+                        $(".loder-wrapper").fadeOut("fast");
                     },
                     error: function (response) {
                         alert("Something went Worng");
+                        $(".loder-wrapper").fadeOut("fast");
                     }
 
               });
@@ -407,7 +472,8 @@
                 'aoColumnDefs': [{
                     'bSortable': false,
                     'aTargets': [-1] /* 1st one, start by the right */
-                }]
+                }],
+                "order": [[0, "desc"]]
             });
 
         })

@@ -18,14 +18,14 @@
             </div>
             <div class="row p-3">
                 <div class="col-md-12 table-responsive">
-                    <table id="tbleUpcomingServiceRequest" class="table">
+                    <table id="tbleUpcomingServiceRequest" class="table table-hover table-outside-border">
                         <thead>
-                            <tr>
-                                <td>Service Id </td>
-                                <td>Service Date </td>
-                                <td>Customer Details </td>
-                                <td>Payment</td>
-                                <td> Action</td>
+                            <tr class="gray-bachgroud">
+                                <th>Service Id </th>
+                                <th>Service Date </th>
+                                <th>Customer Details </th>
+                                <th>Payment</th>
+                                <th> Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -149,6 +149,11 @@
 </div>
 
 @section Script{
+    <style>
+        a:hover {
+            color: white !important;
+        }
+    </style>
     <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
@@ -215,6 +220,7 @@
         }
         /*Cancel Service Request*/
         $("#btnCancelServiceModel").on("click", function () {
+            $(".loder-wrapper").fadeIn("fast");
               $.ajax({
                   type: "POST",
                   url: "@Url.Action("CanceledServiceRequest")",
@@ -223,6 +229,7 @@
                       if (responce) {
                           $("#ModelCancelService").modal('hide');
                           $("#alertSuccessMessage").empty();
+                          $(".loder-wrapper").fadeOut("fast");
                           $("#alertSuccessMessage").show().text("Request Successfully Canceled").fadeOut(8000);
                           setTimeout(ReloadPage, 3000);
 
@@ -231,10 +238,12 @@
                      
                  },
                  failure: function (response) {
-                        alert("failure");
+                     alert("failure");
+                     $(".loder-wrapper").fadeOut("fast");
                  },
                  error: function (response) {
-                        alert("Something went Worng");
+                     alert("Something went Worng");
+                     $(".loder-wrapper").fadeOut("fast");
                  }
 
               });
@@ -245,6 +254,7 @@
 
         /*Complete Service Request */
         function CompleteRequest(para) {
+            $(".loder-wrapper").fadeIn("fast");
              $.ajax({
                   type: "POST",
                   url: "@Url.Action("CompleteServiceRequest")",
@@ -253,16 +263,19 @@
 
                      if (responce) {
                          $("#ServiceDeatils").modal('hide');
+                         $(".loder-wrapper").fadeOut("fast");
                          $("#alertSuccessMessage").show().fadeOut(8000);
                          setTimeout(ReloadPage, 3000);
 
                      }
                  },
                  failure: function (response) {
-                        alert("failure");
+                     alert("failure");
+                     $(".loder-wrapper").fadeOut("fast");
                  },
                  error: function (response) {
-                        alert("Something went Worng");
+                     alert("Something went Worng");
+                     $(".loder-wrapper").fadeOut("fast");
                  }
 
               });
@@ -292,7 +305,8 @@
             'aoColumnDefs': [{
                 'bSortable': false,
                 'aTargets': [-1] /* 1st one, start by the right */
-            }]
+            }],
+            "order": [[0, "desc"]]
         });
     </script>
 }

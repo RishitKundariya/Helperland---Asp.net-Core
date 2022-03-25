@@ -15,5 +15,6 @@ namespace Helperland.Models.ViewModel.Customer
         public int? Status { get; set; }
         public bool Rate { get; set; }
         public decimal? Rating { get; set; }
+        public string Avatar { get; set; }
     }
 }

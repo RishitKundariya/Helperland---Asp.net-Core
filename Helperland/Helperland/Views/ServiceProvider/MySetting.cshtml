@@ -391,6 +391,11 @@
     </div>
 </div>
 @section Script{
+    <style>
+        a:hover {
+            color: white !important;
+        }
+    </style>
     <script>
 
         $(document).ready(function () {
@@ -529,7 +534,7 @@
                     $('#btnSavePassword').attr('disabled','disabled');
                     return;
                 } else {
-
+                    $(".loder-wrapper").fadeIn("fast");
                      $.ajax({
                           type: "POST",
                          url: "@Url.Action("ResetPassword")",
@@ -547,12 +552,15 @@
                                  $("#txtNewPassword").val("");
                                  $("#txtConfirmPassword").val("");
                              }
+                             $(".loder-wrapper").fadeOut("fast");
                             },
                             failure: function (response) {
                                 alert("failure");
+                                $(".loder-wrapper").fadeOut("fast");
                             },
                             error: function (response) {
                                 alert("Something went Worng");
+                                $(".loder-wrapper").fadeOut("fast");
                             }
 
                       });

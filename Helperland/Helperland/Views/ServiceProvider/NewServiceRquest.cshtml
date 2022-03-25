@@ -33,14 +33,14 @@
             </div>
             <div class="row p-3">
                 <div class="col-md-12 table-responsive">
-                    <table id="tbleNewServiceRequest" class="table">
+                    <table id="tbleNewServiceRequest" class="table table-outside-border table-hover">
                         <thead>
-                            <tr>
-                                <td>Service Id </td>
-                                <td>Service Date </td>
-                                <td>Customer Details </td>
-                                <td>Payment</td>
-                                <td> Action</td>
+                            <tr class="gray-bachgroud">
+                                <th>Service Id </th>
+                                <th>Service Date </th>
+                                <th>Customer Details </th>
+                                <th>Payment</th>
+                                <th> Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -130,6 +130,11 @@
 </div>
 
 @section Script{
+    <style>
+        a:hover {
+            color: white !important;
+        }
+    </style>
     <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
@@ -153,7 +158,8 @@
                 'aoColumnDefs': [{
                     'bSortable': false,
                     'aTargets': [-1] /* 1st one, start by the right */
-                }]
+                }],
+                "order": [[0, "desc"]]
             });
 
         });
@@ -198,6 +204,7 @@
 
         function AcceptRequest(para) {
             $("#ServiceDeatils").modal('hide');
+            $(".loder-wrapper").fadeIn("fast");
              $.ajax({
                   type: "POST",
             url: "@Url.Action("AcceptServiceRequest")",
@@ -212,14 +219,16 @@
                      } else {
                          $("#alertErrorMessage").show().text(responce).fadeOut(10000);
                      }
-
+                     $(".loder-wrapper").fadeOut("fast");
 
                  },
                  failure: function (response) {
-                        alert("failure");
+                     alert("failure");
+                     $(".loder-wrapper").fadeOut("fast");
                  },
                  error: function (response) {
-                        alert("Something went Worng");
+                     alert("Something went Worng");
+                     $(".loder-wrapper").fadeOut("fast");
                  }
 
               });

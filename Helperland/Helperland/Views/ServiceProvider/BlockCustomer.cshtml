@@ -18,7 +18,10 @@
                 {
                 <div class="col-md-3 p-2 m-3" style="border:1px solid grey">
                     <div class="center" style="justify-content:center">
-                        <img src="~/image/avatar-hat.png" class="" style="border:2px solid grey;border-radius:50%; display:block" />
+                       
+                            <img src="/image/avatar-ship.png" class="" style="border:2px solid grey;border-radius:50%; display:block">
+                        
+
 
                     </div>
                     <div class="text-center  mt-3 mb-3"> <h5>  @item.Username </h5></div>
@@ -43,24 +46,32 @@
 </div>
 
 @section Script{ 
+    <style>
+        a:hover {
+            color: white !important;
+        }
+    </style>
     <script>
       /*  Block Customer*/
-    function BlockCustomer(para) {
+        function BlockCustomer(para) {
+            $(".loder-wrapper").fadeIn("fast");
          $.ajax({
                   type: "POST",
                   url: "@Url.Action("SetblockCustomer")",
                   data: { "userId": para },
                  success: function (responce) {
-
+                     $(".loder-wrapper").fadeOut("fast");
                      if (responce) {
                          location.reload();
                      }
                  },
                  failure: function (response) {
-                        alert("failure");
+                     alert("failure");
+                     $(".loder-wrapper").fadeOut("fast");
                  },
                  error: function (response) {
-                        alert("Something went Worng");
+                     alert("Something went Worng");
+                     $(".loder-wrapper").fadeOut("fast");
                  }
 
          });
@@ -69,13 +80,14 @@
         }
 
       /*  UnBlock Customer*/
-    function UnBlockCustomer(para) {
+        function UnBlockCustomer(para) {
+            $(".loder-wrapper").fadeIn("fast");
          $.ajax({
                   type: "POST",
                   url: "@Url.Action("SetUnblockCustomer")",
                   data: { "userId": para },
                  success: function (responce) {
-
+                     $(".loder-wrapper").fadeOut("fast");
                      if (responce) {
 
                          location.reload();
@@ -83,10 +95,12 @@
                      }
                  },
                  failure: function (response) {
-                        alert("failure");
+                     alert("failure");
+                     $(".loder-wrapper").fadeOut("fast");
                  },
                  error: function (response) {
-                        alert("Something went Worng");
+                     alert("Something went Worng");
+                     $(".loder-wrapper").fadeOut("fast");
                  }
 
               });

@@ -13,5 +13,6 @@ namespace Helperland.Models.ViewModel.Customer
         public string  ServiceProviderName { get; set; }
         public decimal Payment { get; set; }
         public decimal? Rating { get; set; }
+        public string Avatar { get; set; }
     }
 }

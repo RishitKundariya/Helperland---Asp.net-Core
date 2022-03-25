@@ -1,0 +1,337 @@
+﻿@{
+    Layout = "_AdminPannel";
+    ViewBag.Title = "User Management | Admin Pannel";
+}
+@model Helperland.Models.ViewModel.Admin.ServiceHistoryAdminViewModel
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="m-1">
+                <h2 class="d-inline"> User Management </h2>
+                <div class="float-right">
+                    <a href="#" class="btn-admin btn btn-sm">
+                        <img src="/image/plus.png">  Add New User
+                    </a>
+                </div>
+            </div>
+            <div class="p-3 mb-3 white-background">
+                <form asp-action="UserManagement" asp-controller="Admin">
+                    <div class="row ">
+                        <div class="col-md-3 ">
+                            <input type="text"  asp-for="UserSearchModel.Username" class="form-control" placeholder="Username" />
+                        </div>
+                        <div class="col-md-2 ">
+                            <select asp-for="UserSearchModel.UserType" class="form-control form-select">
+                                <option value="-1"> Select </option>
+                                <option value="1"> Customer </option>
+                                <option value="2"> Service Provider </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="col-auto">
+                                <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">+49</div>
+                                    </div>
+                                    <input type="number" class="form-control" asp-for="UserSearchModel.PhoneNumber" placeholder="Phone Number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="zipcode" asp-for="UserSearchModel.Zipcode">
+                        </div>
+                        <div class="col-md-1">
+                            <input type="submit" class="btn btn-admin btn-sm" value="Search">
+                        </div>
+                        <div class="col-md-1">
+                            <a href="#" class="btn white-background btn-sm btn-outline-dark">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="alert  display-none" id="AlertMessage" role="alert">
+        </div>
+        <div class="col-md-12 table-responsive">
+            <div style="float:right"> <button class="btn btn-admin rounded-pill font-white " onclick="Export()"> Export</button></div>
+            <table id="tblDisplayUserList" class="table table-hover table-outside-border">
+                <thead>
+                    <tr class="gray-bachgroud">
+                        <th>User Name </th>
+                        <th>Role </th>
+                        <th>Date of Registration </th>
+                        <th>User Type </th>
+                        <th>Phone Number </th>
+                        <th>Postal code </th>
+                        <th>Status </th>
+                        <th>  Action </th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.UserList)
+                    {
+                        <tr style="background-color:white;height:60px">
+                            <td>@item.UserName</td>
+                            <td></td>
+                            <td>@item.RegistrationDate</td>
+                            <td>@item.UserType</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>@item.PostalCode</td>
+                            <td>
+                                @if ((bool)item.Status)
+                                {
+                                    <span class="completed"> Active </span>
+
+                                }
+                                else
+                                {
+                                    <span class="cancel"> Inactive </span>
+                                }
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn " type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/image/icon-more.png" alt="" class="position-relative">
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><button class="dropdown-item" onclick="DeleteUser(@item.UserId)">Delete</button></li>
+                                        @if ((bool)item.Status)
+                                        {
+                                            <li><button class="dropdown-item" onclick="DeActiveUser(@item.UserId)">Deactive</button></li>
+
+                                        }
+                                        else
+                                        {
+                                            <li><button onclick="ActiveUser(@item.UserId)" class="dropdown-item">Active</button></li>
+                                        }
+                                        @if (item.UserTypeId == 2)
+                                        {
+                                            @if ((item.IsApprove == null || item.IsApprove == false))
+                                            {
+                                                <li><button onclick="ApproveUser(@item.UserId)" class="dropdown-item">Approve  </button></li>
+                                            }
+                                            else
+                                            {
+                                                <li><button onclick="DisapproveUser(@item.UserId)" class="dropdown-item">Disapprove</button></li>
+                                            }
+                                        }
+
+
+                                    </ul>
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Script{
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+      /*  Delete User*/
+        function DeleteUser(para) {
+            $.ajax({
+                type: "POST",
+                 url: "@Url.Action("DeleteUser")",
+                 data: { "userId": para },
+                 success: function (responce) {
+                     $("#AlertMessage").empty();
+                     if (responce) {
+                         $("#AlertMessage").text("Deleted User Successfully").addClass("alert-success").show().fadeOut(8000);
+                     }
+                     else {
+                         $("#AlertMessage").text("Try again ").addClass("alert-danger").show().fadeOut(8000);
+                     }
+                     setTimeout(ReloadPage, 500);
+                },
+                failure: function (response) {
+                    alert("failure");
+                },
+                error: function (response) {
+                    alert("Something went Worng");
+                }
+
+            });
+        }
+
+       /* Active User*/
+        function ActiveUser(para) {
+             $.ajax({
+                type: "POST",
+                 url: "@Url.Action("ActivateUser")",
+                 data: { "userId": para },
+                 success: function (responce) {
+                     $("#AlertMessage").empty();
+                     if (responce) {
+                         $("#AlertMessage").text("Activate User Successfully").addClass("alert-success").show().fadeOut(8000);
+                     }
+                     else {
+                         $("#AlertMessage").text("Try again ").addClass("alert-danger").show().fadeOut(8000);
+                     }
+                     setTimeout(ReloadPage, 500);
+                },
+                failure: function (response) {
+                    alert("failure");
+                },
+                error: function (response) {
+                    alert("Something went Worng");
+                }
+
+            });
+        }
+       /* Deactive User*/
+        function DeActiveUser(para) {
+             $.ajax({
+                type: "POST",
+                 url: "@Url.Action("DeactivateUser")",
+                 data: { "userId": para },
+                 success: function (responce) {
+                     $("#AlertMessage").empty();
+                     if (responce) {
+                         $("#AlertMessage").text("Deactivate User Successfully").addClass("alert-success").show().fadeOut(8000);
+                     }
+                     else {
+                         $("#AlertMessage").text("Try again ").addClass("alert-danger").show().fadeOut(8000);
+                     }
+                     setTimeout(ReloadPage, 500);
+                },
+                failure: function (response) {
+                    alert("failure");
+                },
+                error: function (response) {
+                    alert("Something went Worng");
+                }
+
+            });
+        }
+
+       /* Approve Service Provider*/
+        function ApproveUser(para) {
+             $.ajax({
+                type: "POST",
+                 url: "@Url.Action("ApproveServiceProvider")",
+                 data: { "userId": para },
+                 success: function (responce) {
+                     $("#AlertMessage").empty();
+                     if (responce) {
+                         $("#AlertMessage").text("Approved Service Provider Successfully").addClass("alert-success").show().fadeOut(8000);
+                     }
+                     else {
+                         $("#AlertMessage").text("Try again ").addClass("alert-danger").show().fadeOut(8000);
+                     }
+                     setTimeout(ReloadPage, 500);
+                },
+                failure: function (response) {
+                    alert("failure");
+                },
+                error: function (response) {
+                    alert("Something went Worng");
+                }
+
+            });
+        }
+        /*Dis- Approve Service Provider*/
+        function DisapproveUser(para) {
+             $.ajax({
+                type: "POST",
+                 url: "@Url.Action("DisApproveServiceProvider")",
+                 data: { "userId": para },
+                 success: function (responce) {
+                     $("#AlertMessage").empty();
+                     if (responce) {
+                         $("#AlertMessage").text("Dis Approved Service Provider Successfully").addClass("alert-success").show().fadeOut(8000);
+                     }
+                     else {
+                         $("#AlertMessage").text("Try again ").addClass("alert-danger").show().fadeOut(8000);
+                     }
+                     setTimeout(ReloadPage, 500);
+                },
+                failure: function (response) {
+                    alert("failure");
+                },
+                error: function (response) {
+                    alert("Something went Worng");
+                }
+
+            });
+        }
+
+
+        /*Export Data of table into csv*/
+        function Export() {
+            var csv = [];
+            var rows = document.querySelectorAll("table tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+
+                for (var j = 0; j < cols.length-1; j++) {
+                    split = cols[j].innerText.split("\n");
+                    row.push(split[0]);
+                }
+                csv.push(row.join(","));
+            }
+            console.log(csv);
+            // Download CSV file
+            downloadCSV(csv.join("\n"), "User List");
+        }
+        function downloadCSV(csv, filename) {
+            var csvFile;
+            var downloadLink;
+
+            // CSV file
+            csvFile = new Blob([csv], { type: "text/csv" });
+
+            // Download link
+            downloadLink = document.createElement("a");
+
+            // File name
+            downloadLink.download = filename;
+
+            // Create a link to the file
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+
+            // Hide download link
+            downloadLink.style.display = "none";
+
+            // Add the link to DOM
+            document.body.appendChild(downloadLink);
+
+            // Click download link
+            downloadLink.click();
+        }
+
+        /*  Implement Datatable in Service Table*/
+        $(document).ready(function () {
+            $('#tblDisplayUserList').dataTable({
+                "bFilter": false,
+                "bInfo": false,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }],
+                 "order": [[0, "desc"]]
+            });
+
+        })
+
+
+        function ReloadPage() {
+            location.reload();
+        }
+    </script>
+
+
+}
+
+
