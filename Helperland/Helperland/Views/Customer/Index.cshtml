@@ -4,107 +4,111 @@
 }
 @using Microsoft.AspNetCore.Http
 @model List<Helperland.Models.ViewModel.Customer.CurrentServicesViewModel>
-<div class="row justify-content-center gray-bachgroud" style="margin-top:100px; padding-top:2rem;padding-bottom:2rem;">
-    <h1 class="text-center"> Welcome, @Context.Session.GetString("username") </h1>
+<div class="container-fluid">
+    <div class="row justify-content-center gray-bachgroud" style="margin-top:100px; padding-top:2rem;padding-bottom:2rem;">
+        <h1 class="text-center"> Welcome, @Context.Session.GetString("username") </h1>
 
 
-</div>
-<div class="row justify-content-center">
-    <partial name="_CustomerSidetaMenuPartialView" />
-    <input type="hidden" value="@Context.Session.GetString("userID")" id="userId" />
-    <div class="col-md-9">
-        <div class="row p-3">
-            <div class="col-md-6"><h3> Current Service Requests </h3></div>
-            <div class="col-md-6 text-right"> <a asp-action="Index" asp-controller="BookService" class="btn rounded-pill marun font-white">Add New Service Request </a>  </div>
-        </div>
+    </div>
+    <div class="row justify-content-center">
+        <partial name="_CustomerSidetaMenuPartialView" />
+        <input type="hidden" value="@Context.Session.GetString("userID")" id="userId" />
+        <div class="col-md-9">
+            <div class="row p-3">
+                <div class="col-md-6"><h3> Current Service Requests </h3></div>
+                <div class="col-md-6 text-right"> <a asp-action="Index" asp-controller="BookService" class="btn rounded-pill marun font-white">Add New Service Request </a>  </div>
+            </div>
 
-        <div class="row p-3">
-            <div class="col-md-12 table-responsive">
-                <table id="tblCurrentServiceRequest" class="table table-hover table-outside-border ">
-                    <thead>
-                        <tr class="gray-bachgroud">
-                            <th>Service Id </th>
-                            <th>Service Date </th>
-                            <th>Service Provider </th>
-                            <th>Payment</th>
-                            <th> Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td onclick="OpenModel(@item.ServiceId)"> @item.ServiceId </td>
-                                <td class="flex" onclick="OpenModel(@item.ServiceId)">
-                                    <div><img src="/image/calendar2.png" asp-append-version="true"><b> @item.StartDate</b> </div>
-                                    8.:00 - 12:00
-                                </td>
-                                <td onclick="OpenModel(@item.ServiceId)">
-                                    @if (item.ServiceProviderName != null)
-                                    {
-                                        <div class="d-flex">
-                                            <div class="service-history-icon d-flex">
-                                                @if (item.Avatar == 0.ToString())
-                                                {
-                                                    <img src="./image/avatar-car.png" style="height:50px;width:50px">
-                                                }
-                                                else if (item.Avatar == 1.ToString())
-                                                {
-                                                    <img src="./image/avatar-female.png" style="height:50px;width:50px" >
-                                                }
-                                                else if (item.Avatar == 2.ToString())
-                                                {
-                                                    <img src="./image/avatar-hat.png" style="height:50px;width:50px" >
-                                                }
-                                                else if (item.Avatar == 3.ToString())
-                                                {
-                                                    <img src="./image/avatar-iron.png" style="height:50px;width:50px">
-                                                }
-                                                else if (item.Avatar == 4.ToString())
-                                                {
-                                                    <img src="./image/avatar-male.png" style="height:50px;width:50px">
-                                                }
-                                                else if (item.Avatar == 5.ToString())
-                                                {
-                                                    <img src="./image/avatar-ship.png" style="height:50px;width:50px">
-                                                }
-
-                                            </div>
-                                            <div>
-                                                <span class="d-block"> @item.ServiceProviderName </span>
-                                                @{
-                                                    int i = (int)item.Rating;
-                                                }
-                                                @for (int j = 0; j < i; j++)
-                                                {
-                                                    <img src="/image/yellow-small-star.png" class="service-history-star-icon">
-                                                }
-                                                @for (int j = 0; j < 5 - i; j++)
-                                                {
-                                                    <img src="/image/grey-small-star.png" class="service-history-star-icon">
-                                                }
-                                                @i
-                                            </div>
-
-                                        </div>
-                                    }
-
-                                </td>
-                                <td class="active-font" onclick="OpenModel(@item.ServiceId)">
-                                    <div> <b> @item.Payment  €</b> </div>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm  marun font-white rounded-pill m-2" ata-bs-toggle="modal" data-bs-target="#ServiceDeatils" onclick="RescheduleService(@item.ServiceId)">Reschedule </button>
-                                    <button class="btn btn-cancel btn-sm font-white rounded-pill m-2" ata-bs-toggle="modal" data-bs-target="#ServiceDeatils" onclick="CancelService(@item.ServiceId)">Cancel</button>
-                                </td>
+            <div class="row p-3">
+                <div class="col-md-12 table-responsive">
+                    <table id="tblCurrentServiceRequest" class="table table-hover table-outside-border ">
+                        <thead>
+                            <tr class="gray-bachgroud">
+                                <th>Service Id </th>
+                                <th>Service Date </th>
+                                <th>Service Provider </th>
+                                <th>Payment</th>
+                                <th> Action</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td onclick="OpenModel(@item.ServiceId)"> @item.ServiceId </td>
+                                    <td class="flex" onclick="OpenModel(@item.ServiceId)">
+                                        <div><img src="/image/calendar2.png" asp-append-version="true"><b> @item.StartDate</b> </div>
+                                        8.:00 - 12:00
+                                    </td>
+                                    <td onclick="OpenModel(@item.ServiceId)">
+                                        @if (item.ServiceProviderName != null)
+                                        {
+                                            <div class="d-flex">
+                                                <div class="service-history-icon d-flex">
+                                                    @if (item.Avatar == 0.ToString())
+                                                    {
+                                                        <img src="./image/avatar-car.png" style="height:50px;width:50px">
+                                                    }
+                                                    else if (item.Avatar == 1.ToString())
+                                                    {
+                                                        <img src="./image/avatar-female.png" style="height:50px;width:50px">
+                                                    }
+                                                    else if (item.Avatar == 2.ToString())
+                                                    {
+                                                        <img src="./image/avatar-hat.png" style="height:50px;width:50px">
+                                                    }
+                                                    else if (item.Avatar == 3.ToString())
+                                                    {
+                                                        <img src="./image/avatar-iron.png" style="height:50px;width:50px">
+                                                    }
+                                                    else if (item.Avatar == 4.ToString())
+                                                    {
+                                                        <img src="./image/avatar-male.png" style="height:50px;width:50px">
+                                                    }
+                                                    else if (item.Avatar == 5.ToString())
+                                                    {
+                                                        <img src="./image/avatar-ship.png" style="height:50px;width:50px">
+                                                    }
+
+                                                </div>
+                                                <div>
+                                                    <span class="d-block"> @item.ServiceProviderName </span>
+                                                    @{
+                                                        int i = (int)item.Rating;
+                                                    }
+                                                    @for (int j = 0; j < i; j++)
+                                                    {
+                                                        <img src="/image/yellow-small-star.png" class="service-history-star-icon">
+                                                    }
+                                                    @for (int j = 0; j < 5 - i; j++)
+                                                    {
+                                                        <img src="/image/grey-small-star.png" class="service-history-star-icon">
+                                                    }
+                                                    @i
+                                                </div>
+
+                                            </div>
+                                        }
+
+                                    </td>
+                                    <td class="active-font" onclick="OpenModel(@item.ServiceId)">
+                                        <div> <b> @item.Payment  €</b> </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm  marun font-white rounded-pill m-2" ata-bs-toggle="modal" data-bs-target="#ServiceDeatils" onclick="RescheduleService(@item.ServiceId)">Reschedule </button>
+                                        <button class="btn btn-cancel btn-sm font-white rounded-pill m-2" ata-bs-toggle="modal" data-bs-target="#ServiceDeatils" onclick="CancelService(@item.ServiceId)">Cancel</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 
 <!-- Modal  Service Details -->

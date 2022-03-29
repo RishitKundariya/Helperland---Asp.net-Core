@@ -4,21 +4,24 @@
 }
 @using Microsoft.AspNetCore.Http
 @model List<Helperland.Models.ViewModel.Customer.ServiceHistoryViewModel>
-<div class="row justify-content-center gray-bachgroud" style="margin-top:100px; padding-top:2rem;padding-bottom:2rem;">
-    <h1 class="text-center"> Welcome, @Context.Session.GetString("username") </h1>
-</div>
-<div class="row justify-content-center">
-    <partial name="_CustomerSidetaMenuPartialView" />
-    <input type="hidden" value="@Context.Session.GetString("userID")" id="userId" />
-    <div class="col-md-9">
-        <div class="row p-3">
-            <div class="col-md-6">
-                <h3>  Service History </h3>
-              
+
+<div class="container-fluid">
+
+    <div class="row justify-content-center gray-bachgroud" style="margin-top:100px; padding-top:2rem;padding-bottom:2rem;">
+        <h1 class="text-center"> Welcome, @Context.Session.GetString("username") </h1>
+    </div>
+    <div class="row justify-content-center">
+        <partial name="_CustomerSidetaMenuPartialView" />
+        <input type="hidden" value="@Context.Session.GetString("userID")" id="userId" />
+        <div class="col-md-9">
+            <div class="row p-3">
+                <div class="col-md-6">
+                    <h3>  Service History </h3>
+
+                </div>
+                <div class="col-md-6">  <button class="btn active-btn rounded-pill font-white float-right" onclick="Export()"> Export</button></div>
             </div>
-            <div class="col-md-6">  <button class="btn active-btn rounded-pill font-white float-right" onclick="Export()"> Export</button></div>
-        </div>
-        <div class="row p-3">
+            <div class="row p-3">
                 <div class="col-md-12 table-responsive">
                     <table id="tblServiceRequestHistory" class="table table-hover table-outside-border ">
                         <thead>
@@ -121,10 +124,14 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+
         </div>
-        
     </div>
+
+
 </div>
+
     <!-- Modal  Service Details -->
     <div class="modal fade" id="ServiceDeatils" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">

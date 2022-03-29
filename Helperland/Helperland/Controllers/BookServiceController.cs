@@ -88,6 +88,11 @@ namespace Helperland.Controllers
         {
             ViewBag.ServiceRequestID = bookServiceRepository.BookService(bookServiceViewModel);
             ViewBag.SuccessRequest = true;
+            ViewBag.city = bookServiceRepository.GetAllCity().Select(x => new SelectListItem()
+            {
+                Text = x.CityName,
+                Value = x.Id.ToString()
+            });
             return View("Index");
         }
 
